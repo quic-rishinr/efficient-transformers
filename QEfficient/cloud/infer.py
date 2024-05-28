@@ -15,12 +15,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import QEfficient
 from QEfficient.cloud.compile import main as compile
 from QEfficient.exporter.export_hf_to_cloud_ai_100 import qualcomm_efficient_converter
-from QEfficient.generation.text_generation_inference import (
-    check_batch_size_and_num_prompts,
-    cloud_ai_100_exec_kv,
-)
-from QEfficient.utils import hf_download, onnx_exists, qpc_exists
-from QEfficient.utils.constants import Constants
+from QEfficient.generation.text_generation_inference import cloud_ai_100_exec_kv,  cloud_ai_100_exec_kv_cb
+from QEfficient.utils import hf_download
+from QEfficient.utils.constants import QEFF_MODELS_DIR, Constants
 from QEfficient.utils.logging_utils import logger
 
 """
@@ -31,32 +28,54 @@ from QEfficient.utils.logging_utils import logger
 """
 
 
+def qpc_exists(qpc_dir_path: str) -> bool:
+    """
+    Checks if qpc files already exists, removes the directory if files have been manipulated.
+    ---------
+    :param dir_path: str. Path of qpc directory.
+    :return: bool.
+    """
+    return os.path.isdir(qpc_dir_path) and os.path.isfile(os.path.join(qpc_dir_path, "programqpc.bin"))
+
+
+def onnx_exists(onnx_file_path: str) -> bool:
+    # todo(ochougul): add check for other files like raw input files, input_list.txt
+    return os.path.isfile(onnx_file_path) and os.path.isfile(
+        os.path.join(os.path.dirname(onnx_file_path), "custom_io.yaml")
+    )
+
+
 def main(
     model_name: str,
     num_cores: int,
-    prompt: str = None,
-    prompts_txt_file_path: str = None,
+    prompt: str,
     aic_enable_depth_first: bool = False,
     mos: int = -1,
     cache_dir: str = Constants.CACHE_DIR,
     hf_token: str = None,
     batch_size: int = 1,
+    decode_batch_size: int = None,
     prompt_len: int = 32,
     ctx_len: int = 128,
     mxfp6: bool = False,
-    mxint8: bool = False,
     device_group: List[int] = [
         0,
     ],
 ) -> None:
+    # Make
+    model_card_dir = os.path.join(QEFF_MODELS_DIR, str(model_name))
+    os.makedirs(model_card_dir, exist_ok=True)
+
     qpc_base_dir_name = (
-        f"qpc_{num_cores}cores_{batch_size}BS_{prompt_len}PL_{ctx_len}CL_{mos}MOS_"
+        f"qpc_{num_cores}cores_{batch_size}BS_{prompt_len}PL_{ctx_len}CL_"
         + f"{len(device_group)}"
         + "devices"
-        + ("_mxfp6_mxint8" if (mxfp6 and mxint8) else "_mxfp6" if mxfp6 else "_fp16_mxint8" if mxint8 else "_fp16")
+        + ("_mxfp6" if mxfp6 else "_fp16")
     )
+    qpc_dir_path = os.path.join(model_card_dir, qpc_base_dir_name, "qpcs")
 
-    prompt = check_batch_size_and_num_prompts(prompt, prompts_txt_file_path, batch_size)
+    onnx_dir_path = os.path.join(model_card_dir, "onnx")
+    onnx_model_path = os.path.join(onnx_dir_path, model_name.replace("/", "_") + "_kv_clipped_fp16.onnx")
 
     # Get tokenizer
     if hf_token is not None:
@@ -64,27 +83,26 @@ def main(
     model_hf_path = hf_download(
         repo_id=model_name,
         cache_dir=cache_dir,
-        ignore_patterns=["*.txt", "*.onnx", "*.ot", "*.md", "*.tflite", "*.pdf", "*.msgpack", "*.h5"],
+        ignore_patterns=["*.txt", "*.onnx", "*.ot", "*.md", "*.tflite", "*.pdf"],
     )
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_hf_path, use_cache=True, padding_side="left", trust_remote_code=True
-    )
+    tokenizer = AutoTokenizer.from_pretrained(model_hf_path, use_cache=True, padding_side="left")
 
-    qpc_path_exists, qpc_dir_path = qpc_exists(model_name, qpc_base_dir_name)
-    if qpc_path_exists:
+    if qpc_exists(qpc_dir_path):
         # execute
         logger.info("Pre-compiled qpc found! Trying to execute with given prompt")
-        cloud_ai_100_exec_kv(
-            batch_size,
-            tokenizer=tokenizer,
-            qpc_path=qpc_dir_path,
-            device_id=device_group,
-            prompt=prompt,
-        )
+        if decode_batch_size:
+            # Skip running the exising execution api, Since this requires handling application in different way
+            # for continous batching support.
+            # todo: vbaddi: integrate schduler app, once its up
+
+            cloud_ai_100_exec_kv_cb(tokenizer=tokenizer, qpc=qpc_dir_path, device_id=device_group, prompt=prompt, decode_batch_size=decode_batch_size)
+            # logger.warning(f"Execution for CB is not available yet. But qpc path is here {qpc_dir_path}")
+            # return
+        else:
+            cloud_ai_100_exec_kv(tokenizer=tokenizer, qpc=qpc_dir_path, device_id=device_group, prompt=prompt)
         return
 
-    onnx_path_exists, onnx_dir_path, onnx_model_path = onnx_exists(model_name)
-    if onnx_path_exists:
+    if onnx_exists(onnx_model_path):
         # Compile -> execute
         # We need to pass parent directory of qpc_dir_path, as the compile function handles the qpcs directory creation
         generated_qpc_path = compile(
@@ -92,10 +110,10 @@ def main(
             qpc_path=os.path.dirname(qpc_dir_path),
             num_cores=num_cores,
             batch_size=batch_size,
+            decode_batch_size=decode_batch_size,
             prompt_len=prompt_len,
             ctx_len=ctx_len,
             mxfp6=mxfp6,
-            mxint8=mxint8,
             aic_enable_depth_first=aic_enable_depth_first,
             mos=mos,
             device_group=device_group,
@@ -103,13 +121,16 @@ def main(
         assert (
             generated_qpc_path == qpc_dir_path
         ), f"QPC files were generated at an unusual location, expected {qpc_dir_path}; got {generated_qpc_path}"
-        cloud_ai_100_exec_kv(
-            batch_size,
-            tokenizer=tokenizer,
-            qpc_path=qpc_dir_path,
-            device_id=device_group,
-            prompt=prompt,
-        )
+        if decode_batch_size:
+            # Skip running the exising execution api, Since this requires handling application in different way
+            # for continous batching support.
+            # todo: vbaddi: integrate schduler app, once its up
+
+            cloud_ai_100_exec_kv_cb(tokenizer=tokenizer, qpc=qpc_dir_path, device_id=device_group, prompt=prompt, decode_batch_size=decode_batch_size)
+            # logger.warning(f"Execution for CB is not available yet. But qpc path is here {generated_qpc_path}")
+            return
+        else:
+            cloud_ai_100_exec_kv(tokenizer=tokenizer, qpc=generated_qpc_path, device_id=device_group, prompt=prompt)
         return
 
     #############################################
@@ -131,9 +152,6 @@ def main(
         return_path=True,
         tokenizer=tokenizer,
     )
-    print(
-        f"Generated Onnx_path {generated_onnx_path} and Onnx_model_path {onnx_model_path} and Onnx_dir_path is {onnx_dir_path}"
-    )
     assert (
         generated_onnx_path == onnx_model_path
     ), f"ONNX files were generated at an unusual location, expected {onnx_model_path}, got {generated_onnx_path}"
@@ -146,10 +164,10 @@ def main(
         qpc_path=os.path.dirname(qpc_dir_path),
         num_cores=num_cores,
         batch_size=batch_size,
+        decode_batch_size=decode_batch_size,
         prompt_len=prompt_len,
         ctx_len=ctx_len,
         mxfp6=mxfp6,
-        mxint8=mxint8,
         aic_enable_depth_first=aic_enable_depth_first,
         mos=mos,
         device_group=device_group,
@@ -160,42 +178,43 @@ def main(
     logger.info(f"Compiled qpc files can be found at : {generated_qpc_path}")
 
     # Execute
-    cloud_ai_100_exec_kv(
-        batch_size,
-        tokenizer=tokenizer,
-        qpc_path=qpc_dir_path,
-        device_id=device_group,
-        prompt=prompt,
-    )
+    if decode_batch_size:
+        # Skip running the exising execution api, Since this requires handling application in different way
+        # for continous batching support.
+        # todo: vbaddi: integrate schduler app, once its up
+
+        cloud_ai_100_exec_kv_cb(tokenizer=tokenizer, qpc=qpc_dir_path, device_id=device_group, prompt=prompt, decode_batch_size=decode_batch_size)
+        # logger.warning(f"Execution for CB is not available yet. But qpc path is here {generated_qpc_path}")
+        # return
+    else:
+        cloud_ai_100_exec_kv(tokenizer=tokenizer, qpc=generated_qpc_path, device_id=device_group, prompt=prompt)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Inference command, the model will be downloaded from HF, optmized, compiled, executed on Cloud AI 100"
+        description="Inference command, the model will be downloaded from HF, optmized, compiled, executed on AIC"
     )
     parser.add_argument("--model-name", "--model_name", required=True, help="HF Model card name/id")
     parser.add_argument(
-        "--cache-dir",
-        "--cache_dir",
-        default=Constants.CACHE_DIR,
-        required=False,
-        help="Cache dir to store HF Downloads",
+        "--cache-dir", "--cache_dir", default=Constants.CACHE_DIR, required=False, help="Cache dir to store HF Downlods"
     )
     parser.add_argument(
         "--hf-token", "--hf_token", default=None, type=str, required=False, help="HF token id for private HF models"
     )
     parser.add_argument("--batch-size", "--batch_size", type=int, default=1, help="Batch size for text generation")
     parser.add_argument(
+        "--decode-batch-size",
+        "--decode_batch_size",
+        type=int,
+        default=1,
+        help="Decode Batch size for text generation",
+    )
+    parser.add_argument(
         "--prompt-len", "--prompt_len", default=32, type=int, help="Sequence length for text generation."
     )
     parser.add_argument("--ctx-len", "--ctx_len", default=128, type=int, help="Context length for text generation.")
     parser.add_argument(
         "--mxfp6", action="store_true", help="Compress constant MatMul weights to MXFP6 E2M3, default is no compression"
-    )
-    parser.add_argument(
-        "--mxint8",
-        action="store_true",
-        help="Compress Present/Past KV to MXINT8 using CustomIO config, default is False",
     )
     parser.add_argument(
         "--num_cores", "--num-cores", type=int, required=True, help="Number of cores to compile on Cloud AI 100"
@@ -210,13 +229,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--prompt",
         type=lambda prompt: prompt.split("|"),
-        help="Input prompt, if executing for batch size>1, pass input prompts in single string but seperate with pipe (|) symbol",
-    )
-    parser.add_argument(
-        "--prompts_txt_file_path",
-        "--prompts-txt-file-path",
-        type=str,
-        help="File path for taking input prompts from txt file, sample prompts.txt file present in examples folder",
+        default="My name is",
+        help="Input prompt, if executing for batch size>1, pass input promprs in single string but seperate with pipe (|) symbol",
     )
     parser.add_argument(
         "--aic_enable_depth_first",

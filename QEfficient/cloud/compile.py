@@ -14,16 +14,22 @@ from QEfficient.exporter.export_utils import compile_kv_model_on_cloud_ai_100
 from QEfficient.utils.logging_utils import logger
 
 
-def create_and_dump_specializations(batch_size: int, prompt_len: int, ctx_len: int, path: str):
+def create_and_dump_specializations(batch_size: int, decode_batch_size: int, prompt_len: int, ctx_len: int, path: str):
     # Create
     specializations = {
         "specializations": [
             {
                 "batch_size": str(batch_size),
+                "decode_batch_size": str(decode_batch_size),
                 "seq_len": str(prompt_len),
                 "ctx_len": str(ctx_len),
             },
-            {"batch_size": str(batch_size), "seq_len": "1", "ctx_len": str(ctx_len)},
+            {
+                "batch_size": str(decode_batch_size),
+                "decode_batch_size": str(decode_batch_size),
+                "seq_len": "1",
+                "ctx_len": str(ctx_len),
+            },
         ]
     }
     # Dump
@@ -39,10 +45,10 @@ def main(
     aic_enable_depth_first: bool = False,
     mos: int = -1,
     batch_size: int = 1,
+    decode_batch_size: int = 4,
     prompt_len: int = 32,
     ctx_len: int = 128,
     mxfp6: bool = True,
-    mxint8: bool = False,
 ) -> str:
     # Dynamically create the specializations JSON
     """
@@ -60,21 +66,16 @@ def main(
     os.makedirs(qpc_path, exist_ok=True)
     specialization_json_path = os.path.join(qpc_path, "specializations.json")
     create_and_dump_specializations(
-        batch_size=batch_size, prompt_len=prompt_len, ctx_len=ctx_len, path=specialization_json_path
+        batch_size=batch_size,
+        decode_batch_size=decode_batch_size,
+        prompt_len=prompt_len,
+        ctx_len=ctx_len,
+        path=specialization_json_path,
     )
-
-    # Select the customIO config based on the mx flag.
-    if mxint8:
-        custom_io_file_name = "custom_io_int8.yaml"
-    else:
-        custom_io_file_name = "custom_io_fp16.yaml"
-
-    custom_io_file_path = os.path.join(os.path.dirname(onnx_path), custom_io_file_name)
+    custom_io_file_path = os.path.join(os.path.dirname(onnx_path), "custom_io.yaml")
 
     if not os.path.isfile(custom_io_file_path):
-        raise FileNotFoundError(
-            f"file {custom_io_file_path} needs to exist in the same directory as onnx model files. Please rerun infer/export Api"
-        )
+        raise FileNotFoundError(f"file {custom_io_file_path} needs to exist in the same directory as onnx model files.")
 
     _, qpc_path = compile_kv_model_on_cloud_ai_100(
         onnx_path=onnx_path,
@@ -103,6 +104,9 @@ if __name__ == "__main__":
     )
     parser.add_argument("--batch_size", "--batch-size", type=int, default=1, help="Batch size for text generation")
     parser.add_argument(
+        "--decode_batch_size", "--decode-batch-size", type=int, default=4, help="Batch size for text generation"
+    )
+    parser.add_argument(
         "--prompt_len",
         "--prompt-len",
         default=32,
@@ -114,11 +118,6 @@ if __name__ == "__main__":
         "--mxfp6",
         action="store_true",
         help="Compress constant MatMul weights to MXFP6 E2M3, default is no compression",
-    )
-    parser.add_argument(
-        "--mxint8",
-        action="store_true",
-        help="Compress Present/Past KV to MXINT8 using CustomIO config, default is False",
     )
     parser.add_argument(
         "--num_cores",
