@@ -1,7 +1,15 @@
 # -----------------------------------------------------------------------------
 #
-# Copyright (c)  2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
-# SPDX-License-Identifier: BSD-3-Clause
+# Qualcomm Technologies, Inc. Proprietary
+# (c) 2023 Qualcomm Technologies, Inc. All rights reserved.
+#
+# All data and information contained in or disclosed by this document are
+# confidential and proprietary information of Qualcomm Technologies, Inc., and
+# all rights therein are expressly reserved. By accepting this material, the
+# recipient agrees that this material and the information contained therein
+# are held in confidence and in trust and will not be used, copied, reproduced
+# in whole or in part, nor its contents revealed in any manner to others
+# without the express written permission of Qualcomm Technologies, Inc.
 #
 # -----------------------------------------------------------------------------
 
@@ -10,12 +18,15 @@ from typing import Optional, Tuple, Union
 import torch
 from torch import nn
 from torch.nn import CrossEntropyLoss
-from transformers.models.gpt2.modeling_gpt2 import GPT2Attention, GPT2Block, GPT2LMHeadModel, GPT2Model, logger
+from transformers.models.gpt2.modeling_gpt2 import (GPT2Attention, GPT2Block,
+                                                    GPT2LMHeadModel, GPT2Model,
+                                                    logger)
 
 from QEfficient.transformers.modeling_outputs import (
     QEffBaseModelOutputWithPastAndCrossAttentions,
-    QEffCausalLMOutputWithCrossAttentions,
-)
+    QEffCausalLMOutputWithCrossAttentions)
+
+from QEfficient.transformers.modeling_attn_mask_utils import QEffAttentionMaskConverter
 
 
 class QEffGPT2LMHeadModel(GPT2LMHeadModel):
@@ -30,6 +41,7 @@ class QEffGPT2LMHeadModel(GPT2LMHeadModel):
         input_ids: Optional[torch.LongTensor] = None,
         past_key_values: Optional[Tuple[Tuple[torch.Tensor]]] = None,
         cache_index: Optional[torch.Tensor] = None,
+        batch_index: Optional[torch.LongTensor] = None,
         attention_mask: Optional[torch.FloatTensor] = None,
         token_type_ids: Optional[torch.LongTensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
@@ -55,6 +67,7 @@ class QEffGPT2LMHeadModel(GPT2LMHeadModel):
             input_ids,
             past_key_values=past_key_values,
             cache_index=cache_index,  # Forward the cache index to transformer model
+            batch_index=batch_index,
             attention_mask=attention_mask,
             token_type_ids=token_type_ids,
             position_ids=position_ids,
@@ -74,7 +87,7 @@ class QEffGPT2LMHeadModel(GPT2LMHeadModel):
             torch.cuda.set_device(self.transformer.first_device)
             hidden_states = hidden_states.to(self.lm_head.weight.device)
 
-        lm_logits = self.lm_head(hidden_states[:, -1:])
+        lm_logits  = self.lm_head(hidden_states[:, -1, :]) # remove the singleton dimension
 
         loss = None
         if labels is not None:
@@ -114,22 +127,21 @@ class QEffGPT2Block(GPT2Block):
         hidden_states: Optional[Tuple[torch.FloatTensor]],
         layer_past: Optional[Tuple[torch.Tensor]] = None,
         cache_index: Optional[torch.Tensor] = None,
+        batch_index: Optional[torch.LongTensor] = None,
         attention_mask: Optional[torch.FloatTensor] = None,
         head_mask: Optional[torch.FloatTensor] = None,
         encoder_hidden_states: Optional[torch.Tensor] = None,
         encoder_attention_mask: Optional[torch.FloatTensor] = None,
         use_cache: Optional[bool] = False,
         output_attentions: Optional[bool] = False,
-    ) -> Union[
-        Tuple[torch.Tensor],
-        Optional[Tuple[torch.Tensor, Tuple[torch.FloatTensor, ...]]],
-    ]:
+    ) -> Union[Tuple[torch.Tensor], Optional[Tuple[torch.Tensor, Tuple[torch.FloatTensor, ...]]],]:
         residual = hidden_states
         hidden_states = self.ln_1(hidden_states)
         attn_outputs = self.attn(
             hidden_states,
             layer_past=layer_past,
             cache_index=cache_index,
+            batch_index=batch_index,
             attention_mask=attention_mask,
             head_mask=head_mask,
             use_cache=use_cache,
@@ -188,6 +200,7 @@ class QEffGPT2Model(GPT2Model):
         input_ids: Optional[torch.LongTensor] = None,
         past_key_values: Optional[Tuple[Tuple[torch.Tensor]]] = None,
         cache_index: Optional[torch.Tensor] = None,
+        batch_index: Optional[torch.LongTensor] = None,
         attention_mask: Optional[torch.FloatTensor] = None,
         token_type_ids: Optional[torch.LongTensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
@@ -201,9 +214,7 @@ class QEffGPT2Model(GPT2Model):
         return_dict: Optional[bool] = None,
     ) -> Union[Tuple, QEffBaseModelOutputWithPastAndCrossAttentions]:
         output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
-        output_hidden_states = (
-            output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
-        )
+        output_hidden_states = output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
         use_cache = use_cache if use_cache is not None else self.config.use_cache
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
 
@@ -246,27 +257,39 @@ class QEffGPT2Model(GPT2Model):
         if attention_mask is not None:
             if batch_size <= 0:
                 raise ValueError("batch_size has to be defined and > 0")
-            attention_mask = attention_mask.view(batch_size, -1)
+            
+            # attention_mask = attention_mask.view(batch_size, -1)
 
             # Added for Optimized KV model creation
+            # for CB, Different attention_mask is different for
             if cache_index is not None:
-                attention_mask[:, cache_index + seq_length - 1] = True
+                attention_mask[batch_index, cache_index + seq_length - 1] = True
                 attention_mask_retained = attention_mask.clone()
+                # for pytorch
+                attention_mask = attention_mask[batch_index.view(-1)]
+            
+            attention_mask = QEffAttentionMaskConverter(True).to_4d(
+                attention_mask,
+                seq_length,
+                torch.float32,
+                past_length if past_length > 0 else seq_length,
+                cache_index,
+            )
 
             # We create a 3D attention mask from a 2D tensor mask.
             # Sizes are [batch_size, 1, 1, to_seq_length]
             # So we can broadcast to [batch_size, num_heads, from_seq_length, to_seq_length]
             # this attention mask is more simple than the triangular masking of causal attention
             # used in OpenAI GPT, we just need to prepare the broadcast dimension here.
-            attention_mask = attention_mask[:, None, None, :]
+            # attention_mask = attention_mask[:, None, None, :]
 
             # Since attention_mask is 1.0 for positions we want to attend and 0.0 for
             # masked positions, this operation will create a tensor which is 0.0 for
             # positions we want to attend and the dtype's smallest value for masked positions.
             # Since we are adding it to the raw scores before the softmax, this is
             # effectively the same as removing these entirely.
-            attention_mask = attention_mask.to(dtype=self.dtype)  # fp16 compatibility
-            attention_mask = (1.0 - attention_mask) * torch.finfo(torch.float16).min
+            # attention_mask = attention_mask.to(dtype=self.dtype)  # fp16 compatibility
+            # attention_mask = (1.0 - attention_mask) * torch.finfo(torch.float16).min
 
         # If a 2D or 3D attention mask is provided for the cross-attention
         # we need to make broadcastable to [batch_size, num_heads, seq_length, seq_length]
@@ -304,9 +327,7 @@ class QEffGPT2Model(GPT2Model):
 
         if self.gradient_checkpointing and self.training:
             if use_cache:
-                logger.warning_once(
-                    "`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`..."
-                )
+                logger.warning_once("`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...")
                 use_cache = False
 
         presents = () if use_cache else None
@@ -351,6 +372,7 @@ class QEffGPT2Model(GPT2Model):
                     hidden_states,
                     layer_past=layer_past,
                     cache_index=cache_index,
+                    batch_index=batch_index,
                     attention_mask=attention_mask,
                     head_mask=head_mask[i],
                     encoder_hidden_states=encoder_hidden_states,
@@ -411,40 +433,36 @@ class QEffGPT2Attention(GPT2Attention):
     - add new args cache idx for the kv retention
     """
 
-    def _attn(self, query, key, value, kv_indices, attention_mask=None, head_mask=None):
+    def _attn(self, query, key, value, attention_mask=None, head_mask=None):
         attn_weights = torch.matmul(query, key.transpose(-1, -2))
 
         if self.scale_attn_weights:
             attn_weights = attn_weights / torch.full(
-                [],
-                value.size(-1) ** 0.5,
-                dtype=attn_weights.dtype,
-                device=attn_weights.device,
+                [], value.size(-1) ** 0.5, dtype=attn_weights.dtype, device=attn_weights.device
             )
 
         # Layer-wise attention scaling
         if self.scale_attn_by_inverse_layer_idx:
             attn_weights = attn_weights / float(self.layer_idx + 1)
 
-        if not self.is_cross_attention:
-            # if only "normal" attention layer implements causal mask
-            query_length, key_length = query.size(-2), key.size(-2)
-
-            if kv_indices is None:
-                causal_mask = self.bias[:, :, key_length - query_length : key_length, :key_length]
-            else:
-                causal_mask = self.bias[:, :, kv_indices, :key_length]
-
-            mask_value = torch.finfo(torch.float16).min
-
-            # Need to be a tensor, otherwise we get error: `RuntimeError: expected scalar type float but found double`.
-            # Need to be on the same device, otherwise `RuntimeError: ..., x and y to be on the same device`
-            mask_value = torch.full([], mask_value, dtype=attn_weights.dtype).to(attn_weights.device)
-            attn_weights = torch.where(causal_mask, attn_weights.to(attn_weights.dtype), mask_value)
-
+        # if not self.is_cross_attention:
+        #     # if only "normal" attention layer implements causal mask
+        #     query_length, key_length = query.size(-2), key.size(-2)
+        #     causal_mask = self.bias[:, :, key_length - query_length : key_length, :key_length]
+        #     mask_value = torch.finfo(attn_weights.dtype).min
+        #     # Need to be a tensor, otherwise we get error: `RuntimeError: expected scalar type float but found double`.
+        #     # Need to be on the same device, otherwise `RuntimeError: ..., x and y to be on the same device`
+        #     mask_value = torch.full([], mask_value, dtype=attn_weights.dtype).to(attn_weights.device)
+        #     attn_weights = torch.where(causal_mask, attn_weights.to(attn_weights.dtype), mask_value)
+        
+        # Added by VB for CB
         if attention_mask is not None:
             # Apply the attention mask
-            attn_weights = attn_weights + attention_mask
+            attn_weights = torch.where(attention_mask, torch.tensor(-10000.0, dtype=torch.float32), attn_weights)
+
+        # if attention_mask is not None:
+        #     # Apply the attention mask
+        #     attn_weights = attn_weights + attention_mask
 
         attn_weights = nn.functional.softmax(attn_weights, dim=-1)
 
@@ -459,12 +477,13 @@ class QEffGPT2Attention(GPT2Attention):
         attn_output = torch.matmul(attn_weights, value)
 
         return attn_output, attn_weights
-
+            
     def forward(
         self,
         hidden_states: Optional[Tuple[torch.FloatTensor]],
         layer_past: Optional[Tuple[torch.Tensor]] = None,
         cache_index: Optional[torch.LongTensor] = None,
+        batch_index: Optional[torch.LongTensor] = None,
         attention_mask: Optional[torch.FloatTensor] = None,
         head_mask: Optional[torch.FloatTensor] = None,
         encoder_hidden_states: Optional[torch.Tensor] = None,
@@ -489,28 +508,63 @@ class QEffGPT2Attention(GPT2Attention):
         key = self._split_heads(key, self.num_heads, self.head_dim)
         value = self._split_heads(value, self.num_heads, self.head_dim)
 
+        # Modified Version 1
         if layer_past is not None:
-            # Added for optimized GPT Attention for AI 100 KV Retention
-            past_key = layer_past[0]
-            past_value = layer_past[1]
+            # Added for optimized GPT Attention for AI100 KV Retention
+            past_key_value = layer_past
             seq_length = key.shape[2]
 
             assert value.shape[2] == seq_length
-            kv_indices = torch.arange(seq_length) + cache_index
-            past_key[:, :, kv_indices] = key
-            past_value[:, :, kv_indices] = value
-            key = past_key
-            value = past_value
+            # kv_indices = torch.arange(seq_length)+ cache_index
+            kv_indices = torch.arange(seq_length).unsqueeze(0) + cache_index
+            past_key_value = tuple(torch.stack([tensor.permute(0, 2, 1, 3) for tensor in (past_key_value[0], past_key_value[1])], dim=0))
+            # q, k, v = map(lambda x: x.transpose(1, 2), (q, k, v))
+
+            past_key_value[0][batch_index, kv_indices] = key.transpose(1, 2)
+            past_key_value[1][batch_index, kv_indices] = value.transpose(1, 2)
+
+            # TODO try, gather changes --> IR (works) mostly for layout (bs, sq, nl, head-dim)
+
+            past_key_value = tuple(torch.stack([tensor.permute(0, 2, 1, 3) for tensor in (past_key_value[0], past_key_value[1])], dim=0))
+            key = past_key_value[0][batch_index.view(-1)]
+            value = past_key_value[1][batch_index.view(-1)]
+
+            # for pytorch verification
+            # key = past_key_value[0][batch_index, kv_indices]
+            # value = past_key_value[1][batch_index, kv_indices]
+        
+        # Modified Version 2
+        # if layer_past is not None:
+        #     # Added for optimized GPT Attention for AI100 KV Retention
+        #     past_key_value = layer_past
+        #     seq_length = key.shape[2]
+
+        #     assert value.shape[2] == seq_length
+        #     # kv_indices = torch.arange(seq_length)+ cache_index
+        #     kv_indices = torch.arange(seq_length).unsqueeze(0) + cache_index
+            
+        #     # Assuming past and key have the same shape except for the sequence length dimension
+        #     # We adjust the indexing to avoid transposing
+        #     for i in range(batch_index.shape[0]):
+        #         past_key_value[0][batch_index[i], kv_indices[i]] = key[batch_index[i], :]
+        #         past_key_value[1][batch_index[i], kv_indices[i]] = value[batch_index[i], :]
+
+        #     key = past_key_value[0]
+        #     value = past_key_value[1]
 
         if use_cache is True:
-            present = (key, value)
+            if cache_index is not None:
+                present = past_key_value
+            else:
+                present = (key, value)
         else:
             present = None
-
-        if layer_past is not None:
-            attn_output, attn_weights = self._attn(query, key, value, kv_indices, attention_mask, head_mask)
+        
+        # attention_mask = attention_mask[batch_index.view(-1)]
+        if self.reorder_and_upcast_attn:
+            attn_output, attn_weights = self._upcast_and_reordered_attn(query, key, value, attention_mask, head_mask)
         else:
-            attn_output, attn_weights = self._attn(query, key, value, None, attention_mask, head_mask)
+            attn_output, attn_weights = self._attn(query, key, value, attention_mask, head_mask)
 
         attn_output = self._merge_heads(attn_output, self.num_heads, self.head_dim)
         attn_output = self.c_proj(attn_output)

@@ -5,7 +5,7 @@
 #
 # -----------------------------------------------------------------------------
 
-from typing import Dict, List
+from typing import Dict, List, Optional
 from warnings import warn
 
 import numpy as np
@@ -27,6 +27,7 @@ except ImportError:
     sys.path.append("/opt/qti-aic/dev/python")
     import QAicApi_pb2 as aicapi
 
+
 aic_to_np_dtype_mapping = {
     aicapi.FLOAT_TYPE: np.dtype(np.float32),
     aicapi.FLOAT_16_TYPE: np.dtype(np.float16),
@@ -44,19 +45,24 @@ class QAICInferenceSession:
     def __init__(
         self,
         qpc_path: str,
-        device_ids: List[int] = [0],
+        device_ids: Optional[List[int]] = None,
         activate: bool = True,
         enable_debug_logs: bool = False,
     ):
         # Load QPC
-        devices = qaicrt.QIDList(device_ids)
-        self.context = qaicrt.Context(devices)
-        self.queue = qaicrt.Queue(self.context, device_ids[0])  # Async API
+        if device_ids is not None:
+            devices = qaicrt.QIDList(device_ids)
+            self.context = qaicrt.Context(devices)
+            self.queue = qaicrt.Queue(self.context, device_ids[0])
+        else:
+            self.context = qaicrt.Context()
+            self.queue = qaicrt.Queue(self.context, 0)  # Async API
         if enable_debug_logs:
             assert (
                 self.context.setLogLevel(qaicrt.QLogLevel.QL_DEBUG) == qaicrt.QStatus.QS_SUCCESS
             ), "Failed to setLogLevel"
         qpc = qaicrt.Qpc(qpc_path)
+
         # Load IO Descriptor
         iodesc = aicapi.IoDesc()
         status, iodesc_data = qpc.getIoDescriptor()
@@ -68,15 +74,17 @@ class QAICInferenceSession:
         ]
         self.bindings = iodesc.selected_set.bindings
         self.binding_index_map = {binding.name: binding.index for binding in self.bindings}
+
         # Create and load Program
         prog_properties = qaicrt.QAicProgramProperties()
         prog_properties.SubmitRetryTimeoutMs = 60_000
-        if len(device_ids) > 1:
+        if device_ids and len(device_ids) > 1:
             prog_properties.devMapping = ":".join(map(str, device_ids))
         self.program = qaicrt.Program(self.context, None, qpc, prog_properties)
         assert self.program.load() == qaicrt.QStatus.QS_SUCCESS, "Failed to load program"
         if activate:
             self.activate()
+
         # Create input qbuffers and buf_dims
         self.qbuffers = [qaicrt.QBuffer(bytes(binding.size)) for binding in self.bindings]
         self.buf_dims = qaicrt.BufferDimensionsVecRef(
@@ -115,15 +123,19 @@ class QAICInferenceSession:
         self.set_buffers({k: np.array([]) for k in skipped_buffer_names})
 
     def run(self, inputs: Dict[str, np.ndarray]) -> Dict[str, np.ndarray]:
+        # print("Inputs ", inputs)
         # Set inputs
         self.set_buffers(inputs)
         assert self.execObj.setData(self.qbuffers, self.buf_dims) == qaicrt.QStatus.QS_SUCCESS, "Failed to setData"
+
         # # Run with sync API
         # if self.execObj.run(self.qbuffers) != qaicrt.QStatus.QS_SUCCESS:
+
         # Run with async API
         assert self.queue.enqueue(self.execObj) == qaicrt.QStatus.QS_SUCCESS, "Failed to enqueue"
         if self.execObj.waitForCompletion() != qaicrt.QStatus.QS_SUCCESS:
             error_message = "Failed to run"
+
             # Print additional error messages for unmatched dimension error
             if self.allowed_shapes:
                 error_message += "\n\n"
@@ -145,9 +157,11 @@ class QAICInferenceSession:
                         continue
                     error_message += f"{binding.name}:\t{elemsize}\t{shape}\n"
             raise ValueError(error_message)
+
         # Get output buffers
         status, output_qbuffers = self.execObj.getData()
         assert status == qaicrt.QStatus.QS_SUCCESS, "Failed to getData"
+
         # Build output
         outputs = {}
         for output_name in self.output_names:
@@ -158,4 +172,5 @@ class QAICInferenceSession:
                 bytes(output_qbuffers[buffer_index]),
                 aic_to_np_dtype_mapping[self.bindings[buffer_index].type],
             ).reshape(self.buf_dims[buffer_index][1])
+
         return outputs
