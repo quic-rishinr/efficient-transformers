@@ -14,7 +14,7 @@ import numpy as np
 import transformers
 from transformers import PreTrainedTokenizer, PreTrainedTokenizerFast
 
-from QEfficient.generation.cloud_infer import QAICInferenceSession
+from QEfficient.generation.cloud_infer_cb import QAICInferenceSession
 from QEfficient.utils.logging_utils import logger
 
 io_files = []
