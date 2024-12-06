@@ -22,11 +22,15 @@ def duplicate_weights_for_linear_layer(
     new_kv_heads = repeat * orig_kv_heads
     if isinstance(layer, (WQLinear_GEMM, QuantLinearGPTQ)):
         if head_dim % 8 != 0:
-            raise ValueError(f"the value head_dim={head_dim} is not divisible by 8 which is \
-                                according to the assumption that model is 4-bit quantized.")
+            raise ValueError(
+                f"the value head_dim={head_dim} is not divisible by 8 which is \
+                                according to the assumption that model is 4-bit quantized."
+            )
         if hidden_size % layer.group_size != 0:
-            raise ValueError(f"The value of hidden_size={hidden_size} is not divisible by \
-                            K_proj.group_size={layer.group_size}")
+            raise ValueError(
+                f"The value of hidden_size={hidden_size} is not divisible by \
+                            K_proj.group_size={layer.group_size}"
+            )
 
         # Duplication of quantized weights
         layer.qweight.data = torch.repeat_interleave(
@@ -59,7 +63,7 @@ def main(args):
     replace_transformers_quantizers()
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        num_hidden_layers=1,
+        # num_hidden_layers=1,  # Use for generating smaller model
         attn_implementation="eager",
     )
     # Undo the effect of replace_transformers_quantizers
@@ -104,12 +108,13 @@ def main(args):
         )
 
     # Export the modified model
-    q_model = QEFFAutoModelForCausalLM(model, model_name)
+    q_model = QEFFAutoModelForCausalLM(model, continuous_batching=(True if args.full_batch_size else False))
     export(
         model_name,
         q_model,
         tokenizer=tokenizer,
         onnx_dir_path=f"{model_base_name}-{new_kv_heads}kvheads",
+        full_batch_size=(args.full_batch_size if args.full_batch_size else None),
     )
 
 
@@ -117,10 +122,21 @@ if __name__ == "__main__":
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Modify and export a causal language model.")
     parser.add_argument(
-        "--model_name", type=str, default="meta-llama/Meta-Llama-3-8B-Instruct", help="Name of the model to use."
+        "--model_name",
+        "--model-name",
+        type=str,
+        default="meta-llama/Meta-Llama-3-8B-Instruct",
+        help="Name of the model to use.",
     )
     parser.add_argument("--prompt", type=str, default="My name is", help="Prompt to use for the model.")
     parser.add_argument("--repeat", type=int, default=2, help="Factor to repeat key-value heads.")
+    parser.add_argument(
+        "--full_batch_size",
+        "--full-batch-size",
+        type=int,
+        default=None,
+        help="Set full batch size to enable continuous batching mode, default is None",
+    )
 
     args = parser.parse_args()
     main(args)
