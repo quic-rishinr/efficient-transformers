@@ -172,6 +172,7 @@ from QEfficient.transformers.models.mllama.modeling_mllama import (
     QEffMllamaRotaryEmbedding,
     QEffMllamaSelfAttentionDecoderLayer,
     QEffMllamaTextCrossAttention,
+    QEffMllamaTextCrossAttentionDualQPC,
     QEffMllamaTextModel,
     QEffMllamaTextSelfAttention,
     QEffMllamaVisionModel,
@@ -353,4 +354,16 @@ class SpDTransform:
                 f"model class {model_class} does not yet support returning multiple logits to keep."
             )
 
+        return model, transformed
+
+
+class DualQPCTransform(ModuleMappingTransform):
+    _module_mapping = {
+        MllamaTextCrossAttention:QEffMllamaTextCrossAttentionDualQPC
+    }
+    @classmethod
+    def apply(cls, model: nn.Module) -> Tuple[nn.Module, bool]:
+        model, transformed = super().apply(model)
+        # FIXME: see if we can merge into _module_mapping dict
+        transformers.cache_utils.DynamicCache.update = QEffDynamicCache.update
         return model, transformed

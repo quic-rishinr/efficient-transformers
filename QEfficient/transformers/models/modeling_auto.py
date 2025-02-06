@@ -18,6 +18,7 @@ import torch
 import torch.nn as nn
 import transformers
 from transformers import (
+    AutoConfig,
     AutoModel,
     AutoModelForCausalLM,
     AutoModelForImageTextToText,
@@ -33,7 +34,12 @@ from QEfficient.base.onnx_transforms import FP16ClipTransform, SplitTensorsTrans
 from QEfficient.generation.cloud_infer import QAICInferenceSession
 from QEfficient.generation.text_generation_inference import get_compilation_dims
 from QEfficient.transformers.models.mllama.modeling_mllama import ModelWrapper, VisionEncoder
-from QEfficient.transformers.models.pytorch_transforms import CustomOpsTransform, KVCacheTransform, SpDTransform
+from QEfficient.transformers.models.pytorch_transforms import (
+    CustomOpsTransform,
+    DualQPCTransform,
+    KVCacheTransform,
+    SpDTransform,
+)
 from QEfficient.transformers.quantizers.auto import QEFF_AUTO_QUANTIZATION_CONFIG_MAPPING, with_replaced_quantizers
 from QEfficient.transformers.quantizers.quant_transforms import AwqToMatmulNbitsTransform, GPTQToMatmulNbitsTransform
 from QEfficient.utils import constants, get_padding_shape_from_config
@@ -723,6 +729,13 @@ class QEFFAutoModelForImageTextToText(QEFFTransformersBase):
     ):
         if kwargs.pop("full_batch_size", None):
             raise NotImplementedError("Continuous batching is not supported for image-text-to-text models yet.")
+        
+        # FIXME This is not a scalable approach and it needs to load the config using AutoConfig file. Check if this can be made without loading the config and passing the config 
+        config = AutoConfig.from_pretrained(pretrained_model_name_or_path)
+        num_hidden_layers = kwargs.pop("num_hidden_layers", None)
+        if num_hidden_layers:   
+            config.text_config.num_hidden_layers = num_hidden_layers
+            
 
         self = super().from_pretrained(pretrained_model_name_or_path, is_tlm=is_tlm, *args, **kwargs)
         self.processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path, padding_side="right", **kwargs)
@@ -730,6 +743,9 @@ class QEFFAutoModelForImageTextToText(QEFFTransformersBase):
         self.kv_offload = kv_offload
         self.is_tlm = is_tlm
         self.continuous_batching = continuous_batching
+        
+        if self.kv_offload:
+            self.model, _ = DualQPCTransform.apply(self.model)
         return self
 
     @property
@@ -800,6 +816,23 @@ class QEFFAutoModelForImageTextToText(QEFFTransformersBase):
         mxfp6_matmul: bool = False,
         **compiler_options,
     ) -> str:
+        
+        # TODO Call the generate input method from here and initialize the Model_input_name, model_output_names and dynamic access here
+        # TODO Add the custom IO creation for language (QEffMllamaForConditionalGeneration) here and reuse it for both single and dual QPC approach 
+        # TODO (Optional) for language custom IO creation we can use the num_hidden_layer instead of input and output names
+        """
+        custom_io = {}
+        kv_cache_dtype = "mxint8" if mxint8_kv_cache else "float16"
+        for suffix in ["", "_RetainedState"]:
+            for i in range(self.num_layers):
+                for kv in ["key", "value"]:
+                    custom_io[f"past_{kv}.{i}{suffix}"] = kv_cache_dtype
+        """
+        # TODO Remove ModelWrapper and use self.model (QEffMllamaForConditionalGeneration) for text generation. 
+        # TODO Check if we can use QEFF auto model class for Vision encoder. This way it will be more generic. 
+        # TODO Create a separate method for printing the performance numbers
+        # TODO Remove pytorch_vlm_generate method from here
+        
         if self.kv_offload:
             model = self.model
             self.model = VisionEncoder(model)
