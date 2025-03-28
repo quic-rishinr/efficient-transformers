@@ -158,6 +158,25 @@ class QEffLlamaAttention(LlamaAttention):
     def __qeff_init__(self):
         self.rotary_emb = QEffLlamaRotaryEmbedding(config=self.config)
 
+    def compute_block_attention(self, query_states, key_states, value_states, attention_mask, start_idx, end_idx):
+        curr_attn_weights = torch.matmul(
+            query_states[:, :, start_idx:end_idx, :], key_states.transpose(2, 3)
+        ) / math.sqrt(self.head_dim)
+
+        if attention_mask is not None:  # no matter the length, we just slice it
+            curr_attn_weights = torch.where(
+                attention_mask[:, :, start_idx:end_idx, :],
+                torch.tensor(-10000.0, dtype=torch.float32),
+                curr_attn_weights,
+            )
+
+        # upcast attention to fp32
+        curr_attn_weights = nn.functional.softmax(curr_attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        curr_attn_weights = nn.functional.dropout(curr_attn_weights, p=self.attention_dropout, training=True)
+        curr_attn_output = torch.matmul(curr_attn_weights, value_states)
+
+        return curr_attn_output
+
     def forward(
         self,
         hidden_states: torch.Tensor,
@@ -220,15 +239,60 @@ class QEffLlamaAttention(LlamaAttention):
         key_states = repeat_kv(key_states, self.num_key_value_groups)
         value_states = repeat_kv(value_states, self.num_key_value_groups)
 
-        attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+        # block_size = 32
+        # if block_size is not None:
 
-        if attention_mask is not None:  # no matter the length, we just slice it
-            attn_weights = torch.where(attention_mask, torch.tensor(-10000.0, dtype=torch.float32), attn_weights)
+        #     if (q_len//block_size) > 0:
+        #         assert (q_len%block_size) == 0, "query_seq_len is not perfectly divisible by 32 while trying to do Block Wise Attention for Prefill"
 
-        # upcast attention to fp32
-        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
-        attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
-        attn_output = torch.matmul(attn_weights, value_states)
+        #     runtime_block_size = torch.where((q_len//torch.tensor(block_size)) > 0, torch.tensor(block_size), torch.tensor(1))
+        #     attn_output = torch.zeros(bsz, self.num_heads, q_len, self.head_dim)
+
+        #     for iteration in range(q_len//runtime_block_size):
+        #         curr_attn_weights = torch.matmul(query_states[:, :, iteration * runtime_block_size:(iteration+1)*runtime_block_size, :], key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+
+        #         if attention_mask is not None:  # no matter the length, we just slice it
+        #             curr_attn_weights = torch.where(attention_mask[:, :, iteration*runtime_block_size:(iteration+1)*runtime_block_size, :], torch.tensor(-10000.0, dtype=torch.float32), curr_attn_weights)
+
+        #         # upcast attention to fp32
+        #         curr_attn_weights = nn.functional.softmax(curr_attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        #         curr_attn_weights = nn.functional.dropout(curr_attn_weights, p=self.attention_dropout, training=self.training)
+        #         curr_attn_output = torch.matmul(curr_attn_weights, value_states)
+        #         attn_output[:, :, iteration*runtime_block_size:(iteration+1)*runtime_block_size, :] = curr_attn_output
+
+        block_size = 32
+        if block_size is not None:
+            runtime_block_size = torch.where(
+                (q_len // torch.tensor(block_size)) > 0, torch.tensor(block_size), torch.tensor(1)
+            )
+            reminder_block_size = q_len % block_size  # calculate the remaining query block
+            attn_output = torch.zeros(bsz, self.num_heads, q_len, self.head_dim)
+
+            num_iterations = q_len // runtime_block_size
+            for iteration in range(num_iterations):
+                start_idx = iteration * runtime_block_size
+                end_idx = (iteration + 1) * runtime_block_size
+                attn_output[:, :, start_idx:end_idx, :] = self.compute_block_attention(
+                    query_states, key_states, value_states, attention_mask, start_idx, end_idx
+                )
+
+            if reminder_block_size:
+                start_idx = num_iterations * runtime_block_size
+                end_idx = start_idx + reminder_block_size
+                attn_output[:, :, start_idx:end_idx, :] = self.compute_block_attention(
+                    query_states, key_states, value_states, attention_mask, start_idx, end_idx
+                )
+
+        else:
+            attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+
+            if attention_mask is not None:  # no matter the length, we just slice it
+                attn_weights = torch.where(attention_mask, torch.tensor(-10000.0, dtype=torch.float32), attn_weights)
+
+            # upcast attention to fp32
+            attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+            attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
+            attn_output = torch.matmul(attn_weights, value_states)
 
         if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
             raise ValueError(
