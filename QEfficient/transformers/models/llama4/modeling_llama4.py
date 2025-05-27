@@ -319,8 +319,7 @@ class QEffLlama4TextRotaryEmbedding(nn.Module):
         # self.max_seq_len_cached = config.max_position_embeddings
         # TODO: vbaddi Shouldn't for rope, the max posision_embeddings be original embeddings for rope,
         # chunk size 8192 always? and Revisit when >8K Chunked attention is enabled.
-        self.max_seq_len_cached = config.rope_scaling["original_max_position_embeddings"]
-        # self.max_seq_len_cached = config.max_position_embeddings
+        self.max_seq_len_cached = constants.LLAMA4_MAX_POSITION_EMBEDDINGS
 
         # Get inverse frequency and scaling function (handles yarn/etc)
         inv_freq, self.attention_scaling = self.rope_init_fn(config, device)
@@ -1076,7 +1075,7 @@ class QEffLlama4ForConditionalGeneration(Llama4ForConditionalGeneration):
         lang_inputs["past_key_values"] = [[] for _ in range(self.language_model.config.num_hidden_layers)]
         for i in range(self.language_model.config.num_hidden_layers):
             for kv in ["key", "value"]:
-                lang_inputs["past_key_values"][i].append(torch.zeros(kv_cache_shape, dtype=torch.float32))
+                lang_inputs["past_key_values"][i].append(torch.zeros(kv_cache_shape[0][0].shape, dtype=torch.float32))
 
         inputs = {}
         if kv_offload:
