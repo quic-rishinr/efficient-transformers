@@ -10,7 +10,7 @@ from typing import Callable, List, Optional, Tuple, Union
 
 import torch
 from torch import nn
-from transformers.cache_utils import Cache, DynamicCache
+from transformers.cache_utils import Cache
 from transformers.modeling_outputs import (
     BaseModelOutput,
     BaseModelOutputWithPast,
@@ -32,6 +32,7 @@ from transformers.models.llama4.modeling_llama4 import (
     repeat_kv,
 )
 
+from QEfficient.transformers.cache_utils import QEffDynamicCache
 from QEfficient.transformers.modeling_attn_mask_utils import _create_causal_mask
 from QEfficient.utils import constants
 from QEfficient.utils._utils import IOInfo, get_padding_shape_from_config
@@ -565,6 +566,7 @@ class QEffLlama4TextAttention(Llama4TextAttention):
 
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
+        is_sliding = kwargs.get("is_sliding")
 
         if past_key_value is not None:
             chunk_postion_ids = position_ids
@@ -575,8 +577,10 @@ class QEffLlama4TextAttention(Llama4TextAttention):
                 )
 
             # sin and cos are specific to RoPE models; cache_position needed for the static cache
-            cache_kwargs = {"batch_index": batch_index, "position_ids": chunk_postion_ids}
-            key_states, value_states = past_key_value.update(key_states, value_states, self.layer_idx, cache_kwargs)
+            cache_kwargs = {"batch_index": batch_index, "position_ids": chunk_postion_ids, "is_sliding": is_sliding}
+            key_states, value_states = past_key_value.update_hybrid_chunked(
+                key_states, value_states, self.layer_idx, cache_kwargs
+            )
 
         attention_interface: Callable = eager_attention_forward
 
@@ -710,7 +714,7 @@ class QEffLlama4TextModel(Llama4TextModel):
         return_legacy_cache = False
         if use_cache and not isinstance(past_key_values, Cache):
             return_legacy_cache = True
-            past_key_values = DynamicCache.from_legacy_cache(past_key_values)
+            past_key_values = QEffDynamicCache.from_legacy_cache(past_key_values)
 
         if cache_position is None:
             past_seen_tokens = past_key_values.get_seq_length() if past_key_values is not None else 0
@@ -809,6 +813,15 @@ class QEffLlama4ForCausalLM(Llama4ForCausalLM):
             output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
         )
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        is_sliding = None
+        if hasattr(self.config.get_text_config(), "no_rope_layers"):
+            is_sliding = self.config.no_rope_layers
+        else:
+            layer_switch = getattr(self.config, "sliding_window_pattern", 2)
+            is_sliding = [bool((i + 1) % layer_switch) for i in range(self.config.num_hidden_layers)]
+
+        kwargs["is_sliding"] = is_sliding
 
         # decoder outputs consists of (dec_features, layer_state, dec_hidden, dec_attn)
         outputs = self.model(
