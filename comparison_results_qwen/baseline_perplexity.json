@@ -1,0 +1,17 @@
+{
+  "model_name": "gpt2",
+  "dataset": "wikitext-2-raw-v1",
+  "num_samples": 2,
+  "ctx_len": 512,
+  "perplexity": {
+    "mean": 36.9375,
+    "std": 6.3125,
+    "min": 30.625,
+    "max": 43.25,
+    "median": 36.9375
+  },
+  "per_sample_perplexities": [
+    30.625,
+    43.25
+  ]
+}

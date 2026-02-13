@@ -96,7 +96,7 @@ def run_intern_on_aic(
 
 
 if __name__ == "__main__":
-    model_name = "OpenGVLab/InternVL2_5-1B"
+    model_name = "OpenGVLab/InternVL3_5-1B"
 
     # Chat Template information for prompt preprocessing
     messages: List[List[str]] = []

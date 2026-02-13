@@ -1,0 +1,83 @@
+================================================================================
+SYNTHETIC MODEL COMPARISON REPORT
+================================================================================
+
+Scenario: WORST
+Description: Poor quality - QEff model shows significant degradation (> 10% degradation)
+Number of Samples: 100
+Vocabulary Size: 32000
+Sequence Length: 512
+
+================================================================================
+METRIC SUMMARIES
+================================================================================
+
+1. PERPLEXITY
+----------------------------------------
+   Baseline Perplexity:    289235.9566 ± 25574.8230
+   QEfficient Perplexity:  348810.6181 ± 32083.7836
+   Difference:             +59574.6616
+   Relative Change:        20.60%
+   Status:                 POOR
+
+2. LOGIT MSE
+----------------------------------------
+   Mean:    0.255219
+   Std Dev: 0.000787
+   Min:     0.253686
+   Max:     0.257176
+   Median:  0.255102
+   Status:  POOR
+
+3. KL DIVERGENCE
+----------------------------------------
+   Mean:    0.221586
+   Std Dev: 0.014039
+   Min:     0.196520
+   Max:     0.294367
+   Median:  0.221370
+   Status:  POOR
+
+4. TOP-K OVERLAP
+----------------------------------------
+   Mean:    66.842969
+   Std Dev: 0.467075
+   Min:     65.234375
+   Max:     67.832031
+   Median:  66.835938
+   Status:  POOR
+
+5. RANK CORRELATION
+----------------------------------------
+   Mean:    0.966711
+   Std Dev: 0.000097
+   Min:     0.966474
+   Max:     0.966917
+   Median:  0.966716
+   Status:  ACCEPTABLE
+
+6. NEXT TOKEN ACCURACY
+----------------------------------------
+   Mean:    64.732422
+   Std Dev: 1.782007
+   Min:     59.570312
+   Max:     69.335938
+   Median:  65.039062
+   Status:  POOR
+
+================================================================================
+OVERALL ASSESSMENT
+================================================================================
+
+Metrics Summary:
+   Excellent:  0/6 metrics
+   Good:       0/6 metrics
+   Acceptable: 1/6 metrics
+   Poor:       5/6 metrics
+
+Expected Scenario: WORST
+Scenario Description: Poor quality - QEff model shows significant degradation (> 10% degradation)
+
+================================================================================
+END OF REPORT
+================================================================================

@@ -1,0 +1,8 @@
+Metric,Value,Std Dev,Min,Max
+Baseline Perplexity,17.9699,3.7368,-,-
+QEfficient Perplexity,17.9975,3.7558,-,-
+logit_mse,0.0000,0.0000,0.0000,0.0000
+kl_divergence,0.0000,0.0000,-0.0000,0.0001
+topk_overlap,99.6172,0.0904,99.4922,99.7266
+rank_correlation,1.0000,0.0000,1.0000,1.0000
+next_token_accuracy,99.7656,0.3125,99.2188,100.0000

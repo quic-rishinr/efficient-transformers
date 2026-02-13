@@ -1,0 +1,83 @@
+================================================================================
+SYNTHETIC MODEL COMPARISON REPORT
+================================================================================
+
+Scenario: GOOD
+Description: Excellent quality - QEff model closely matches baseline (< 1% degradation)
+Number of Samples: 500
+Vocabulary Size: 32000
+Sequence Length: 512
+
+================================================================================
+METRIC SUMMARIES
+================================================================================
+
+1. PERPLEXITY
+----------------------------------------
+   Baseline Perplexity:    287636.2041 ± 24841.0403
+   QEfficient Perplexity:  287635.7152 ± 24840.9977
+   Difference:             -0.4888
+   Relative Change:        0.00%
+   Status:                 EXCELLENT
+
+2. LOGIT MSE
+----------------------------------------
+   Mean:    0.000001
+   Std Dev: 0.000000
+   Min:     0.000001
+   Max:     0.000001
+   Median:  0.000001
+   Status:  EXCELLENT
+
+3. KL DIVERGENCE
+----------------------------------------
+   Mean:    0.000001
+   Std Dev: 0.000000
+   Min:     0.000000
+   Max:     0.000001
+   Median:  0.000001
+   Status:  EXCELLENT
+
+4. TOP-K OVERLAP
+----------------------------------------
+   Mean:    99.921289
+   Std Dev: 0.040825
+   Min:     99.746094
+   Max:     100.000000
+   Median:  99.921875
+   Status:  EXCELLENT
+
+5. RANK CORRELATION
+----------------------------------------
+   Mean:    1.000000
+   Std Dev: 0.000000
+   Min:     1.000000
+   Max:     1.000000
+   Median:  1.000000
+   Status:  EXCELLENT
+
+6. NEXT TOKEN ACCURACY
+----------------------------------------
+   Mean:    99.945312
+   Std Dev: 0.103645
+   Min:     99.414062
+   Max:     100.000000
+   Median:  100.000000
+   Status:  EXCELLENT
+
+================================================================================
+OVERALL ASSESSMENT
+================================================================================
+
+Metrics Summary:
+   Excellent:  6/6 metrics
+   Good:       0/6 metrics
+   Acceptable: 0/6 metrics
+   Poor:       0/6 metrics
+
+Expected Scenario: GOOD
+Scenario Description: Excellent quality - QEff model closely matches baseline (< 1% degradation)
+
+================================================================================
+END OF REPORT
+================================================================================

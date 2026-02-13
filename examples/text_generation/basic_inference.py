@@ -47,10 +47,12 @@ def main():
         prompts=[args.prompt],
         device_id=args.device_group,
         generation_len=args.generation_len,
+        return_logits=True
     )
 
     print(f"\nPrompt: {args.prompt}")
     print(f"Generated: {exec_info.generated_texts[0]}")
+    print(f"Generated: {exec_info.logits[0]}")
 
 
 if __name__ == "__main__":

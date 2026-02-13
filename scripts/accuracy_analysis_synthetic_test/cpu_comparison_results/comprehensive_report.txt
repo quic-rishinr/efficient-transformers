@@ -1,0 +1,105 @@
+================================================================================
+COMPREHENSIVE MODEL COMPARISON REPORT
+================================================================================
+
+Model: meta-llama/Llama-3.2-1B
+Dataset: wikitext-2-raw-v1
+Number of Samples: 5
+Context Length: 256
+
+================================================================================
+METRIC SUMMARIES WITH EXPECTATIONS
+================================================================================
+
+1. PERPLEXITY
+----------------------------------------
+   Baseline Perplexity:    17.9699 ± 3.7368
+   QEfficient Perplexity:  17.9975 ± 3.7558
+   Difference:             +0.0276
+   Relative Change:        0.15%
+   Status:                 EXCELLENT
+   Expectations:
+      Excellent:  < 1.0%
+      Good:       < 5.0%
+      Acceptable: < 10.0%
+
+2. LOGIT MSE
+----------------------------------------
+   Mean:    0.000023
+   Std Dev: 0.000006
+   Min:     0.000016
+   Max:     0.000035
+   Median:  0.000021
+   Status:  EXCELLENT
+   Expectations:
+      Excellent:  < 1e-04
+      Good:       < 1e-03
+      Acceptable: < 1e-02
+
+3. KL DIVERGENCE
+----------------------------------------
+   Mean:    0.000025
+   Std Dev: 0.000019
+   Min:     -0.000007
+   Max:     0.000053
+   Median:  0.000026
+   Status:  EXCELLENT
+   Expectations:
+      Excellent:  < 1e-04
+      Good:       < 0.01
+      Acceptable: < 0.1
+
+4. TOP-K OVERLAP
+----------------------------------------
+   Mean:    99.6172%
+   Std Dev: 0.0904%
+   Min:     99.4922%
+   Max:     99.7266%
+   Median:  99.6484%
+   Status:  EXCELLENT
+   Expectations:
+      Excellent:  > 99%
+      Good:       > 95%
+      Acceptable: > 90%
+
+5. RANK CORRELATION
+----------------------------------------
+   Mean:    0.99999864
+   Std Dev: 0.00000026
+   Min:     0.99999818
+   Max:     0.99999891
+   Median:  0.99999878
+   Status:  EXCELLENT
+   Expectations:
+      Excellent:  > 0.9999
+      Good:       > 0.99
+      Acceptable: > 0.95
+
+6. NEXT TOKEN ACCURACY
+----------------------------------------
+   Mean:    99.7656%
+   Std Dev: 0.3125%
+   Min:     99.2188%
+   Max:     100.0000%
+   Median:  100.0000%
+   Status:  EXCELLENT
+   Expectations:
+      Excellent:  > 99%
+      Good:       > 95%
+      Acceptable: > 90%
+
+================================================================================
+OVERALL ASSESSMENT
+================================================================================
+
+Metrics Summary:
+   Excellent:  6/6 metrics
+   Good:       0/6 metrics
+   Acceptable: 0/6 metrics
+   Poor:       0/6 metrics
+
+Overall: EXCELLENT - Model optimization preserved accuracy exceptionally well!
+
+================================================================================
+END OF REPORT
+================================================================================

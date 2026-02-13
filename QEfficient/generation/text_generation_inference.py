@@ -51,12 +51,14 @@ class CloudAI100ExecInfo:
         :generated_texts (Union[List[List[str]], List[str]]): Generated text(s).
         :generated_ids (Union[List[np.ndarray], np.ndarray]): Generated IDs.
         :perf_metrics (PerfMetrics): Performance metrics.
+        :logits (Optional[np.ndarray]): Generated logits [batch_size, seq_len, vocab_size]. Only populated if return_logits=True.
     """
 
     batch_size: int
     generated_texts: Union[List[str], List[List[str]]]
     generated_ids: Union[List[np.ndarray], np.ndarray]
     perf_metrics: PerfMetrics
+    logits: Optional[np.ndarray] = None
 
     def __repr__(self):
         return f"Average Prefill time a.k.a TTFT is= {round(self.perf_metrics.prefill_time, 2)} sec\
@@ -331,6 +333,7 @@ def cloud_ai_100_exec_kv(
     return_pdfs: bool = False,
     include_guided_decoding: bool = False,
     sampling_params: Optional[Dict[str, Any]] = None,
+    return_logits: bool = False,
 ):
     """
     This method generates output until ``eos`` or ``generation_len`` by executing the compiled ``qpc`` on ``Cloud AI 100`` Hardware cards.
@@ -404,7 +407,14 @@ def cloud_ai_100_exec_kv(
     for _ in range(0, int(iteration)):
         if full_batch_size is None:
             exec_info = [
-                generate_text.generate(prompt[i : i + batch_size], generation_len, stream, prompt_to_lora_id_mapping)
+                generate_text.generate(
+                    prompt[i : i + batch_size], 
+                    generation_len, 
+                    stream, 
+                    automation,
+                    prompt_to_lora_id_mapping, 
+                    return_logits
+                )
                 for i in range(0, len(prompt), batch_size)
             ]
             prefill_time = np.average([info.perf_metrics.prefill_time for info in exec_info])
@@ -413,16 +423,22 @@ def cloud_ai_100_exec_kv(
             total_time = np.average([info.perf_metrics.total_time for info in exec_info])
             generated_texts = [info.generated_texts for info in exec_info]
             generated_ids = [info.generated_ids for info in exec_info]
+            
+            # Aggregate logits if return_logits is True
+            logits = None
+            if return_logits and exec_info and exec_info[0].logits is not None:
+                logits = np.concatenate([info.logits for info in exec_info], axis=0)
 
             exec_info = CloudAI100ExecInfo(
                 batch_size=batch_size,
                 generated_texts=generated_texts,
                 generated_ids=generated_ids,
                 perf_metrics=PerfMetrics(prefill_time, decode_perf, total_perf, total_time),
+                logits=logits,
             )
         else:
             exec_info = generate_text.generate(
-                prompt=prompt, generation_len=generation_len, prompt_to_lora_id_mapping=prompt_to_lora_id_mapping
+                prompt=prompt, generation_len=generation_len, prompt_to_lora_id_mapping=prompt_to_lora_id_mapping, return_logits=return_logits
             )
 
         print_latency_stats_kv(prompt, exec_info=exec_info, automation=automation)
@@ -492,6 +508,7 @@ class QEffTextGenerationBase:
         self.decode_input_ids = None
         self.decode_pos_ids = None
         self.generation_len = None
+        self.generated_logits = None
 
         self.tokenizer = tokenizer
         self._set_tokenizer_params()  # set tokenizer params
@@ -675,14 +692,26 @@ class QEffTextGenerationBase:
                 logits = np.expand_dims(logits, 1)
             return logits.argmax(2)
 
-    def initialize_decode_inputs(self, num_prompts, execution_batch_size, max_gen_length):
+    def initialize_decode_inputs(self, num_prompts, execution_batch_size, max_gen_length, return_logits=False):
         """
         Initialize np arrays for storing the prefill output for all the decode batch size.
+        
+        Args:
+            num_prompts (int): Number of prompts to process.
+            execution_batch_size (int): Batch size for execution.
+            max_gen_length (int): Maximum generation length.
+            return_logits (bool): If True, allocate memory for storing logits.
         """
         self.generated_ids = np.full((num_prompts, max_gen_length), self.tokenizer.pad_token_id)
         self.decode_input_ids = np.zeros((execution_batch_size, 1), np.int64)
         self.decode_pos_ids = np.zeros((execution_batch_size, 1), np.int64)
         self.generation_len = np.zeros((execution_batch_size, 1), np.int64)
+        
+        # Initialize logits storage if requested
+        if return_logits:
+            self.generated_logits = np.zeros((num_prompts, max_gen_length, self._vocab_size), dtype=np.float32)
+        else:
+            self.generated_logits = None
 
     def initialize_lora_id_mapping(self, prompt_to_lora_id_mapping):
         """
@@ -760,7 +789,7 @@ class QEffTextGenerationBase:
             logits_out_placeholder = np.zeros((batch_size, sequence_length, self._vocab_size), dtype=np.float32)
             self._session.set_buffers({"logits": logits_out_placeholder})
 
-    def run_prefill(self, prompt, generation_len, prefill_logit_bs=1, decode_batch_id=None):
+    def run_prefill(self, prompt, generation_len, prefill_logit_bs=1, decode_batch_id=None, return_logits=False):
         """
         Runs prefill for a given prompt and generation length.
 
@@ -771,6 +800,8 @@ class QEffTextGenerationBase:
             prompt (str): The prompt for which to run prefill.
             generation_len (int): The generation length.
             prefill_logit_bs (int, optional): The prefill logit batch size. Defaults to 1.
+            decode_batch_id: Batch ID for decode (optional).
+            return_logits (bool): If True, store logits from prefill.
 
         Returns:
             outputs (dict): The outputs of the prefill.
@@ -844,6 +875,28 @@ class QEffTextGenerationBase:
 
             if self._write_io_dir is not None:
                 write_io_files(inputs, outputs, self._write_io_dir, "prefill", "aic_batch_io", True, False)
+        
+        # Store prefill logits if requested (from last chunk)
+        if return_logits and self.generated_logits is not None:
+            if self.include_sampler:
+                if self.return_pdfs:
+                    # Use probability distributions
+                    if decode_batch_id is not None:
+                        self.generated_logits[decode_batch_id.flatten()[0], 0] = outputs["probs"][:, -1, :].flatten()
+                    else:
+                        self.generated_logits[:, 0] = outputs["probs"][:, -1, :]
+                else:
+                    logger.warning("return_logits=True requires return_pdfs=True when include_sampler=True. Prefill logits will not be captured.")
+            else:
+                # Use raw logits
+                logits = outputs["logits"]
+                if len(logits.shape) == 2:
+                    logits = np.expand_dims(logits, 1)
+                if decode_batch_id is not None:
+                    self.generated_logits[decode_batch_id.flatten()[0], 0] = logits[:, -1, :].flatten()
+                else:
+                    self.generated_logits[:, 0] = logits[:, -1, :]
+        
         return (
             outputs,
             position_ids,
@@ -977,7 +1030,7 @@ class QEffTextGenerationBase:
         return decode_pause_time
 
     def run_decode(
-        self, decode_inputs, generation_len, automation, streamer: Optional[transformers.TextStreamer] = None
+        self, decode_inputs, generation_len, automation, streamer: Optional[transformers.TextStreamer] = None, return_logits: bool = False
     ):
         """
         Default method for running decode. Executes the decoding process for a given set of inputs and a specified generation length.
@@ -988,6 +1041,7 @@ class QEffTextGenerationBase:
             decode_inputs (dict): The initial inputs for decoding. This should be a dictionary containing 'input_ids' and 'position_ids'.
             generation_len (int): Max allowed length for generating tokens. The decoding process will be terminated  when generation length is reached.
             streamer (transformers.TextStreamer): TextStreamer object to print decoded tokens to console.
+            return_logits (bool): If True, store logits for each generated token.
         Returns:
             num_token (int): The number of tokens processed in the decoding process.
         """
@@ -1017,6 +1071,21 @@ class QEffTextGenerationBase:
             if self._write_io_dir is not None:
                 write_io_files(decode_inputs, outputs, self._write_io_dir, "decode", "aic_batch_io", True, False)
                 self._write_io_dir = None
+
+            # Store logits if requested
+            if return_logits and self.generated_logits is not None:
+                if self.include_sampler:
+                    if self.return_pdfs:
+                        # Use probability distributions
+                        self.generated_logits[:, num_token] = outputs["probs"][:, -1, :]
+                    else:
+                        logger.warning("return_logits=True requires return_pdfs=True when include_sampler=True. Logits will not be captured.")
+                else:
+                    # Use raw logits
+                    logits = outputs["logits"]
+                    if len(logits.shape) == 2:
+                        logits = np.expand_dims(logits, 1)
+                    self.generated_logits[:, num_token] = logits[:, -1, :]
 
             # Prepare inputs for next iteration
             decode_inputs["input_ids"] = self._fetch_next_token_id(outputs)
@@ -1116,6 +1185,7 @@ class TextGeneration:
         prompt: List[str],
         generation_len: Optional[int] = None,
         prompt_to_lora_id_mapping: Optional[List[int]] = None,
+        return_logits: bool = False,
     ):
         """
         This method should be called to set/reset inputs
@@ -1123,6 +1193,7 @@ class TextGeneration:
             :prompt (List[str]): prompts for the model text generation
             :generation_len (Optional[int], optional): Number of tokens to be generated.
             :prompt_to_lora_id_mapping (Optional[List[int]], optional): Mapping to associate prompts with their respective LoRA adapter.
+            :return_logits (bool): If True, allocate memory for storing logits.
         """
         execution_batch_size = (
             self._full_batch_size if self._full_batch_size is not None else self._qaic_model.batch_size
@@ -1137,7 +1208,7 @@ class TextGeneration:
         if prompt_to_lora_id_mapping:
             self._qaic_model.initialize_lora_id_mapping(prompt_to_lora_id_mapping)
 
-        self._qaic_model.initialize_decode_inputs(num_prompts, execution_batch_size, max_gen_length)
+        self._qaic_model.initialize_decode_inputs(num_prompts, execution_batch_size, max_gen_length, return_logits)
 
     def _regular_model_execution(
         self,
@@ -1146,6 +1217,7 @@ class TextGeneration:
         stream: Optional[bool] = True,
         automation: Optional[bool] = False,
         prompt_to_lora_id_mapping: Optional[List[int]] = None,
+        return_logits: bool = False,
     ):
         """
         Executes the model in regular mode.
@@ -1155,24 +1227,25 @@ class TextGeneration:
             :generation_len (Optional[int], optional): The generation length.
             :stream (Optional[bool], optional): Boolean flag to enable stream output to console.
             :prompt_to_lora_id_mapping (Optional[List[int]], optional): Mapping to associate prompts with their respective LoRA adapter.
+            :return_logits (bool): If True, capture and return logits.
 
         Returns:
         :tuple: A tuple containing performance metrics and generated texts.
 
         """
-        self._setup_model_execution_inputs(prompt, generation_len, prompt_to_lora_id_mapping)
+        self._setup_model_execution_inputs(prompt, generation_len, prompt_to_lora_id_mapping, return_logits)
         if stream and self._text_streamer is None:
             self._text_streamer = transformers.TextStreamer(self._tokenizer)
         start = perf_counter()
         outputs, position_ids, generation_len = self._qaic_model.run_prefill(
-            prompt, generation_len, prefill_logit_bs=self._qaic_model.batch_size
+            prompt, generation_len, prefill_logit_bs=self._qaic_model.batch_size, return_logits=return_logits
         )
         self._qaic_model.update_decode_input(outputs, position_ids, generation_len)
 
         decode_inputs = self._qaic_model.prepare_decode_inputs()
 
         loop_start = perf_counter()  # Start decode loop timer
-        num_token = self._qaic_model.run_decode(decode_inputs, generation_len, automation, self._text_streamer)
+        num_token = self._qaic_model.run_decode(decode_inputs, generation_len, automation, self._text_streamer, return_logits)
         end = perf_counter()
         generated_texts = self._tokenizer.batch_decode(self._qaic_model.generated_ids, skip_special_tokens=True)
 
@@ -1277,6 +1350,7 @@ class TextGeneration:
         stream: bool = True,
         automation: Optional[bool] = False,
         prompt_to_lora_id_mapping: Optional[List[int]] = None,
+        return_logits: bool = False,
     ):
         """
         Executes the model for a given list of prompts and a specified generation length.
@@ -1286,12 +1360,16 @@ class TextGeneration:
             generation_len (Optional[int], optional): The generation length.
             stream (Optional[bool], optional): Boolean flag to enable stream output to console.
             prompt_to_lora_id_mapping (Optional[List[int]], optional): Mapping to associate prompts with their respective LoRA adapter.
+            return_logits (bool, optional): If True, capture and return logits for each generated token. Defaults to False.
+                Note: When include_sampler=True, this requires return_pdfs=True to capture probability distributions.
         Returns:
-            latency_stats (tuple): A tuple containing the generated texts, performance metrics.
+            latency_stats (CloudAI100ExecInfo): Object containing generated texts, IDs, performance metrics, and optionally logits.
         """
 
         if self._full_batch_size is not None:
             logger.warning("Streamer is currently unavailable for continuous batch execution.")
+            if return_logits:
+                logger.warning("return_logits is not yet supported for continuous batching execution. Logits will not be captured.")
             perf_metrics, generated_texts = self._continuous_batching_execution(
                 prompt, generation_len, prompt_to_lora_id_mapping
             )
@@ -1299,7 +1377,7 @@ class TextGeneration:
             if stream:
                 print("\nPrompt : " + prompt[0] + "\nCompletion :", flush=True, end="")
             perf_metrics, generated_texts = self._regular_model_execution(
-                prompt, generation_len, stream, automation, prompt_to_lora_id_mapping
+                prompt, generation_len, stream, automation, prompt_to_lora_id_mapping, return_logits
             )
 
         if stream:
@@ -1315,5 +1393,6 @@ class TextGeneration:
             generated_texts=generated_texts,
             generated_ids=self._qaic_model.generated_ids,
             perf_metrics=perf_metrics,
+            logits=self._qaic_model.generated_logits if return_logits else None,
         )
         return latency_stats

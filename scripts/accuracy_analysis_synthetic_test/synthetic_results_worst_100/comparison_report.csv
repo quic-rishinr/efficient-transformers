@@ -1,0 +1,9 @@
+Metric,Value,Std Dev,Min,Max,Status
+Baseline Perplexity,289235.9566,25574.8230,-,-,-
+QEfficient Perplexity,348810.6181,32083.7836,-,-,-
+Perplexity % Change,20.60%,-,-,-,POOR
+logit_mse,0.255219,0.000787,0.253686,0.257176,POOR
+kl_divergence,0.221586,0.014039,0.196520,0.294367,POOR
+topk_overlap,66.842969,0.467075,65.234375,67.832031,POOR
+rank_correlation,0.966711,0.000097,0.966474,0.966917,ACCEPTABLE
+next_token_accuracy,64.732422,1.782007,59.570312,69.335938,POOR
