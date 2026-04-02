@@ -1,0 +1,185 @@
+{
+  "created_at_utc": "2026-03-29T08:03:40.025725Z",
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "prompt_len": 512,
+  "ctx_len": 512,
+  "batch_size": 1,
+  "generation_len": 8,
+  "num_cores": 16,
+  "num_devices": 1,
+  "device_id": 0,
+  "export_dir": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217",
+  "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+  "export_time_sec": 71.42089778697118,
+  "results": [
+    {
+      "variant": "mxfp6",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": false,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217/compile_mxfp6"
+      },
+      "compile_success": true,
+      "run_success": true,
+      "compile_wall_time_sec": 47.23187381681055,
+      "compile_time_sec": 47.23187381681055,
+      "qpc_path": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217/compile_mxfp6/qpc-dee864a584ff8d8a/qpc",
+      "qpc_size_bytes": 7783930948,
+      "run_wall_time_sec": 14.516445118002594,
+      "run_metrics": {
+        "prefill_time_sec": 0.2027623811736703,
+        "decode_tok_per_sec_per_batch": 17.456991482112453,
+        "total_tok_per_sec_per_batch": 11.594244091664352,
+        "e2e_time_sec": 0.6037478549405932,
+        "decode_tok_per_sec_aggregate": 17.456991482112453,
+        "total_tok_per_sec_aggregate": 11.594244091664352
+      }
+    },
+    {
+      "variant": "mxint8",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": true,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": false,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217/compile_mxint8"
+      },
+      "compile_success": true,
+      "run_success": true,
+      "compile_wall_time_sec": 49.97845350578427,
+      "compile_time_sec": 49.97845350578427,
+      "qpc_path": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217/compile_mxint8/qpc-a7c447e0fce983d5/qpc",
+      "qpc_size_bytes": 16379920965,
+      "run_wall_time_sec": 25.20099517889321,
+      "run_metrics": {
+        "prefill_time_sec": 0.4831281341612339,
+        "decode_tok_per_sec_per_batch": 7.451681663387075,
+        "total_tok_per_sec_per_batch": 4.920867510835223,
+        "e2e_time_sec": 1.4225134053267539,
+        "decode_tok_per_sec_aggregate": 7.451681663387075,
+        "total_tok_per_sec_aggregate": 4.920867510835223
+      }
+    },
+    {
+      "variant": "mxfp6_mxint8",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": true,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217/compile_mxfp6_mxint8"
+      },
+      "compile_success": true,
+      "run_success": true,
+      "compile_wall_time_sec": 48.39729280304164,
+      "compile_time_sec": 48.39729280304164,
+      "qpc_path": "/dev/shm/qeff_turboquant_qwen25_7b_impl_20260329_080217/compile_mxfp6_mxint8/qpc-c076d6b23387ddb0/qpc",
+      "qpc_size_bytes": 7783957164,
+      "run_wall_time_sec": 14.542041444219649,
+      "run_metrics": {
+        "prefill_time_sec": 0.19723009364679456,
+        "decode_tok_per_sec_per_batch": 17.500894064123734,
+        "total_tok_per_sec_per_batch": 11.721176801513193,
+        "e2e_time_sec": 0.5972096589393914,
+        "decode_tok_per_sec_aggregate": 17.500894064123734,
+        "total_tok_per_sec_aggregate": 11.721176801513193
+      }
+    }
+  ],
+  "turboquant_emulation": {
+    "enabled": true,
+    "note": "Software emulation of TurboQuant-style KV compression (not QAIC kernel path).",
+    "model_head_dim": 128,
+    "num_kv_heads": 4,
+    "num_hidden_layers_total": 28,
+    "num_layers_evaluated": 4,
+    "ctx_len": 512,
+    "query_len": 64,
+    "batch_size": 1,
+    "device": "cpu",
+    "turboquant_config": {
+      "bits": 3.0,
+      "seed": 2026,
+      "stats_dtype": "float16"
+    },
+    "timing": {
+      "quant_time_sec_total": 0.02628801204264164,
+      "dequant_time_sec_total": 0.009508674498647451,
+      "wall_time_sec_total": 0.48353434167802334
+    },
+    "compression": {
+      "original_bytes_total": 4194304,
+      "estimated_compressed_bytes_total": 851968,
+      "estimated_ratio_total": 4.923076923076923
+    },
+    "quality_avg": {
+      "k_mse": 0.18260196596384048,
+      "v_mse": 0.18265225365757942,
+      "logits_mse": 0.18333720043301582,
+      "logits_cosine": 0.9197330921888351
+    },
+    "quality_per_layer": [
+      {
+        "layer_idx": 0,
+        "k_mse": 0.18167686462402344,
+        "v_mse": 0.18459570407867432,
+        "k_mae": 0.3389468491077423,
+        "v_mae": 0.3414388597011566,
+        "logits_mse": 0.18297423422336578,
+        "logits_mae": 0.3390581011772156,
+        "logits_cosine": 0.9198721647262573,
+        "estimated_compression_ratio": 4.923076923076923
+      },
+      {
+        "layer_idx": 1,
+        "k_mse": 0.18224889039993286,
+        "v_mse": 0.18250805139541626,
+        "k_mae": 0.3390151262283325,
+        "v_mae": 0.33946409821510315,
+        "logits_mse": 0.17973309755325317,
+        "logits_mae": 0.3363534212112427,
+        "logits_cosine": 0.920450747013092,
+        "estimated_compression_ratio": 4.923076923076923
+      },
+      {
+        "layer_idx": 2,
+        "k_mse": 0.18322882056236267,
+        "v_mse": 0.1820484697818756,
+        "k_mae": 0.34018421173095703,
+        "v_mae": 0.3391265869140625,
+        "logits_mse": 0.1832132339477539,
+        "logits_mae": 0.33974140882492065,
+        "logits_cosine": 0.9193292856216431,
+        "estimated_compression_ratio": 4.923076923076923
+      },
+      {
+        "layer_idx": 3,
+        "k_mse": 0.18325328826904297,
+        "v_mse": 0.1814567893743515,
+        "k_mae": 0.34013405442237854,
+        "v_mae": 0.3384428322315216,
+        "logits_mse": 0.18742823600769043,
+        "logits_mae": 0.34325864911079407,
+        "logits_cosine": 0.9192801713943481,
+        "estimated_compression_ratio": 4.923076923076923
+      }
+    ]
+  }
+}

@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1200" viewBox="0 0 1400 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Efficient Transformers Capability Map</title>
+  <desc id="desc">A refined capability map showing Efficient Transformers as a central hub connected to six clean capability groups across workload coverage, runtime, decode efficiency, and deployment workflow on Cloud AI 100.</desc>
+  <defs>
+    <style>
+      .title {
+        font-family: sans-serif;
+        font-size: 46px;
+        font-weight: 700;
+        fill: #102843;
+      }
+      .subtitle {
+        font-family: sans-serif;
+        font-size: 23px;
+        font-weight: 500;
+        fill: #4a647b;
+      }
+      .kicker {
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        fill: #2f7fb6;
+      }
+      .cardTitle {
+        font-family: sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        fill: #17324c;
+      }
+      .cardBody {
+        font-family: sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        fill: #536a80;
+      }
+      .hubKicker {
+        font-family: sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.9px;
+        fill: #d8efff;
+      }
+      .hubTitle {
+        font-family: sans-serif;
+        font-size: 49px;
+        font-weight: 700;
+        fill: #ffffff;
+      }
+      .hubBody {
+        font-family: sans-serif;
+        font-size: 21px;
+        font-weight: 500;
+        fill: #e9f6ff;
+      }
+      .chipText {
+        font-family: sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        fill: #16527e;
+      }
+      .footerTitle {
+        font-family: sans-serif;
+        font-size: 27px;
+        font-weight: 700;
+        fill: #17314b;
+      }
+      .footerBody {
+        font-family: sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        fill: #556c81;
+      }
+      .connector {
+        stroke: #3f81b7;
+        stroke-width: 5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        marker-end: url(#arrow);
+      }
+    </style>
+
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#86a6c3" flood-opacity="0.18"/>
+    </filter>
+
+    <filter id="hubShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#2f6ea0" flood-opacity="0.22"/>
+    </filter>
+
+    <marker id="arrow" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M0,0 L12,6 L0,12 C2,9.5 2,2.5 0,0 Z" fill="#3f81b7"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="1200" fill="#f6fbff"/>
+  <rect width="1400" height="1200" rx="30" fill="#f6fbff"/>
+  <circle cx="700" cy="520" r="300" fill="#dcefff" opacity="0.45"/>
+
+  <text x="68" y="86" class="title">Efficient Transformers Capability Map</text>
+  <text x="68" y="124" class="subtitle">A cleaner view of the stack across workload breadth, serving runtime, decode optimization, and deployment workflow on Cloud AI 100.</text>
+
+  <path d="M548,402 C500,392 462,334 404,300" class="connector"/>
+  <path d="M500,520 C456,520 444,550 404,550" class="connector"/>
+  <path d="M548,638 C500,648 462,766 404,800" class="connector"/>
+
+  <path d="M852,402 C900,392 938,334 996,300" class="connector"/>
+  <path d="M900,520 C944,520 956,550 996,550" class="connector"/>
+  <path d="M852,638 C900,648 938,766 996,800" class="connector"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="54" y="204" width="350" height="192" rx="28" fill="#ffffff" stroke="#d7e4f0" stroke-width="2.5"/>
+    <rect x="54" y="204" width="350" height="10" rx="28" fill="#2f7fb6"/>
+    <text x="84" y="244" class="kicker">TEXT CORE</text>
+    <text x="84" y="286" class="cardTitle">Text and Adapters</text>
+    <text x="84" y="326" class="cardBody">CausalLM, PEFT, LoRA</text>
+    <text x="84" y="356" class="cardBody">AWQ, GPTQ, FP8, GGUF</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="54" y="454" width="350" height="192" rx="28" fill="#ffffff" stroke="#d7e4f0" stroke-width="2.5"/>
+    <rect x="54" y="454" width="350" height="10" rx="28" fill="#1290c8"/>
+    <text x="84" y="494" class="kicker">MULTIMODAL</text>
+    <text x="84" y="536" class="cardTitle">Vision and Media</text>
+    <text x="84" y="576" class="cardBody">VLMs, FLUX, Wan</text>
+    <text x="84" y="606" class="cardBody">Single or dual QPC paths</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="54" y="704" width="350" height="192" rx="28" fill="#ffffff" stroke="#d7e4f0" stroke-width="2.5"/>
+    <rect x="54" y="704" width="350" height="10" rx="28" fill="#2c9b98"/>
+    <text x="84" y="744" class="kicker">TASK EXTENSION</text>
+    <text x="84" y="786" class="cardTitle">Beyond Generation</text>
+    <text x="84" y="826" class="cardBody">Embeddings and retrieval</text>
+    <text x="84" y="856" class="cardBody">Audio, classification, safety</text>
+  </g>
+
+  <g>
+    <circle cx="700" cy="520" r="190" fill="#0b72b8"/>
+    <circle cx="700" cy="520" r="206" fill="none" stroke="#d8ecff" stroke-width="14" opacity="0.6"/>
+
+    <text x="700" y="406" text-anchor="middle" textLength="252" lengthAdjust="spacingAndGlyphs" class="hubKicker">UNIFIED DEPLOYMENT STACK</text>
+    <text x="700" y="474" text-anchor="middle" class="hubTitle">Efficient</text>
+    <text x="700" y="526" text-anchor="middle" class="hubTitle">Transformers</text>
+    <text x="700" y="568" text-anchor="middle" class="hubBody">One engineering path</text>
+    <text x="700" y="598" text-anchor="middle" class="hubBody">from checkpoint to optimized</text>
+    <text x="700" y="628" text-anchor="middle" class="hubBody">execution on Cloud AI 100</text>
+
+    <rect x="580" y="646" width="80" height="36" rx="18" fill="#eaf6ff" stroke="#b9daee" stroke-width="1.2"/>
+    <rect x="654" y="646" width="92" height="36" rx="18" fill="#eaf6ff" stroke="#b9daee" stroke-width="1.2"/>
+    <rect x="740" y="646" width="80" height="36" rx="18" fill="#eaf6ff" stroke="#b9daee" stroke-width="1.2"/>
+    <text x="620" y="669" text-anchor="middle" class="chipText">Onboard</text>
+    <text x="700" y="669" text-anchor="middle" class="chipText">Optimize</text>
+    <text x="780" y="669" text-anchor="middle" class="chipText">Deploy</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="996" y="204" width="350" height="192" rx="28" fill="#ffffff" stroke="#d7e4f0" stroke-width="2.5"/>
+    <rect x="996" y="204" width="350" height="10" rx="28" fill="#2d7bbc"/>
+    <text x="1026" y="244" class="kicker">SERVING RUNTIME</text>
+    <text x="1026" y="286" class="cardTitle">Serving Runtime</text>
+    <text x="1026" y="326" class="cardBody">Continuous batching and CCL</text>
+    <text x="1026" y="356" class="cardBody">Disaggregated serving at scale</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="996" y="454" width="350" height="192" rx="28" fill="#ffffff" stroke="#d7e4f0" stroke-width="2.5"/>
+    <rect x="996" y="454" width="350" height="10" rx="28" fill="#0f8abe"/>
+    <text x="1026" y="494" class="kicker">DECODE PATH</text>
+    <text x="1026" y="536" class="cardTitle">Decode Efficiency</text>
+    <text x="1026" y="576" class="cardBody">SpD, prompt lookup, ODS</text>
+    <text x="1026" y="606" class="cardBody">BlockedKV and prefix cache</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="996" y="704" width="350" height="192" rx="28" fill="#ffffff" stroke="#d7e4f0" stroke-width="2.5"/>
+    <rect x="996" y="704" width="350" height="10" rx="28" fill="#2e9a8b"/>
+    <text x="1026" y="744" class="kicker">DEPLOYMENT</text>
+    <text x="1026" y="786" class="cardTitle">Export and Compile</text>
+    <text x="1026" y="826" class="cardBody">Auto classes and ONNX reuse</text>
+    <text x="1026" y="856" class="cardBody">Subfunctions and artifacts</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="150" y="1012" width="1100" height="112" rx="26" fill="#ffffff" stroke="#d7e4f0" stroke-width="2.5"/>
+    <text x="700" y="1058" text-anchor="middle" class="footerTitle">One stack from onboarding to sustained serving</text>
+    <text x="700" y="1092" text-anchor="middle" class="footerBody">Teams can move across text, multimodal, audio, and media workloads without rebuilding the deployment toolchain.</text>
+  </g>
+</svg>

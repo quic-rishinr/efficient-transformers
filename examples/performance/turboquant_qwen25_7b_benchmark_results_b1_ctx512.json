@@ -1,0 +1,59 @@
+{
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "prompt_len": 512,
+  "ctx_len": 512,
+  "batch_size": 1,
+  "generation_len": 8,
+  "num_cores": 16,
+  "num_devices": 1,
+  "device_id": 0,
+  "export_dir": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512",
+  "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+  "export_time_sec": 76.46470981929451,
+  "results": [
+    {
+      "variant": "mxfp6",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": false,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxfp6"
+      },
+      "compile_success": true,
+      "run_success": false,
+      "compile_wall_time_sec": 47.761555610224605,
+      "compile_time_sec": 47.761555610224605,
+      "qpc_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxfp6/qpc-162a4e44d5b42941/qpc",
+      "qpc_size_bytes": 7783930916,
+      "run_error": "RuntimeError: Initialization Exception: in object: Program:PythonProgramFailed to create program with Qpc Buffer ",
+      "run_traceback": "Traceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/examples/performance/turboquant_qwen25_7b_benchmark.py\", line 95, in run_variant\n    exec_info = model.generate(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py\", line 3473, in generate\n    return QEfficient.cloud_ai_100_exec_kv(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/generation/text_generation_inference.py\", line 387, in cloud_ai_100_exec_kv\n    generate_text = TextGeneration(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/generation/text_generation_inference.py\", line 1085, in __init__\n    self._qaic_model = QEffTextGenerationBase(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/generation/text_generation_inference.py\", line 464, in __init__\n    self._session = QAICInferenceSession(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/generation/cloud_infer.py\", line 108, in __init__\n    self.program = qaicrt.Program(self.context, None, qpc, prog_properties)\nRuntimeError: Initialization Exception: in object: Program:PythonProgramFailed to create program with Qpc Buffer \n"
+    },
+    {
+      "variant": "mxint4",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": false,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": false,
+        "mxint4_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4"
+      },
+      "compile_success": false,
+      "run_success": false,
+      "compile_wall_time_sec": 0.0052259317599236965,
+      "compile_error": "RuntimeError: Compilation failed!\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-aic-num-cores=16', '-mxint4-matmul', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/qpc']\nCompiler exitcode: 1\nCompiler stderr:\n[Deprecated] -compile-only will be removed in a future release, default mode is compile-only\nInvalid option -mxint4-matmul. Use -h, -help, or --help for list of options.\n",
+      "compile_traceback": "Traceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 520, in _compile\n    subprocess.run(command, capture_output=True, check=True)\n  File \"/home/rishinr/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-aic-num-cores=16', '-mxint4-matmul', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/qpc']' returned non-zero exit status 1.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/examples/performance/turboquant_qwen25_7b_benchmark.py\", line 79, in run_variant\n    qpc_path = model.compile(**compile_kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py\", line 3401, in compile\n    qpc_path = self._compile(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/utils/_utils.py\", line 704, in wrapper\n    result = func(self, *args, **kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 522, in _compile\n    raise RuntimeError(\nRuntimeError: Compilation failed!\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-aic-num-cores=16', '-mxint4-matmul', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512/compile_mxint4/qpc-6bb65f88088514f9/qpc']\nCompiler exitcode: 1\nCompiler stderr:\n[Deprecated] -compile-only will be removed in a future release, default mode is compile-only\nInvalid option -mxint4-matmul. Use -h, -help, or --help for list of options.\n\n"
+    }
+  ]
+}

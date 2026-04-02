@@ -1,0 +1,105 @@
+{
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "prompt_len": 512,
+  "ctx_len": 512,
+  "batch_size": 1,
+  "generation_len": 8,
+  "num_cores": 16,
+  "num_devices": 1,
+  "device_id": 0,
+  "export_dir": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004",
+  "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+  "export_time_sec": 71.32110537588596,
+  "results": [
+    {
+      "variant": "mxfp6",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": false,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004/compile_mxfp6"
+      },
+      "compile_success": true,
+      "run_success": true,
+      "compile_wall_time_sec": 48.16058163391426,
+      "compile_time_sec": 48.16058163391426,
+      "qpc_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004/compile_mxfp6/qpc-216cf4a89f844c80/qpc",
+      "qpc_size_bytes": 7783930980,
+      "run_wall_time_sec": 14.849553007166833,
+      "run_metrics": {
+        "prefill_time_sec": 0.1999131329357624,
+        "decode_tok_per_sec_per_batch": 17.506998556466662,
+        "total_tok_per_sec_per_batch": 11.671466948855084,
+        "e2e_time_sec": 0.5997532298788428,
+        "decode_tok_per_sec_aggregate": 17.506998556466662,
+        "total_tok_per_sec_aggregate": 11.671466948855084
+      }
+    },
+    {
+      "variant": "mxint8",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": true,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": false,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004/compile_mxint8"
+      },
+      "compile_success": true,
+      "run_success": true,
+      "compile_wall_time_sec": 49.85165328439325,
+      "compile_time_sec": 49.85165328439325,
+      "qpc_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004/compile_mxint8/qpc-34f28e4e2599d749/qpc",
+      "qpc_size_bytes": 16379920997,
+      "run_wall_time_sec": 25.239699432160705,
+      "run_metrics": {
+        "prefill_time_sec": 0.484961180947721,
+        "decode_tok_per_sec_per_batch": 7.437173351491234,
+        "total_tok_per_sec_per_batch": 4.908219833546408,
+        "e2e_time_sec": 1.4261789890006185,
+        "decode_tok_per_sec_aggregate": 7.437173351491234,
+        "total_tok_per_sec_aggregate": 4.908219833546408
+      }
+    },
+    {
+      "variant": "mxfp6_mxint8",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 512,
+        "ctx_len": 512,
+        "batch_size": 1,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": true,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004/compile_mxfp6_mxint8"
+      },
+      "compile_success": true,
+      "run_success": true,
+      "compile_wall_time_sec": 46.205147958826274,
+      "compile_time_sec": 46.205147958826274,
+      "qpc_path": "/dev/shm/qeff_turboquant_qwen25_7b_b1_ctx512_combo_20260329_072004/compile_mxfp6_mxint8/qpc-64665bc4a4340a6e/qpc",
+      "qpc_size_bytes": 7783957196,
+      "run_wall_time_sec": 14.233405987732112,
+      "run_metrics": {
+        "prefill_time_sec": 0.20056819496676326,
+        "decode_tok_per_sec_per_batch": 17.571926189156123,
+        "total_tok_per_sec_per_batch": 11.687491884002336,
+        "e2e_time_sec": 0.5989308971911669,
+        "decode_tok_per_sec_aggregate": 17.571926189156123,
+        "total_tok_per_sec_aggregate": 11.687491884002336
+      }
+    }
+  ]
+}

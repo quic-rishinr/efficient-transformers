@@ -1,0 +1,54 @@
+{
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "prompt_len": 1024,
+  "ctx_len": 1024,
+  "batch_size": 32,
+  "generation_len": 8,
+  "num_cores": 16,
+  "num_devices": 1,
+  "device_id": 0,
+  "export_dir": "/dev/shm/qeff_turboquant_qwen25_7b",
+  "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+  "export_time_sec": 0.003426962997764349,
+  "results": [
+    {
+      "variant": "mxfp6",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 1024,
+        "ctx_len": 1024,
+        "batch_size": 32,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": false,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6"
+      },
+      "compile_success": false,
+      "run_success": false,
+      "compile_error": "RuntimeError: Compilation failed!\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/qpc']\nCompiler exitcode: 255\nCompiler stderr:\n[Deprecated] -compile-only will be removed in a future release, default mode is compile-only\nQAIC_ERROR: Network compilation failed: \nError message: staticVASize limit exceeded for core 0\nVASize {VA size 4.719 GB VTLBs 302} limit {VA size 3.687 GB VTLBs 3879}\nDelta 1.031 GB\nReserved for dynamic 2.984 GB\nMaximum dynamic mapped buffers\n  DynCand (instance) VAR  /model/layers.1/QEffQwen2DecoderLayer/__878 (0x000073EA6B52F400) raw size 2.950 GB VA reservation {VA size 2.984 GB VTLBs 191}\n  DynCand (instance) VAR  /model/layers.0/QEffQwen2DecoderLayer.1/__76 (0x000073EA6B52E780) raw size 2.950 GB VA reservation {VA size 2.984 GB VTLBs 191}\nMust be static space requirement 1.734 GB\nOverlapping dynmap candidates: false\nDynamic value candidates: 329, MC candidates: 4464\nDisqualifying opcodes:\n  1.039 GB funcall\n  224.000 MB aicgather\n  512.273 KB aicspecializationselect\n\nUnable to Compile\n",
+      "compile_traceback": "Traceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 520, in _compile\n    subprocess.run(command, capture_output=True, check=True)\n  File \"/home/rishinr/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/qpc']' returned non-zero exit status 255.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/examples/performance/turboquant_qwen25_7b_benchmark.py\", line 79, in run_variant\n    qpc_path = model.compile(**compile_kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py\", line 3401, in compile\n    qpc_path = self._compile(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/utils/_utils.py\", line 704, in wrapper\n    result = func(self, *args, **kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 522, in _compile\n    raise RuntimeError(\nRuntimeError: Compilation failed!\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxfp6/qpc-57e98f29513669e6/qpc']\nCompiler exitcode: 255\nCompiler stderr:\n[Deprecated] -compile-only will be removed in a future release, default mode is compile-only\nQAIC_ERROR: Network compilation failed: \nError message: staticVASize limit exceeded for core 0\nVASize {VA size 4.719 GB VTLBs 302} limit {VA size 3.687 GB VTLBs 3879}\nDelta 1.031 GB\nReserved for dynamic 2.984 GB\nMaximum dynamic mapped buffers\n  DynCand (instance) VAR  /model/layers.1/QEffQwen2DecoderLayer/__878 (0x000073EA6B52F400) raw size 2.950 GB VA reservation {VA size 2.984 GB VTLBs 191}\n  DynCand (instance) VAR  /model/layers.0/QEffQwen2DecoderLayer.1/__76 (0x000073EA6B52E780) raw size 2.950 GB VA reservation {VA size 2.984 GB VTLBs 191}\nMust be static space requirement 1.734 GB\nOverlapping dynmap candidates: false\nDynamic value candidates: 329, MC candidates: 4464\nDisqualifying opcodes:\n  1.039 GB funcall\n  224.000 MB aicgather\n  512.273 KB aicspecializationselect\n\nUnable to Compile\n\n"
+    },
+    {
+      "variant": "mxint4",
+      "compile_kwargs": {
+        "onnx_path": "/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx",
+        "prefill_seq_len": 1024,
+        "ctx_len": 1024,
+        "batch_size": 32,
+        "num_cores": 16,
+        "num_devices": 1,
+        "mxint8_kv_cache": false,
+        "use_onnx_subfunctions": true,
+        "mxfp6_matmul": false,
+        "mxint4_matmul": true,
+        "compile_dir": "/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4"
+      },
+      "compile_success": false,
+      "run_success": false,
+      "compile_error": "RuntimeError: Compilation failed!\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-aic-num-cores=16', '-mxint4-matmul', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/qpc']\nCompiler exitcode: 1\nCompiler stderr:\n[Deprecated] -compile-only will be removed in a future release, default mode is compile-only\nInvalid option -mxint4-matmul. Use -h, -help, or --help for list of options.\n",
+      "compile_traceback": "Traceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 520, in _compile\n    subprocess.run(command, capture_output=True, check=True)\n  File \"/home/rishinr/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-aic-num-cores=16', '-mxint4-matmul', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/qpc']' returned non-zero exit status 1.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/examples/performance/turboquant_qwen25_7b_benchmark.py\", line 79, in run_variant\n    qpc_path = model.compile(**compile_kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py\", line 3401, in compile\n    qpc_path = self._compile(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/utils/_utils.py\", line 704, in wrapper\n    result = func(self, *args, **kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 522, in _compile\n    raise RuntimeError(\nRuntimeError: Compilation failed!\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/dev/shm/qeff_turboquant_qwen25_7b-3ded752766bc46b1/Qwen2ForCausalLM.onnx', '-compile-only', '-retained-state', '-convert-to-fp16', '-aic-num-cores=16', '-mxint4-matmul', '-sub-functions', '-network-specialization-config=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/specializations.json', '-custom-IO-list-file=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/custom_io.yaml', '-aic-binary-dir=/dev/shm/qeff_turboquant_qwen25_7b/compile_mxint4/qpc-1ee82a30157dea80/qpc']\nCompiler exitcode: 1\nCompiler stderr:\n[Deprecated] -compile-only will be removed in a future release, default mode is compile-only\nInvalid option -mxint4-matmul. Use -h, -help, or --help for list of options.\n\n"
+    }
+  ]
+}

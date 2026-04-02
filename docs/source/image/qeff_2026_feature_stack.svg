@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1380" viewBox="0 0 1400 1380" role="img" aria-labelledby="title desc">
+  <title id="title">Efficient Transformers Feature Stack</title>
+  <desc id="desc">Five-layer Efficient Transformers stack with directional top-to-bottom flow and readable text.</desc>
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 52px; font-weight: 700; fill: #102943; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 28px; font-weight: 500; fill: #365674; }
+      .layerTitle { font-family: Arial, sans-serif; font-size: 38px; font-weight: 700; fill: #112a45; }
+      .layerBody { font-family: Arial, sans-serif; font-size: 30px; font-weight: 500; fill: #385978; }
+      .flow { stroke: #3d79a9; stroke-width: 7; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="1380" rx="24" fill="#f4f9ff"/>
+
+  <text x="60" y="86" class="title">Efficient Transformers Feature Stack</text>
+  <text x="60" y="128" class="subtitle">Qualcomm view of the stack layers used in production deployment on Cloud AI 100.</text>
+
+  <rect x="80" y="180" width="1240" height="170" rx="22" fill="#ffffff" stroke="#c9deef" stroke-width="3"/>
+  <text x="130" y="246" class="layerTitle">1. Workloads</text>
+  <text x="130" y="304" class="layerBody">LLMs | VLMs | Diffusers | Embeddings | Audio | Safety | PEFT</text>
+
+  <rect x="80" y="420" width="1240" height="170" rx="22" fill="#ffffff" stroke="#c9deef" stroke-width="3"/>
+  <text x="130" y="486" class="layerTitle">2. Entry APIs</text>
+  <text x="130" y="544" class="layerBody">Auto classes | Flux/Wan pipelines | cloud.finetune</text>
+
+  <rect x="80" y="660" width="1240" height="170" rx="22" fill="#ffffff" stroke="#c9deef" stroke-width="3"/>
+  <text x="130" y="726" class="layerTitle">3. Serving Runtime</text>
+  <text x="130" y="784" class="layerBody">Continuous batching | CCL | SpD | ODS | BlockedKV | Disaggregated serving</text>
+
+  <rect x="80" y="900" width="1240" height="170" rx="22" fill="#ffffff" stroke="#c9deef" stroke-width="3"/>
+  <text x="130" y="966" class="layerTitle">4. Export and Compile</text>
+  <text x="130" y="1024" class="layerBody">ONNX subfunctions | Reusable artifacts | Export time and memory optimization</text>
+
+  <rect x="80" y="1140" width="1240" height="170" rx="22" fill="#ffffff" stroke="#c9deef" stroke-width="3"/>
+  <text x="130" y="1206" class="layerTitle">5. Adaptation and Ops</text>
+  <text x="130" y="1264" class="layerBody">PEFT/LoRA | DDP and multi-node FT | Checkpoint resume | Custom datasets</text>
+
+  <line x1="700" y1="350" x2="700" y2="420" class="flow"/>
+  <polygon points="700,420 688,397 712,397" fill="#3d79a9"/>
+  <line x1="700" y1="590" x2="700" y2="660" class="flow"/>
+  <polygon points="700,660 688,637 712,637" fill="#3d79a9"/>
+  <line x1="700" y1="830" x2="700" y2="900" class="flow"/>
+  <polygon points="700,900 688,877 712,877" fill="#3d79a9"/>
+  <line x1="700" y1="1070" x2="700" y2="1140" class="flow"/>
+  <polygon points="700,1140 688,1117 712,1117" fill="#3d79a9"/>
+</svg>
