@@ -351,7 +351,7 @@ class ApiRunnerVlm:
         self.dtype = dtype
 
     @torch.no_grad()
-    def run_vlm_hf_model_on_pytorch_CB(self, model, images, queries):
+    def run_vlm_hf_model_on_pytorch_CB(self, model, images, queries, processor_kwargs=None):
         """
         Function responsible for running HuggingFace ``PyTorch`` model for continuous batching
         and return the output tokens for each prompt/image pair.
@@ -365,6 +365,7 @@ class ApiRunnerVlm:
             :List[numpy.ndarray]: List of generated output tokens for each prompt
         """
         generated_ids = []
+        processor_kwargs = processor_kwargs or {}
 
         for idx, (image, query) in enumerate(zip(images, queries)):
             # Prepare conversation format for each image-query pair
@@ -380,7 +381,7 @@ class ApiRunnerVlm:
             prompt = self.processor.apply_chat_template(conversation, add_generation_prompt=True)
 
             # Process inputs
-            inputs = self.processor(images=image, text=prompt, return_tensors="pt")
+            inputs = self.processor(images=image, text=prompt, return_tensors="pt", **processor_kwargs)
             if "pixel_values" in inputs:
                 inputs["pixel_values"] = inputs["pixel_values"].to(dtype=self.dtype)
 

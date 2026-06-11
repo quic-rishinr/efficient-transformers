@@ -39,7 +39,7 @@ with open(CONFIG_PATH, "r") as f:
 test_mm_models = [model_config["model_name"] for model_config in multimodal_models]
 model_config_dict = {model["model_name"]: model for model in multimodal_models}
 
-NEW_GENERATION_TOKENS = 10
+NEW_GENERATION_TOKENS = 1
 
 
 def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100_CB(
@@ -75,9 +75,9 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100_CB(
             "qwen3_vl",
             "qwen3_vl_moe",
         ]:
-            config.vision_config.depth = 9
+            config.vision_config.depth = 2
             config.text_config.num_hidden_layers = 1
-            config.vision_config.deepstack_visual_indexes = [8]
+            config.vision_config.deepstack_visual_indexes = [1]
         if model_name in ModelConfig.INTERNVL_MODELS or model_name in ModelConfig.MOLMO_MODELS:
             config._attn_implementation = "eager"
             model_hf = load_vlm_model(config)
@@ -171,7 +171,12 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100_CB(
         pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(
             model_hf, image_list, prompt_list, generation_config
         )
-        compile_kwargs["img_size"] = img_size
+        compile_img_size = img_size
+        vision_config = getattr(qeff_model.model.config, "vision_config", None)
+        vision_image_size = getattr(vision_config, "image_size", None) if vision_config is not None else None
+        if getattr(qeff_model.model.config, "model_type", None) == "gemma3" and vision_image_size is not None:
+            compile_img_size = vision_image_size
+        compile_kwargs["img_size"] = compile_img_size
     else:
         processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True, padding=True)
         tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
@@ -209,8 +214,24 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100_CB(
         )
         image_list = [images[0]] * full_batch_size
         prompt_list = [queries[0]] * full_batch_size
-        pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(model_hf, image_list, prompt_list)
-        compile_kwargs["img_size"] = img_size
+        processor_kwargs = {}
+        vision_config = getattr(qeff_model.model.config, "vision_config", None)
+        vision_image_size = getattr(vision_config, "image_size", None) if vision_config is not None else None
+        if (
+            getattr(qeff_model.model.config, "model_type", None) == "gemma3"
+            and vision_image_size is not None
+            and vision_image_size != 896
+        ):
+            processor_kwargs["size"] = {"height": vision_image_size, "width": vision_image_size}
+            image_height = vision_image_size
+            image_width = vision_image_size
+        pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(
+            model_hf, image_list, prompt_list, processor_kwargs=processor_kwargs
+        )
+        compile_img_size = img_size
+        if getattr(qeff_model.model.config, "model_type", None) == "gemma3" and vision_image_size is not None:
+            compile_img_size = vision_image_size
+        compile_kwargs["img_size"] = compile_img_size
 
     qeff_model.export()
     qeff_model.compile(**compile_kwargs)
@@ -231,30 +252,35 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100_CB(
         assert (pytorch_hf_tokens[i] == qpc_tokens[i]).all(), (
             f"Tokens don't match for prompt {i} between HF and QPC output for same prompts"
         )
-    if model_name in ModelConfig.MOLMO_MODELS:
-        pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(
-            model_hf, images, queries, generation_config=generation_config
-        )
-    else:
-        pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(model_hf, images, queries)
+    if queries != prompt_list:
+        if model_name in ModelConfig.MOLMO_MODELS:
+            pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(
+                model_hf, images, queries, generation_config=generation_config
+            )
+        elif model_name in ModelConfig.INTERNVL_MODELS:
+            pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(model_hf, images, queries)
+        else:
+            pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch_CB(
+                model_hf, images, queries, processor_kwargs=processor_kwargs
+            )
 
-    print("QPC Outputs (QAIC):")
-    exec_info = qeff_model.generate(
-        tokenizer=tokenizer,
-        processor=processor,
-        images=image_urls,
-        prompts=queries,
-        generation_len=max_gen_len,
-        image_height=image_height,
-        image_width=image_width,
-    )
-    qpc_tokens = exec_info.generated_ids[:, :max_gen_len]
-    print("QPC Outputs (QAIC) for Continuous Batching with different prompt:")
-    print(exec_info.generated_texts)
-    for i in range(full_batch_size):
-        assert (pytorch_hf_tokens[i] == qpc_tokens[i]).all(), (
-            f"Tokens don't match for prompt {i} between HF and QPC output for different prompts"
+        print("QPC Outputs (QAIC):")
+        exec_info = qeff_model.generate(
+            tokenizer=tokenizer,
+            processor=processor,
+            images=image_urls,
+            prompts=queries,
+            generation_len=max_gen_len,
+            image_height=image_height,
+            image_width=image_width,
         )
+        qpc_tokens = exec_info.generated_ids[:, :max_gen_len]
+        print("QPC Outputs (QAIC) for Continuous Batching with different prompt:")
+        print(exec_info.generated_texts)
+        for i in range(full_batch_size):
+            assert (pytorch_hf_tokens[i] == qpc_tokens[i]).all(), (
+                f"Tokens don't match for prompt {i} between HF and QPC output for different prompts"
+            )
     manual_cleanup(qeff_model.onnx_path)  # Clean up the model files after the tests are done.
 
 

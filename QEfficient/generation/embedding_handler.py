@@ -267,9 +267,13 @@ class VisionHandler:
                     tokenize=False,
                     add_generation_prompt=True,
                 )
-            # Process image and text
-            inputs = self._processor(images=image, text=prompt, return_tensors="pt")
             model_type = getattr(getattr(self._qeff_model, "model", None).config, "model_type", "")
+            processor_kwargs = {}
+            if model_type == "gemma3" and self._image_height and self._image_width:
+                processor_kwargs["size"] = {"height": self._image_height, "width": self._image_width}
+
+            # Process image and text
+            inputs = self._processor(images=image, text=prompt, return_tensors="pt", **processor_kwargs)
             if model_type in {
                 "qwen2_5_vl",
                 "qwen3_vl_moe",

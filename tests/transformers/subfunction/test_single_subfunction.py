@@ -96,9 +96,21 @@ def test_subfunction_vs_nonsubfunction(config, tmp_path):
 def test_tinyllama_exports_single_decoder_subfunction(tmp_path):
     model_id = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 
+    # The test only inspects the exported ONNX subfunction structure (no tokenization
+    # or numeric comparison), so we build the TinyLlama (llama) architecture from its
+    # config with reduced dimensions and random weights instead of loading the full
+    # 1.1B checkpoint. This keeps the architecture identity while cutting export time.
     try:
+        config = AutoConfig.from_pretrained(model_id)
+        config.num_hidden_layers = 2
+        config.num_attention_heads = 4
+        config.num_key_value_heads = 2
+        config.hidden_size = 128
+        config.intermediate_size = 512
+        config.max_position_embeddings = 256
+        config.vocab_size = 127
         qeff_model = QEFFAutoModelForCausalLM(
-            AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs),
+            AutoModelForCausalLM.from_config(config, **model_kwargs),
             cb=False,
         )
     except Exception as exc:

@@ -82,9 +82,9 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100(
             "qwen3_vl",
             "qwen3_vl_moe",
         ]:
-            config.vision_config.depth = 9
+            config.vision_config.depth = 2
             config.text_config.num_hidden_layers = 1
-            config.vision_config.deepstack_visual_indexes = [8]
+            config.vision_config.deepstack_visual_indexes = [1]
         if model_name in ModelConfig.INTERNVL_MODELS or model_name in ModelConfig.MOLMO_MODELS:
             config._attn_implementation = "eager"
             model_hf = load_vlm_model(config)
@@ -186,7 +186,10 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100(
         valid = valid.reshape(1, -1)
         inputs["valid_idx"] = torch.nonzero(valid)[:, 1].unsqueeze(0)
         inputs["pixel_values"] = inputs.pop("images")
-        compile_kwargs["img_size"] = img_size
+        compile_img_size = img_size
+        if getattr(qeff_model.model.config, "model_type", None) == "gemma3" and vision_image_size is not None:
+            compile_img_size = vision_image_size
+        compile_kwargs["img_size"] = compile_img_size
 
     else:
         processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True, padding=True)
@@ -203,6 +206,15 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100(
             },
         ]
         prompt = processor.apply_chat_template(conversation, add_generation_prompt=True)
+        processor_kwargs = {}
+        vision_config = getattr(qeff_model.model.config, "vision_config", None)
+        vision_image_size = getattr(vision_config, "image_size", None) if vision_config is not None else None
+        if (
+            getattr(qeff_model.model.config, "model_type", None) == "gemma3"
+            and vision_image_size is not None
+            and vision_image_size != 896
+        ):
+            processor_kwargs["size"] = {"height": vision_image_size, "width": vision_image_size}
         api_runner = ApiRunnerVlm(
             batch_size,
             processor,
@@ -215,11 +227,11 @@ def check_image_text_to_text_pytorch_vs_kv_vs_ort_vs_ai100(
             max_gen_len,
             num_hidden_layers,
         )
-        inputs = processor(images=image, text=prompt, return_tensors="pt")
+        inputs = processor(images=image, text=prompt, return_tensors="pt", **processor_kwargs)
         if "pixel_values" in inputs:
             inputs["pixel_values"] = inputs["pixel_values"].to(qeff_model.model.config.torch_dtype)
         pytorch_hf_tokens = api_runner.run_vlm_hf_model_on_pytorch(model_hf, inputs)
-        inputs = processor(images=image, text=prompt, return_tensors="pt")
+        inputs = processor(images=image, text=prompt, return_tensors="pt", **processor_kwargs)
         if hasattr(qeff_model.model.config, "model_type") and qeff_model.model.config.model_type in [
             "qwen2_5_vl",
             "qwen3_vl",
