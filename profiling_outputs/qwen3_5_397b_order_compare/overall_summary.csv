@@ -1,0 +1,3 @@
+approach,label,status,overall_peak_rss_gb,overall_peak_time_s,summary_peak_operation,compile_errors,duration_s
+prefill_first,Previous order: vision → prefill → decode,failed,285.105232,110.048,vision: torch.onnx.export,prefill,722.146
+decode_first,New order: vision → decode → prefill,failed,285.036347,109.242,vision: torch.onnx.export,prefill,721.243

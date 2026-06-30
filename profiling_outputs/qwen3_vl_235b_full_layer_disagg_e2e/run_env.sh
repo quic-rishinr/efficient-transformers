@@ -1,0 +1,10 @@
+export HF_HUB_CACHE=/home/huggingface_hub
+export HF_HUB_ENABLE_HF_TRANSFER=1
+export QEFF_HOME=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home
+export MODEL_ID=Qwen/Qwen3-VL-235B-A22B-Instruct
+export PREFILL_SEQ_LEN=128
+export CTX_LEN=4096
+export NUM_CORES=16
+export RUNTIME_DECODE_STEPS=8
+export LAYERWISE=true
+export LAYERWISE_WINDOW_SIZE=1

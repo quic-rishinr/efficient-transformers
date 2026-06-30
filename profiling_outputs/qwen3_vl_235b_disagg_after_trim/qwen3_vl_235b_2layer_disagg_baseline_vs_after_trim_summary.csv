@@ -1,0 +1,8 @@
+phase,baseline_peak_gb,after_trim_peak_gb,delta_gb,delta_pct
+setup + load,28.890,28.917,0.027,0.094
+vision export,16.903,16.897,-0.006,-0.036
+vision qaic-compile,16.046,15.680,-0.367,-2.285
+prefill export,22.931,21.717,-1.213,-5.292
+prefill qaic-compile,25.965,24.482,-1.483,-5.711
+decode export,40.931,39.488,-1.443,-3.526
+decode qaic-compile,17.676,15.531,-2.145,-12.134

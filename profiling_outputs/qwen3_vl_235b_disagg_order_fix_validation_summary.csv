@@ -1,0 +1,6 @@
+run,source_csv,overall_peak_gb,overall_peak_operation,decode_start_gb,decode_export_start_gb,decode_peak_gb,prefill_peak_gb
+baseline_old_order,profiling_outputs/qwen3_vl_235b_disagg_after_trim/qwen3_vl_235b_2layer_disagg_baseline_component_phases.csv,40.931,decode: torch.onnx.export,22.931,23.366,40.931,25.965
+after_trim_old_order,profiling_outputs/qwen3_vl_235b_disagg_after_trim/qwen3_vl_235b_2layer_disagg_after_trim_component_phases.csv,39.488,decode: torch.onnx.export,21.455,22.409,39.488,24.482
+decode_only,profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_decode_only_component_phases.csv,31.497,decode: torch.onnx.export,13.49,14.436,31.497,
+new_fullvision_order_fix,profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_disagg_order_fix_fullvision_20260626_012946/component_phases.csv,30.485,decode: torch.onnx.export,12.443,12.458,30.485,21.717
+new_vdepth4_order_fix,profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_disagg_order_fix_vdepth4_20260626_011820/component_phases.csv,30.48,decode: torch.onnx.export,12.439,12.453,30.48,21.715

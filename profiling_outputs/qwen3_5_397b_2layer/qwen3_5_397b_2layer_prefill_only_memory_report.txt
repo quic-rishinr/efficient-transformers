@@ -1,0 +1,76 @@
+
+QEFFICIENT PERFORMANCE MONITORING REPORT
+============================================================
+Peak Memory Usage:
+   • RSS (Physical): 111.05 GB at 23:52:15
+   • VMS (Virtual):  834.04 GB at 23:51:58
+   • Peak during:    prefill: torch.onnx.export
+
+Memory Statistics:
+   • Current RSS:    59.93 GB (Delta: +59.34 GB)
+   • Current VMS:    86.00 GB (Delta: +79.63 GB)
+   • Average RSS:    62.41 GB
+   • Min/Max RSS:    0.60 / 111.05 GB
+   • Memory Range:   110.45 GB
+Disk I/O Statistics:
+   • Total Read:     84.68 MB
+   • Total Write:    57928.03 MB
+   • Peak Read Rate: 820.35 MB/s
+   • Peak Write Rate:493.00 MB/s
+   • Avg Read Rate:  2.87 MB/s
+   • Avg Write Rate: 0.60 MB/s
+
+Monitoring Info:
+   • Duration:       171.4 seconds
+   • Data Points:    884
+   • Operations:     47
+   • Sampling Rate:  0.05s
+
+QEfficient Operations Timeline:
+    1.    0.0s - hf config setup (0.0s) 
+    2.    0.0s - AutoConfig.from_pretrained (0.5s) 
+    3.    0.5s - post: AutoConfig.from_pretrained (0.0s) 
+    4.    0.5s - post: hf config setup (0.0s) 
+    5.    0.5s - QEFFAutoModelForImageTextToText.from_pretrained (3.9s) [+58.7 GB]
+    6.    4.4s - post: QEFFAutoModelForImageTextToText.from_pretrained (0.0s) 
+    7.    4.4s - AutoTokenizer.from_pretrained (2.8s) [+59.0 GB]
+    8.    7.3s - post: AutoTokenizer.from_pretrained (0.0s) 
+    9.    7.3s - AutoProcessor.from_pretrained (8.1s) [+59.1 GB]
+   10.   15.4s - post: AutoProcessor.from_pretrained (0.0s) 
+   11.   15.4s - prefill: compile request (0.0s) 
+   12.   15.4s - prefill: build output names (0.0s) 
+   13.   15.4s - prefill: post: build output names (0.0s) 
+   14.   15.4s - prefill: vision pytorch transform (0.0s) 
+   15.   15.4s - prefill: post: vision pytorch transform (0.0s) 
+   16.   15.4s - prefill: language pytorch transform (0.0s) 
+   17.   15.4s - prefill: post: language pytorch transform (0.0s) 
+   18.   15.4s - prefill: dual-qpc export orchestration (0.0s) 
+   19.   15.4s - prefill: build dummy inputs (0.0s) 
+   20.   15.4s - prefill: post: build dummy inputs (0.0s) 
+   21.   15.4s - prefill: build dynamic axes (0.0s) 
+   22.   15.4s - prefill: post: build dynamic axes (0.0s) 
+   23.   15.4s - prefill: build output names (0.0s) 
+   24.   15.4s - prefill: post: build output names (0.0s) 
+   25.   15.4s - prefill: language export (0.0s) 
+   26.   15.4s - prefill: torch.onnx.export (125.7s) [+59.4 GB]
+   27.  141.1s - prefill: post: torch.onnx.export (0.0s) 
+   28.  141.1s - prefill: language offload pytorch weights (0.0s) 
+   29.  141.1s - prefill: post: language offload pytorch weights (0.0s) 
+   30.  141.1s - prefill: onnx.load (0.0s) 
+   31.  141.1s - prefill: post: onnx.load (0.0s) 
+   32.  141.1s - prefill: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   33.  141.1s - prefill: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   34.  141.1s - prefill: onnx.save (0.1s) 
+   35.  141.1s - prefill: post: onnx.save (0.4s) 
+   36.  141.5s - prefill: post: language export (0.0s) 
+   37.  141.5s - prefill: post: dual-qpc export orchestration (0.0s) 
+   38.  141.5s - prefill: onnx.load (0.0s) 
+   39.  141.5s - prefill: post: onnx.load (0.0s) 
+   40.  141.5s - prefill: language compile wrapper (0.0s) 
+   41.  141.5s - prefill: onnx.load (0.0s) 
+   42.  141.5s - prefill: post: onnx.load (0.0s) 
+   43.  141.5s - prefill: subprocess.run: qaic-compile (29.8s) [-0.1 GB]
+   44.  171.3s - prefill: post: subprocess.run: qaic-compile (0.0s) 
+   45.  171.3s - prefill: post: language compile wrapper (0.0s) 
+   46.  171.3s - prefill: post: compile request (0.1s) 
+   47.  171.5s - Completion  

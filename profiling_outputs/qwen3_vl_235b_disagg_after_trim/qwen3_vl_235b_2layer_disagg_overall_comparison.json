@@ -1,0 +1,10 @@
+{
+  "baseline_peak_gb": 40.93080520629883,
+  "after_trim_peak_gb": 39.487762451171875,
+  "delta_gb": -1.4430427551269531,
+  "delta_pct": -3.525566496563531,
+  "baseline_peak_operation": "decode: torch.onnx.export",
+  "after_trim_peak_operation": "decode: torch.onnx.export",
+  "baseline_dir": "/home/rishinr/qwen3vl_235b_2layer_non_layerwise_disagg_profile/memory_profiles/qwen3_vl_235b_2layer_non_layerwise_disagg_20260625_224328",
+  "after_trim_dir": "/home/rishinr/qwen3vl_235b_2layer_non_layerwise_disagg_after_trim_fixed2_20260626_003622/profile"
+}

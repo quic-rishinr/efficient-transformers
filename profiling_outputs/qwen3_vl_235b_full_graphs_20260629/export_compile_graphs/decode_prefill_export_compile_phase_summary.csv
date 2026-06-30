@@ -1,0 +1,5 @@
+phase,operation,start_s,end_s,duration_min,rss_start_gib,rss_end_gib,rss_peak_gib,rss_peak_elapsed_s,vms_peak_gib,disk_read_gib,disk_write_gib,cpu_avg_percent,cpu_peak_percent
+Decode export,decode: torch.onnx.export,103.374,1834.789,28.857,440.459,433.446,466.82,108.819,493.957,0.019,437.933,20.069,37.627
+Decode compile,decode: subprocess.run: qaic-compile,1890.311,4760.731,47.84,433.533,432.8,436.836,2128.739,649.992,0.257,171.829,0.457,10.261
+Prefill export,prefill: torch.onnx.export,4760.919,18190.209,223.822,432.825,892.47,892.47,18190.16,925.24,0.516,437.937,39.217,50.262
+Prefill compile,prefill: subprocess.run: qaic-compile,18275.291,19431.065,19.263,469.454,469.454,474.229,18549.713,673.936,0.112,172.991,1.349,9.532

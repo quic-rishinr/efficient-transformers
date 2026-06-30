@@ -1,0 +1,14 @@
+run,phase,start_s,end_s,duration_s,peak_rss_gb,peak_s,status,peak_operation
+prefill_only,setup + load,0.000,15.355,15.355,87.369,2.621,failed,prefill: torch.onnx.export
+prefill_only,prefill export,15.406,141.057,125.651,111.046,19.726,failed,prefill: torch.onnx.export
+prefill_only,prefill qaic-compile,141.515,171.338,29.823,60.676,157.074,failed,prefill: torch.onnx.export
+decode_only,setup + load,0.000,14.558,14.558,88.015,2.646,success,decode: torch.onnx.export
+decode_only,decode export,14.607,126.266,111.659,89.867,16.543,success,decode: torch.onnx.export
+decode_only,decode qaic-compile,127.047,415.526,288.479,74.038,160.879,success,decode: torch.onnx.export
+disagg_full,setup + load,0.000,13.735,13.735,87.963,2.323,failed,vision: torch.onnx.export
+disagg_full,vision export,13.762,142.966,129.204,285.054,112.167,failed,vision: torch.onnx.export
+disagg_full,vision qaic-compile,157.453,175.029,17.576,63.147,159.103,failed,vision: torch.onnx.export
+disagg_full,prefill export,175.210,288.212,113.002,110.794,181.572,failed,vision: torch.onnx.export
+disagg_full,prefill qaic-compile,288.637,318.332,29.695,60.662,304.021,failed,vision: torch.onnx.export
+disagg_full,decode export,318.362,426.616,108.254,90.078,320.180,failed,vision: torch.onnx.export
+disagg_full,decode qaic-compile,427.347,720.835,293.488,73.686,474.577,failed,vision: torch.onnx.export

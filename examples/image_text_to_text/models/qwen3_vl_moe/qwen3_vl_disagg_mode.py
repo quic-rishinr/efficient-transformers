@@ -5,6 +5,7 @@
 #
 # -----------------------------------------------------------------------------
 
+import gc
 from time import perf_counter
 
 import numpy as np
@@ -17,6 +18,32 @@ from transformers import AutoConfig, AutoProcessor
 
 from QEfficient import QEFFAutoModelForImageTextToText
 from QEfficient.generation.cloud_infer import QAICInferenceSession
+
+
+def select_next_token_id(logits: np.ndarray) -> int:
+    if logits.ndim == 2:
+        token_scores = logits[0]
+    elif logits.ndim == 3:
+        token_scores = logits[0, -1]
+    else:
+        raise ValueError(f"Unsupported logits shape for token selection: {logits.shape}")
+    return int(np.argmax(token_scores))
+
+
+def release_session(session: QAICInferenceSession | None) -> None:
+    if session is None:
+        return
+    try:
+        session.deactivate()
+    except Exception:
+        pass
+    try:
+        session.program.unload()
+    except Exception:
+        pass
+    del session
+    gc.collect()
+
 
 model_id = "Qwen/Qwen3-VL-30B-A3B-Instruct"
 # model_id = "tiny-random/qwen3-vl-moe"
@@ -38,6 +65,8 @@ processor = AutoProcessor.from_pretrained(model_id)
 PREFILL_SEQ_LEN = 128
 CTX_LEN = 4096
 BS = 1
+DEVICE_IDS = [0, 1, 2, 3]
+NUM_DEVICES = len(DEVICE_IDS)
 
 skip_vision = False
 if not skip_vision:
@@ -48,7 +77,7 @@ if not skip_vision:
         height=354,
         width=536,
         num_cores=16,
-        num_devices=1,
+        num_devices=NUM_DEVICES,
         mos=1,
         mxfp6_matmul=True,
         aic_enable_depth_first=True,
@@ -66,7 +95,7 @@ decode_qpc_path = qeff_model.compile(
     height=354,
     width=536,
     num_cores=16,
-    num_devices=1,
+    num_devices=NUM_DEVICES,
     mxfp6_matmul=True,
     mxint8_kv_cache=True,
     split_model_io=True,  # This should be used for disagg serving via VLLM
@@ -87,7 +116,7 @@ prefill_qpc_path = qeff_model.compile(
     height=354,
     width=536,
     num_cores=16,
-    num_devices=1,
+    num_devices=NUM_DEVICES,
     mxfp6_matmul=True,
     mxint8_kv_cache=True,
     retain_full_kv=True,
@@ -104,8 +133,6 @@ prefill_qpc_path = qeff_model.compile(
 
 print(f"Prefill qpc path {prefill_qpc_path}")
 print(f"Decode qpc path {decode_qpc_path}")
-lang_prefill_session = QAICInferenceSession(prefill_qpc_path.get("lang_prefill_qpc_path"))
-lang_decode_session = QAICInferenceSession(decode_qpc_path.get("lang_decode_qpc_path"))
 
 if skip_vision:
     messages = [
@@ -131,7 +158,6 @@ else:
             ],
         },
     ]
-    vision_session = QAICInferenceSession(vision_qpc_path.get("vision_qpc_path"))
 
 
 messages = [messages] * BS
@@ -183,7 +209,11 @@ vision_inputs.update({k: vision_inputs[k].astype("float16") for k in vision_inpu
 vision_start = perf_counter()
 vision_outputs = {}
 if vision_inputs:
-    vision_outputs = vision_session.run(vision_inputs)
+    vision_session = QAICInferenceSession(vision_qpc_path.get("vision_qpc_path"), device_ids=DEVICE_IDS)
+    try:
+        vision_outputs = vision_session.run(vision_inputs)
+    finally:
+        release_session(vision_session)
 vision_end = perf_counter()
 
 lang_inputs = {k: v for k, v in inputs.items() if k not in vision_inputs}
@@ -203,23 +233,28 @@ if not skip_vision:
 
 # RUN prefill
 lang_start = perf_counter()
-lang_prefill_session.set_buffers(vision_outputs)
-all_outputs = []
-chunk_inputs = lang_inputs.copy()
-for i in range(num_chunks):
-    chunk_inputs["input_ids"] = lang_inputs["input_ids"][:, i * PREFILL_SEQ_LEN : (i + 1) * PREFILL_SEQ_LEN]
-    chunk_inputs["position_ids"] = lang_inputs["position_ids"][..., i * PREFILL_SEQ_LEN : (i + 1) * PREFILL_SEQ_LEN]
-    outputs = lang_prefill_session.run(chunk_inputs)
-    for i in range(config.text_config.num_hidden_layers):
-        chunk_inputs[f"past_key.{i}"] = outputs[f"past_key.{i}_RetainedState"]
-        chunk_inputs[f"past_value.{i}"] = outputs[f"past_value.{i}_RetainedState"]
-    chunk_inputs["image_idx"] = outputs["image_idx_output"]
+lang_prefill_session = QAICInferenceSession(prefill_qpc_path.get("lang_prefill_qpc_path"), device_ids=DEVICE_IDS)
+try:
+    lang_prefill_session.set_buffers(vision_outputs)
+    all_outputs = []
+    chunk_inputs = lang_inputs.copy()
+    for i in range(num_chunks):
+        chunk_inputs["input_ids"] = lang_inputs["input_ids"][:, i * PREFILL_SEQ_LEN : (i + 1) * PREFILL_SEQ_LEN]
+        chunk_inputs["position_ids"] = lang_inputs["position_ids"][..., i * PREFILL_SEQ_LEN : (i + 1) * PREFILL_SEQ_LEN]
+        outputs = lang_prefill_session.run(chunk_inputs)
+        for i in range(config.text_config.num_hidden_layers):
+            chunk_inputs[f"past_key.{i}"] = outputs[f"past_key.{i}_RetainedState"]
+            chunk_inputs[f"past_value.{i}"] = outputs[f"past_value.{i}_RetainedState"]
+        chunk_inputs["image_idx"] = outputs["image_idx_output"]
+finally:
+    release_session(lang_prefill_session)
 prefill_time = perf_counter() - lang_start + vision_end - vision_start
 print(f"Prefill time : {prefill_time:.2f} secs")
 
-all_outputs.append(np.argmax(outputs["logits"]))
+first_token = select_next_token_id(outputs["logits"])
+all_outputs.append(first_token)
 decode_inputs = {
-    "input_ids": np.argmax(outputs["logits"]).reshape(1, 1),
+    "input_ids": np.array(first_token).reshape(1, 1),
     "position_ids": np.max(lang_inputs["position_ids"], axis=-1, keepdims=True) + 1,
 }
 
@@ -227,14 +262,16 @@ for i in range(config.text_config.num_hidden_layers):
     decode_inputs[f"past_key.{i}"] = outputs[f"past_key.{i}_RetainedState"]
     decode_inputs[f"past_value.{i}"] = outputs[f"past_value.{i}_RetainedState"]
 
+lang_decode_session = QAICInferenceSession(decode_qpc_path.get("lang_decode_qpc_path"), device_ids=DEVICE_IDS)
 st = perf_counter()
 decode_out = lang_decode_session.run(decode_inputs)
 print(f"time for first run of decode with KV as input = {perf_counter() - st} sec\n")
 
-all_outputs.append(np.argmax(decode_out["logits"]))
+next_token = select_next_token_id(decode_out["logits"])
+all_outputs.append(next_token)
 pos_id = np.max(decode_inputs["position_ids"], axis=-1, keepdims=True) + 1
 loop_decode_inputs = {
-    "input_ids": np.argmax(decode_out["logits"]).reshape(1, 1),
+    "input_ids": np.array(next_token).reshape(1, 1),
     "position_ids": pos_id,
 }
 
@@ -246,17 +283,19 @@ for i in range(config.text_config.num_hidden_layers):
 st = perf_counter()
 for i in range(generation_len - 2):
     decode_out = lang_decode_session.run(loop_decode_inputs)
-    all_outputs.append(np.argmax(decode_out["logits"]))
+    next_token = select_next_token_id(decode_out["logits"])
+    all_outputs.append(next_token)
     pos_id += 1
     for j in range(config.text_config.num_hidden_layers):
         loop_decode_inputs[f"past_key.{j}"] = decode_out[f"past_key.{j}_RetainedState"]
         loop_decode_inputs[f"past_value.{j}"] = decode_out[f"past_value.{j}_RetainedState"]
     loop_decode_inputs.update(
         {
-            "input_ids": np.argmax(decode_out["logits"]).reshape(1, 1),
+            "input_ids": np.array(next_token).reshape(1, 1),
             "position_ids": pos_id,
         }
     )
 ft = perf_counter()
+release_session(lang_decode_session)
 print(f"decode tok/sec={(generation_len - 2) / (ft - st)}")
 print(f"\noutput\n{tokenizer.decode(all_outputs)}")

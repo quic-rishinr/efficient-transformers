@@ -1,0 +1,81 @@
+/home/rishinr/.pyenv/versions/mainline/lib/python3.10/site-packages/onnxscript/converter.py:816: FutureWarning: 'onnxscript.values.Op.param_schemas' is deprecated in version 0.1 and will be removed in the future. Please use '.op_signature' instead.
+  param_schemas = callee.param_schemas()
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/376 [00:00<?, ?it/s]Loading weights:   0%|          | 1/376 [00:00<01:01,  6.08it/s]Loading weights:   1%|          | 4/376 [00:00<01:10,  5.26it/s]Loading weights:   1%|▏         | 5/376 [00:01<01:52,  3.31it/s]Loading weights:   4%|▍         | 15/376 [00:01<00:30, 11.74it/s]Loading weights:   5%|▍         | 17/376 [00:02<00:42,  8.46it/s]Loading weights: 100%|██████████| 376/376 [00:02<00:00, 171.43it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status     |  | 
+---------------------------------------------------------------------+------------+--+-
+model.language_model.layers.{2...93}.mlp.gate.weight                 | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.mlp.experts.down_proj           | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.self_attn.q_norm.weight         | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.self_attn.o_proj.weight         | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.input_layernorm.weight          | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.self_attn.k_norm.weight         | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.self_attn.q_proj.weight         | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.mlp.experts.gate_up_proj        | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.self_attn.k_proj.weight         | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.post_attention_layernorm.weight | UNEXPECTED |  | 
+model.language_model.layers.{2...93}.self_attn.v_proj.weight         | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[93m[Warning]: No transforms applied to model: Qwen3VLMoeForConditionalGeneration. It may be an unsupported model![0m
+[93m[Warning]: The subfunction feature is experimental. Please note that using compile consecutively with and without subfunction may produce inconsistent results.[0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).[0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: ONNX Preprocess - Removing mutation from node aten::index_put_ on block input: '5'. This changes graph semantics. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/remove_inplace_ops_for_onnx.cpp:348.)[0m
+[93m[Warning]: ONNX Preprocess - Removing mutation from node aten::index_put_ on block input: '6'. This changes graph semantics. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/remove_inplace_ops_for_onnx.cpp:348.)[0m
+[93m[Warning]: ONNX Preprocess - Removing mutation from node aten::index_put_ on block input: '7'. This changes graph semantics. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/remove_inplace_ops_for_onnx.cpp:348.)[0m
+[93m[Warning]: ONNX Preprocess - Removing mutation from node aten::index_put_ on block input: '8'. This changes graph semantics. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/remove_inplace_ops_for_onnx.cpp:348.)[0m
+[93m[Warning]: Exporting aten::index operator of advanced indexing in opset 17 is achieved by combination of multiple ONNX operators, including Reshape, Transpose, Concat, and Gather. If indices include negative values, the exported graph will produce incorrect results.[0m
+{
+  "metadata": {
+    "target_script": "/home/rishinr/qeff/mainline/efficient-transformers/examples/image_text_to_text/models/qwen3_vl_moe/qwen3_vl_disagg_mode.py",
+    "started_at": "2026-06-26T01:29:54.371842",
+    "hf_hub_cache": "/home/huggingface_hub",
+    "qeff_home": "/home/rishinr/qwen3vl_memory",
+    "hf_hub_enable_hf_transfer": "1",
+    "sampling_interval": 0.1,
+    "child_scan_interval": 0.2,
+    "model_id": "Qwen/Qwen3-VL-235B-A22B-Instruct",
+    "local_files_only": true,
+    "text_layers": 2,
+    "vision_depth": null,
+    "layerwise": false,
+    "compile_components": [
+      "vision",
+      "decode",
+      "prefill"
+    ],
+    "vision_qpc_path": "{'vision_qpc_path': PosixPath('/home/rishinr/qwen3vl_memory/Qwen3VLMoeForConditionalGeneration/Qwen3VLEncoderWrapper-4cedba94eaf91817/qpc-e9169c8686b9bbdc/qpc')}",
+    "prefill_qpc_path": "{'lang_prefill_qpc_path': PosixPath('/home/rishinr/qwen3vl_memory/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-4f650e68b0a21eb3/qpc-278e70aeff53d31c/qpc')}",
+    "decode_qpc_path": "{'lang_decode_qpc_path': PosixPath('/home/rishinr/qwen3vl_memory/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-58bfc9822e45936f/qpc-f57de493e75c90a8/qpc')}",
+    "completed_at": "2026-06-26T01:40:15.125086",
+    "status": "success",
+    "mode": "compile_only"
+  },
+  "outputs": {
+    "report": "profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_disagg_order_fix_fullvision_20260626_012946/memory_report.txt",
+    "phases_csv": "profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_disagg_order_fix_fullvision_20260626_012946/component_phases.csv",
+    "samples_csv": "profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_disagg_order_fix_fullvision_20260626_012946/samples_timeseries.csv",
+    "summary_json": "profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_disagg_order_fix_fullvision_20260626_012946/profile_summary.json",
+    "graph": "profiling_outputs/qwen3_vl_235b_2layer_non_layerwise_disagg_order_fix_fullvision_20260626_012946/memory_timeline.png"
+  }
+}
+Detailed Qwen3-VL-MoE non-layerwise disagg profiling elapsed time: 626.5s
+Skipping module attribute 'freeze'
+Skipping module attribute 'freeze'
+Skipping module attribute 'freeze'
+Skipping module attribute 'freeze'
+Skipping module attribute 'freeze'
+Skipping module attribute 'freeze'

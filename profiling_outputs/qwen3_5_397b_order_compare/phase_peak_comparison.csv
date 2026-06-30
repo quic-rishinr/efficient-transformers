@@ -1,0 +1,8 @@
+phase,phase_label,prefill_first_peak_rss_gb,prefill_first_duration_s,decode_first_peak_rss_gb,decode_first_duration_s,decode_first_minus_prefill_first_peak_gb
+load,Load,88.012093,3.527,88.016670,3.472,0.004577
+vision_export,Vision export,285.105232,122.480,285.036347,122.198,-0.068886
+vision_compile,Vision compile,63.153298,17.215,63.159572,17.043,0.006274
+prefill_export,Prefill export,111.046303,115.553,110.939899,107.651,-0.106403
+prefill_compile,Prefill compile,60.689595,29.599,59.095825,29.848,-1.593770
+decode_export,Decode export,90.080250,104.380,89.987137,111.712,-0.093113
+decode_compile,Decode compile,76.343566,294.726,75.118717,296.952,-1.224850

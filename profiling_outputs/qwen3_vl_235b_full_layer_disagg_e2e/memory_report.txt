@@ -1,0 +1,2735 @@
+
+QEFFICIENT PERFORMANCE MONITORING REPORT
+============================================================
+Peak Memory Usage:
+   • RSS (Physical): 50.94 GB at 08:21:03
+   • VMS (Virtual):  478.97 GB at 07:02:02
+   • Peak during:    prefill: onnx.save
+
+Memory Statistics:
+   • Current RSS:    1.39 GB (Delta: +0.80 GB)
+   • Current VMS:    30.81 GB (Delta: +24.44 GB)
+   • Average RSS:    19.83 GB
+   • Min/Max RSS:    0.60 / 50.94 GB
+   • Memory Range:   50.35 GB
+Disk I/O Statistics:
+   • Total Read:     915314.64 MB
+   • Total Write:    1360849.17 MB
+   • Peak Read Rate: 30419.21 MB/s
+   • Peak Write Rate:5121890.46 MB/s
+   • Avg Read Rate:  28.62 MB/s
+   • Avg Write Rate: 167.27 MB/s
+
+Monitoring Info:
+   • Duration:       6267.8 seconds
+   • Data Points:    43222
+   • Operations:     2706
+   • Sampling Rate:  0.05s
+
+QEfficient Operations Timeline:
+    1.    0.0s - setup: torch.manual_seed (0.0s) 
+    2.    0.0s - post: setup: torch.manual_seed (0.0s) 
+    3.    0.0s - hf config: AutoConfig.from_pretrained (0.0s) 
+    4.    0.0s - post: hf config: AutoConfig.from_pretrained (0.0s) 
+    5.    0.0s - config: mutate dtype/optional layer limits (0.0s) 
+    6.    0.0s - post: config: mutate dtype/optional layer limits (0.0s) 
+    7.    0.0s - hf tokenizer: AutoTokenizer.from_pretrained (0.8s) [+0.1 GB]
+    8.    0.8s - post: hf tokenizer: AutoTokenizer.from_pretrained (0.0s) 
+    9.    0.8s - hf processor: AutoProcessor.from_pretrained (0.5s) [+0.1 GB]
+   10.    1.4s - post: hf processor: AutoProcessor.from_pretrained (0.0s) 
+   11.    1.4s - qeff load vision-only wrapper: QEFFAutoModelForImageTextToText.from_pretrained (1.7s) [+8.4 GB]
+   12.    3.1s - post: qeff load vision-only wrapper: QEFFAutoModelForImageTextToText.from_pretrained (0.0s) 
+   13.    3.1s - vision: compile request (0.0s) 
+   14.    3.1s - vision: build output names (0.0s) 
+   15.    3.1s - vision: post: build output names (0.0s) 
+   16.    3.1s - vision: vision pytorch transform (0.0s) 
+   17.    3.1s - vision: post: vision pytorch transform (0.0s) 
+   18.    3.1s - vision: language pytorch transform (0.0s) 
+   19.    3.1s - vision: post: language pytorch transform (0.0s) 
+   20.    3.1s - vision: dual-qpc export orchestration (0.0s) 
+   21.    3.1s - vision: build dummy inputs (0.0s) 
+   22.    3.1s - vision: post: build dummy inputs (0.0s) 
+   23.    3.1s - vision: build dynamic axes (0.0s) 
+   24.    3.1s - vision: post: build dynamic axes (0.0s) 
+   25.    3.1s - vision: build output names (0.0s) 
+   26.    3.1s - vision: post: build output names (0.0s) 
+   27.    3.1s - vision: vision export (0.0s) 
+   28.    3.1s - vision: torch.onnx.export (22.4s) [+9.8 GB]
+   29.   25.5s - vision: post: torch.onnx.export (0.0s) 
+   30.   25.5s - vision: vision offload pytorch weights (0.0s) 
+   31.   25.5s - vision: post: vision offload pytorch weights (0.0s) 
+   32.   25.5s - vision: onnx.load (0.8s) 
+   33.   26.2s - vision: post: onnx.load (0.0s) 
+   34.   26.3s - vision: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   35.   26.3s - vision: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   36.   26.3s - vision: onnx.save (4.3s) [-0.4 GB]
+   37.   30.6s - vision: post: onnx.save (7.3s) [-0.9 GB]
+   38.   37.9s - vision: post: vision export (0.0s) 
+   39.   37.9s - vision: post: dual-qpc export orchestration (0.0s) 
+   40.   37.9s - vision: vision compile wrapper (0.0s) 
+   41.   37.9s - vision: onnx.load (0.8s) 
+   42.   38.7s - vision: post: onnx.load (0.0s) 
+   43.   38.7s - vision: subprocess.run: qaic-compile (16.4s) [-0.3 GB]
+   44.   55.1s - vision: post: subprocess.run: qaic-compile (0.0s) 
+   45.   55.1s - vision: post: vision compile wrapper (0.0s) 
+   46.   55.1s - vision: post: compile request (0.0s) 
+   47.   55.1s - vision: cleanup vision-only wrapper (0.0s) 
+   48.   55.1s - release host memory after vision compile (1.2s) [-9.6 GB]
+   49.   56.3s - post: release host memory after vision compile (0.0s) 
+   50.   56.3s - qeff load language layerwise wrapper: QEFFAutoModelForImageTextToText.from_pretrained (0.2s) [+0.2 GB]
+   51.   56.5s - post: qeff load language layerwise wrapper: QEFFAutoModelForImageTextToText.from_pretrained (0.0s) 
+   52.   56.5s - prefill: compile request (0.0s) 
+   53.   56.5s - prefill: build output names (0.0s) 
+   54.   56.5s - prefill: post: build output names (0.0s) 
+   55.   56.5s - prefill: vision pytorch transform (0.0s) 
+   56.   56.5s - prefill: post: vision pytorch transform (0.0s) 
+   57.   56.5s - prefill: language pytorch transform (0.0s) 
+   58.   56.5s - prefill: post: language pytorch transform (0.0s) 
+   59.   56.5s - prefill: dual-qpc export orchestration (0.0s) 
+   60.   56.5s - prefill: build dummy inputs (0.0s) 
+   61.   56.5s - prefill: post: build dummy inputs (0.0s) 
+   62.   56.5s - prefill: build dynamic axes (0.0s) 
+   63.   56.5s - prefill: post: build dynamic axes (0.0s) 
+   64.   56.5s - prefill: build output names (0.0s) 
+   65.   56.5s - prefill: post: build output names (0.0s) 
+   66.   56.5s - prefill: language export (0.0s) 
+   67.   56.6s - prefill: post: language export (0.0s) 
+   68.   56.6s - prefill: post: dual-qpc export orchestration (2.6s) [+3.2 GB]
+   69.   59.1s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   70.   69.9s - prefill: post: torch.onnx.export (0.0s) 
+   71.   69.9s - prefill: onnx.load (0.0s) 
+   72.   69.9s - prefill: post: onnx.load (0.0s) 
+   73.   69.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   74.   81.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   75.   81.4s - prefill: onnx.save (0.2s) 
+   76.   89.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   77.   90.1s - prefill: onnx.load (0.0s) 
+   78.   90.1s - prefill: post: onnx.load (0.0s) 
+   79.   94.2s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   80.  103.1s - prefill: post: torch.onnx.export (0.0s) 
+   81.  103.1s - prefill: onnx.load (0.0s) 
+   82.  103.1s - prefill: post: onnx.load (0.0s) 
+   83.  103.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   84.  112.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   85.  112.5s - prefill: onnx.save (0.2s) 
+   86.  119.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   87.  119.7s - prefill: onnx.load (0.0s) 
+   88.  119.7s - prefill: post: onnx.load (0.0s) 
+   89.  133.2s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   90.  142.1s - prefill: post: torch.onnx.export (0.0s) 
+   91.  142.1s - prefill: onnx.load (0.0s) 
+   92.  142.1s - prefill: post: onnx.load (0.0s) 
+   93.  142.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   94.  151.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   95.  151.2s - prefill: onnx.save (0.2s) 
+   96.  157.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   97.  158.3s - prefill: onnx.load (0.0s) 
+   98.  158.3s - prefill: post: onnx.load (0.0s) 
+   99.  171.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   100.  180.0s - prefill: post: torch.onnx.export (0.0s) 
+   101.  180.0s - prefill: onnx.load (0.0s) 
+   102.  180.0s - prefill: post: onnx.load (0.0s) 
+   103.  180.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   104.  188.6s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   105.  188.6s - prefill: onnx.save (0.2s) 
+   106.  195.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   107.  195.5s - prefill: onnx.load (0.0s) 
+   108.  195.5s - prefill: post: onnx.load (0.0s) 
+   109.  207.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   110.  216.5s - prefill: post: torch.onnx.export (0.0s) 
+   111.  216.5s - prefill: onnx.load (0.0s) 
+   112.  216.5s - prefill: post: onnx.load (0.0s) 
+   113.  216.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   114.  225.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   115.  225.1s - prefill: onnx.save (0.2s) 
+   116.  231.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   117.  232.0s - prefill: onnx.load (0.0s) 
+   118.  232.0s - prefill: post: onnx.load (0.0s) 
+   119.  245.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   120.  254.1s - prefill: post: torch.onnx.export (0.0s) 
+   121.  254.1s - prefill: onnx.load (0.0s) 
+   122.  254.1s - prefill: post: onnx.load (0.0s) 
+   123.  254.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   124.  262.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   125.  262.9s - prefill: onnx.save (0.2s) 
+   126.  269.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   127.  269.9s - prefill: onnx.load (0.0s) 
+   128.  269.9s - prefill: post: onnx.load (0.0s) 
+   129.  282.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   130.  291.4s - prefill: post: torch.onnx.export (0.0s) 
+   131.  291.4s - prefill: onnx.load (0.0s) 
+   132.  291.4s - prefill: post: onnx.load (0.0s) 
+   133.  291.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   134.  300.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   135.  300.4s - prefill: onnx.save (0.2s) 
+   136.  307.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   137.  307.5s - prefill: onnx.load (0.0s) 
+   138.  307.5s - prefill: post: onnx.load (0.0s) 
+   139.  321.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   140.  329.8s - prefill: post: torch.onnx.export (0.0s) 
+   141.  329.8s - prefill: onnx.load (0.0s) 
+   142.  329.8s - prefill: post: onnx.load (0.0s) 
+   143.  329.8s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   144.  338.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   145.  338.5s - prefill: onnx.save (0.2s) 
+   146.  344.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   147.  345.3s - prefill: onnx.load (0.0s) 
+   148.  345.3s - prefill: post: onnx.load (0.0s) 
+   149.  358.2s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   150.  366.6s - prefill: post: torch.onnx.export (0.0s) 
+   151.  366.6s - prefill: onnx.load (0.0s) 
+   152.  366.6s - prefill: post: onnx.load (0.0s) 
+   153.  366.6s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   154.  375.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   155.  375.4s - prefill: onnx.save (0.2s) 
+   156.  381.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   157.  382.2s - prefill: onnx.load (0.0s) 
+   158.  382.2s - prefill: post: onnx.load (0.0s) 
+   159.  394.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   160.  402.9s - prefill: post: torch.onnx.export (0.0s) 
+   161.  402.9s - prefill: onnx.load (0.0s) 
+   162.  402.9s - prefill: post: onnx.load (0.0s) 
+   163.  402.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   164.  411.7s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   165.  411.7s - prefill: onnx.save (0.2s) 
+   166.  418.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   167.  418.8s - prefill: onnx.load (0.0s) 
+   168.  418.8s - prefill: post: onnx.load (0.0s) 
+   169.  432.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   170.  440.5s - prefill: post: torch.onnx.export (0.0s) 
+   171.  440.5s - prefill: onnx.load (0.0s) 
+   172.  440.5s - prefill: post: onnx.load (0.0s) 
+   173.  440.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   174.  449.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   175.  449.2s - prefill: onnx.save (0.2s) 
+   176.  455.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   177.  456.2s - prefill: onnx.load (0.0s) 
+   178.  456.2s - prefill: post: onnx.load (0.0s) 
+   179.  470.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   180.  478.4s - prefill: post: torch.onnx.export (0.0s) 
+   181.  478.4s - prefill: onnx.load (0.0s) 
+   182.  478.4s - prefill: post: onnx.load (0.0s) 
+   183.  478.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   184.  487.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   185.  487.1s - prefill: onnx.save (0.2s) 
+   186.  493.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   187.  493.9s - prefill: onnx.load (0.0s) 
+   188.  493.9s - prefill: post: onnx.load (0.0s) 
+   189.  507.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   190.  516.2s - prefill: post: torch.onnx.export (0.0s) 
+   191.  516.2s - prefill: onnx.load (0.0s) 
+   192.  516.2s - prefill: post: onnx.load (0.0s) 
+   193.  516.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   194.  524.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   195.  524.8s - prefill: onnx.save (0.2s) 
+   196.  531.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   197.  531.7s - prefill: onnx.load (0.0s) 
+   198.  531.7s - prefill: post: onnx.load (0.0s) 
+   199.  544.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   200.  553.1s - prefill: post: torch.onnx.export (0.0s) 
+   201.  553.1s - prefill: onnx.load (0.0s) 
+   202.  553.1s - prefill: post: onnx.load (0.0s) 
+   203.  553.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   204.  561.6s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   205.  561.6s - prefill: onnx.save (0.2s) 
+   206.  568.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   207.  568.5s - prefill: onnx.load (0.0s) 
+   208.  568.5s - prefill: post: onnx.load (0.0s) 
+   209.  581.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   210.  590.0s - prefill: post: torch.onnx.export (0.0s) 
+   211.  590.0s - prefill: onnx.load (0.0s) 
+   212.  590.0s - prefill: post: onnx.load (0.0s) 
+   213.  590.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   214.  598.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   215.  598.5s - prefill: onnx.save (0.2s) 
+   216.  604.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   217.  605.1s - prefill: onnx.load (0.0s) 
+   218.  605.1s - prefill: post: onnx.load (0.0s) 
+   219.  618.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   220.  626.6s - prefill: post: torch.onnx.export (0.0s) 
+   221.  626.6s - prefill: onnx.load (0.0s) 
+   222.  626.6s - prefill: post: onnx.load (0.0s) 
+   223.  626.6s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   224.  634.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   225.  634.9s - prefill: onnx.save (0.2s) 
+   226.  641.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   227.  641.5s - prefill: onnx.load (0.0s) 
+   228.  641.5s - prefill: post: onnx.load (0.0s) 
+   229.  654.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   230.  662.6s - prefill: post: torch.onnx.export (0.0s) 
+   231.  662.6s - prefill: onnx.load (0.0s) 
+   232.  662.6s - prefill: post: onnx.load (0.0s) 
+   233.  662.6s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   234.  671.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   235.  671.0s - prefill: onnx.save (0.2s) 
+   236.  677.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   237.  677.6s - prefill: onnx.load (0.0s) 
+   238.  677.6s - prefill: post: onnx.load (0.0s) 
+   239.  690.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   240.  698.6s - prefill: post: torch.onnx.export (0.0s) 
+   241.  698.6s - prefill: onnx.load (0.0s) 
+   242.  698.6s - prefill: post: onnx.load (0.0s) 
+   243.  698.6s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   244.  706.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   245.  706.9s - prefill: onnx.save (0.2s) 
+   246.  713.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   247.  713.5s - prefill: onnx.load (0.0s) 
+   248.  713.5s - prefill: post: onnx.load (0.0s) 
+   249.  719.8s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   250.  728.0s - prefill: post: torch.onnx.export (0.0s) 
+   251.  728.0s - prefill: onnx.load (0.0s) 
+   252.  728.0s - prefill: post: onnx.load (0.0s) 
+   253.  728.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   254.  736.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   255.  736.2s - prefill: onnx.save (0.2s) 
+   256.  742.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   257.  742.7s - prefill: onnx.load (0.0s) 
+   258.  742.7s - prefill: post: onnx.load (0.0s) 
+   259.  754.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   260.  762.9s - prefill: post: torch.onnx.export (0.0s) 
+   261.  762.9s - prefill: onnx.load (0.0s) 
+   262.  762.9s - prefill: post: onnx.load (0.0s) 
+   263.  762.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   264.  771.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   265.  771.1s - prefill: onnx.save (0.2s) 
+   266.  777.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   267.  777.7s - prefill: onnx.load (0.0s) 
+   268.  777.7s - prefill: post: onnx.load (0.0s) 
+   269.  786.8s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   270.  794.9s - prefill: post: torch.onnx.export (0.0s) 
+   271.  794.9s - prefill: onnx.load (0.0s) 
+   272.  794.9s - prefill: post: onnx.load (0.0s) 
+   273.  794.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   274.  803.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   275.  803.1s - prefill: onnx.save (0.2s) 
+   276.  809.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   277.  809.7s - prefill: onnx.load (0.0s) 
+   278.  809.7s - prefill: post: onnx.load (0.0s) 
+   279.  821.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   280.  830.1s - prefill: post: torch.onnx.export (0.0s) 
+   281.  830.1s - prefill: onnx.load (0.0s) 
+   282.  830.1s - prefill: post: onnx.load (0.0s) 
+   283.  830.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   284.  838.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   285.  839.0s - prefill: onnx.save (0.2s) 
+   286.  845.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   287.  845.8s - prefill: onnx.load (0.0s) 
+   288.  845.8s - prefill: post: onnx.load (0.0s) 
+   289.  858.8s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   290.  866.9s - prefill: post: torch.onnx.export (0.0s) 
+   291.  866.9s - prefill: onnx.load (0.0s) 
+   292.  866.9s - prefill: post: onnx.load (0.0s) 
+   293.  866.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   294.  874.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   295.  874.9s - prefill: onnx.save (0.2s) 
+   296.  881.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   297.  881.5s - prefill: onnx.load (0.0s) 
+   298.  881.5s - prefill: post: onnx.load (0.0s) 
+   299.  891.1s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   300.  899.2s - prefill: post: torch.onnx.export (0.0s) 
+   301.  899.2s - prefill: onnx.load (0.0s) 
+   302.  899.2s - prefill: post: onnx.load (0.0s) 
+   303.  899.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   304.  907.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   305.  907.4s - prefill: onnx.save (0.2s) 
+   306.  913.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   307.  913.8s - prefill: onnx.load (0.0s) 
+   308.  913.8s - prefill: post: onnx.load (0.0s) 
+   309.  921.2s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   310.  929.4s - prefill: post: torch.onnx.export (0.0s) 
+   311.  929.4s - prefill: onnx.load (0.0s) 
+   312.  929.4s - prefill: post: onnx.load (0.0s) 
+   313.  929.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   314.  937.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   315.  937.5s - prefill: onnx.save (0.2s) 
+   316.  943.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   317.  944.1s - prefill: onnx.load (0.0s) 
+   318.  944.1s - prefill: post: onnx.load (0.0s) 
+   319.  951.8s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   320.  960.0s - prefill: post: torch.onnx.export (0.0s) 
+   321.  960.0s - prefill: onnx.load (0.0s) 
+   322.  960.0s - prefill: post: onnx.load (0.0s) 
+   323.  960.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   324.  968.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   325.  968.2s - prefill: onnx.save (0.2s) 
+   326.  974.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   327.  974.7s - prefill: onnx.load (0.0s) 
+   328.  974.7s - prefill: post: onnx.load (0.0s) 
+   329.  982.2s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   330.  990.8s - prefill: post: torch.onnx.export (0.0s) 
+   331.  990.8s - prefill: onnx.load (0.0s) 
+   332.  990.8s - prefill: post: onnx.load (0.0s) 
+   333.  990.8s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   334. 1000.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   335. 1000.0s - prefill: onnx.save (0.2s) 
+   336. 1006.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   337. 1007.1s - prefill: onnx.load (0.0s) 
+   338. 1007.1s - prefill: post: onnx.load (0.0s) 
+   339. 1017.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   340. 1026.5s - prefill: post: torch.onnx.export (0.0s) 
+   341. 1026.5s - prefill: onnx.load (0.0s) 
+   342. 1026.5s - prefill: post: onnx.load (0.0s) 
+   343. 1026.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   344. 1035.6s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   345. 1035.6s - prefill: onnx.save (0.2s) 
+   346. 1042.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   347. 1042.8s - prefill: onnx.load (0.0s) 
+   348. 1042.8s - prefill: post: onnx.load (0.0s) 
+   349. 1053.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   350. 1062.5s - prefill: post: torch.onnx.export (0.0s) 
+   351. 1062.5s - prefill: onnx.load (0.0s) 
+   352. 1062.5s - prefill: post: onnx.load (0.0s) 
+   353. 1062.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   354. 1071.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   355. 1071.5s - prefill: onnx.save (0.2s) 
+   356. 1078.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   357. 1078.8s - prefill: onnx.load (0.0s) 
+   358. 1078.8s - prefill: post: onnx.load (0.0s) 
+   359. 1090.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   360. 1099.7s - prefill: post: torch.onnx.export (0.0s) 
+   361. 1099.7s - prefill: onnx.load (0.0s) 
+   362. 1099.7s - prefill: post: onnx.load (0.0s) 
+   363. 1099.7s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   364. 1108.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   365. 1108.8s - prefill: onnx.save (0.2s) 
+   366. 1115.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   367. 1115.8s - prefill: onnx.load (0.0s) 
+   368. 1115.8s - prefill: post: onnx.load (0.0s) 
+   369. 1128.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   370. 1137.7s - prefill: post: torch.onnx.export (0.0s) 
+   371. 1137.7s - prefill: onnx.load (0.0s) 
+   372. 1137.7s - prefill: post: onnx.load (0.0s) 
+   373. 1137.7s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   374. 1146.7s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   375. 1146.7s - prefill: onnx.save (0.2s) 
+   376. 1153.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   377. 1153.8s - prefill: onnx.load (0.0s) 
+   378. 1153.8s - prefill: post: onnx.load (0.0s) 
+   379. 1166.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   380. 1175.5s - prefill: post: torch.onnx.export (0.0s) 
+   381. 1175.5s - prefill: onnx.load (0.0s) 
+   382. 1175.5s - prefill: post: onnx.load (0.0s) 
+   383. 1175.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   384. 1184.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   385. 1184.4s - prefill: onnx.save (0.2s) 
+   386. 1191.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   387. 1191.5s - prefill: onnx.load (0.0s) 
+   388. 1191.5s - prefill: post: onnx.load (0.0s) 
+   389. 1204.2s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   390. 1213.3s - prefill: post: torch.onnx.export (0.0s) 
+   391. 1213.3s - prefill: onnx.load (0.0s) 
+   392. 1213.3s - prefill: post: onnx.load (0.0s) 
+   393. 1213.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   394. 1222.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   395. 1222.5s - prefill: onnx.save (0.2s) 
+   396. 1229.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   397. 1229.5s - prefill: onnx.load (0.0s) 
+   398. 1229.5s - prefill: post: onnx.load (0.0s) 
+   399. 1237.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   400. 1247.2s - prefill: post: torch.onnx.export (0.0s) 
+   401. 1247.2s - prefill: onnx.load (0.0s) 
+   402. 1247.2s - prefill: post: onnx.load (0.0s) 
+   403. 1247.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   404. 1256.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   405. 1256.4s - prefill: onnx.save (0.2s) 
+   406. 1263.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   407. 1263.7s - prefill: onnx.load (0.0s) 
+   408. 1263.7s - prefill: post: onnx.load (0.0s) 
+   409. 1273.1s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   410. 1282.5s - prefill: post: torch.onnx.export (0.0s) 
+   411. 1282.5s - prefill: onnx.load (0.0s) 
+   412. 1282.5s - prefill: post: onnx.load (0.0s) 
+   413. 1282.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   414. 1291.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   415. 1291.9s - prefill: onnx.save (0.2s) 
+   416. 1299.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   417. 1299.3s - prefill: onnx.load (0.0s) 
+   418. 1299.3s - prefill: post: onnx.load (0.0s) 
+   419. 1309.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   420. 1319.1s - prefill: post: torch.onnx.export (0.0s) 
+   421. 1319.1s - prefill: onnx.load (0.0s) 
+   422. 1319.1s - prefill: post: onnx.load (0.0s) 
+   423. 1319.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   424. 1328.7s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   425. 1328.7s - prefill: onnx.save (0.2s) 
+   426. 1336.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   427. 1336.8s - prefill: onnx.load (0.0s) 
+   428. 1336.8s - prefill: post: onnx.load (0.0s) 
+   429. 1344.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   430. 1353.0s - prefill: post: torch.onnx.export (0.0s) 
+   431. 1353.0s - prefill: onnx.load (0.0s) 
+   432. 1353.0s - prefill: post: onnx.load (0.0s) 
+   433. 1353.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   434. 1361.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   435. 1361.8s - prefill: onnx.save (0.2s) 
+   436. 1368.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   437. 1368.8s - prefill: onnx.load (0.0s) 
+   438. 1368.8s - prefill: post: onnx.load (0.0s) 
+   439. 1375.1s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   440. 1383.6s - prefill: post: torch.onnx.export (0.0s) 
+   441. 1383.6s - prefill: onnx.load (0.0s) 
+   442. 1383.6s - prefill: post: onnx.load (0.0s) 
+   443. 1383.6s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   444. 1393.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   445. 1393.0s - prefill: onnx.save (0.2s) 
+   446. 1400.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   447. 1400.4s - prefill: onnx.load (0.0s) 
+   448. 1400.4s - prefill: post: onnx.load (0.0s) 
+   449. 1408.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   450. 1417.3s - prefill: post: torch.onnx.export (0.0s) 
+   451. 1417.3s - prefill: onnx.load (0.0s) 
+   452. 1417.3s - prefill: post: onnx.load (0.0s) 
+   453. 1417.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   454. 1426.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   455. 1426.5s - prefill: onnx.save (0.2s) 
+   456. 1433.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   457. 1434.0s - prefill: onnx.load (0.0s) 
+   458. 1434.0s - prefill: post: onnx.load (0.0s) 
+   459. 1441.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   460. 1450.2s - prefill: post: torch.onnx.export (0.0s) 
+   461. 1450.2s - prefill: onnx.load (0.0s) 
+   462. 1450.2s - prefill: post: onnx.load (0.0s) 
+   463. 1450.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   464. 1459.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   465. 1459.2s - prefill: onnx.save (0.2s) 
+   466. 1466.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   467. 1466.4s - prefill: onnx.load (0.0s) 
+   468. 1466.4s - prefill: post: onnx.load (0.0s) 
+   469. 1473.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   470. 1482.5s - prefill: post: torch.onnx.export (0.0s) 
+   471. 1482.5s - prefill: onnx.load (0.0s) 
+   472. 1482.5s - prefill: post: onnx.load (0.0s) 
+   473. 1482.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   474. 1491.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   475. 1491.4s - prefill: onnx.save (0.2s) 
+   476. 1498.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   477. 1498.4s - prefill: onnx.load (0.0s) 
+   478. 1498.4s - prefill: post: onnx.load (0.0s) 
+   479. 1505.8s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   480. 1514.3s - prefill: post: torch.onnx.export (0.0s) 
+   481. 1514.3s - prefill: onnx.load (0.0s) 
+   482. 1514.3s - prefill: post: onnx.load (0.0s) 
+   483. 1514.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   484. 1523.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   485. 1523.1s - prefill: onnx.save (0.2s) 
+   486. 1529.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   487. 1530.1s - prefill: onnx.load (0.0s) 
+   488. 1530.1s - prefill: post: onnx.load (0.0s) 
+   489. 1537.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   490. 1546.1s - prefill: post: torch.onnx.export (0.0s) 
+   491. 1546.1s - prefill: onnx.load (0.0s) 
+   492. 1546.1s - prefill: post: onnx.load (0.0s) 
+   493. 1546.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   494. 1555.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   495. 1555.1s - prefill: onnx.save (0.2s) 
+   496. 1562.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   497. 1562.5s - prefill: onnx.load (0.0s) 
+   498. 1562.5s - prefill: post: onnx.load (0.0s) 
+   499. 1570.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   500. 1578.5s - prefill: post: torch.onnx.export (0.0s) 
+   501. 1578.5s - prefill: onnx.load (0.0s) 
+   502. 1578.5s - prefill: post: onnx.load (0.0s) 
+   503. 1578.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   504. 1587.3s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   505. 1587.3s - prefill: onnx.save (0.2s) 
+   506. 1593.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   507. 1594.2s - prefill: onnx.load (0.0s) 
+   508. 1594.2s - prefill: post: onnx.load (0.0s) 
+   509. 1601.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   510. 1610.1s - prefill: post: torch.onnx.export (0.0s) 
+   511. 1610.1s - prefill: onnx.load (0.0s) 
+   512. 1610.1s - prefill: post: onnx.load (0.0s) 
+   513. 1610.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   514. 1619.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   515. 1619.1s - prefill: onnx.save (0.2s) 
+   516. 1625.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   517. 1626.2s - prefill: onnx.load (0.0s) 
+   518. 1626.2s - prefill: post: onnx.load (0.0s) 
+   519. 1633.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   520. 1642.4s - prefill: post: torch.onnx.export (0.0s) 
+   521. 1642.4s - prefill: onnx.load (0.0s) 
+   522. 1642.4s - prefill: post: onnx.load (0.0s) 
+   523. 1642.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   524. 1651.6s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   525. 1651.6s - prefill: onnx.save (0.2s) 
+   526. 1658.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   527. 1658.7s - prefill: onnx.load (0.0s) 
+   528. 1658.7s - prefill: post: onnx.load (0.0s) 
+   529. 1666.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   530. 1675.1s - prefill: post: torch.onnx.export (0.0s) 
+   531. 1675.2s - prefill: onnx.load (0.0s) 
+   532. 1675.2s - prefill: post: onnx.load (0.0s) 
+   533. 1675.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   534. 1684.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   535. 1684.2s - prefill: onnx.save (0.2s) 
+   536. 1690.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   537. 1691.2s - prefill: onnx.load (0.0s) 
+   538. 1691.2s - prefill: post: onnx.load (0.0s) 
+   539. 1699.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   540. 1707.9s - prefill: post: torch.onnx.export (0.0s) 
+   541. 1707.9s - prefill: onnx.load (0.0s) 
+   542. 1707.9s - prefill: post: onnx.load (0.0s) 
+   543. 1707.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   544. 1716.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   545. 1716.8s - prefill: onnx.save (0.2s) 
+   546. 1723.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   547. 1723.6s - prefill: onnx.load (0.0s) 
+   548. 1723.6s - prefill: post: onnx.load (0.0s) 
+   549. 1731.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   550. 1739.9s - prefill: post: torch.onnx.export (0.0s) 
+   551. 1739.9s - prefill: onnx.load (0.0s) 
+   552. 1739.9s - prefill: post: onnx.load (0.0s) 
+   553. 1739.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   554. 1749.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   555. 1749.1s - prefill: onnx.save (0.2s) 
+   556. 1755.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   557. 1756.2s - prefill: onnx.load (0.0s) 
+   558. 1756.2s - prefill: post: onnx.load (0.0s) 
+   559. 1763.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   560. 1772.0s - prefill: post: torch.onnx.export (0.0s) 
+   561. 1772.0s - prefill: onnx.load (0.0s) 
+   562. 1772.0s - prefill: post: onnx.load (0.0s) 
+   563. 1772.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   564. 1781.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   565. 1781.1s - prefill: onnx.save (0.2s) 
+   566. 1787.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   567. 1788.2s - prefill: onnx.load (0.0s) 
+   568. 1788.2s - prefill: post: onnx.load (0.0s) 
+   569. 1796.2s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   570. 1804.9s - prefill: post: torch.onnx.export (0.0s) 
+   571. 1804.9s - prefill: onnx.load (0.0s) 
+   572. 1804.9s - prefill: post: onnx.load (0.0s) 
+   573. 1804.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   574. 1814.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   575. 1814.5s - prefill: onnx.save (0.2s) 
+   576. 1821.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   577. 1821.7s - prefill: onnx.load (0.0s) 
+   578. 1821.7s - prefill: post: onnx.load (0.0s) 
+   579. 1829.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   580. 1838.3s - prefill: post: torch.onnx.export (0.0s) 
+   581. 1838.3s - prefill: onnx.load (0.0s) 
+   582. 1838.3s - prefill: post: onnx.load (0.0s) 
+   583. 1838.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   584. 1847.6s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   585. 1847.6s - prefill: onnx.save (0.2s) 
+   586. 1854.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   587. 1854.7s - prefill: onnx.load (0.0s) 
+   588. 1854.7s - prefill: post: onnx.load (0.0s) 
+   589. 1862.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   590. 1871.3s - prefill: post: torch.onnx.export (0.0s) 
+   591. 1871.3s - prefill: onnx.load (0.0s) 
+   592. 1871.3s - prefill: post: onnx.load (0.0s) 
+   593. 1871.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   594. 1880.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   595. 1880.5s - prefill: onnx.save (0.2s) 
+   596. 1887.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   597. 1887.5s - prefill: onnx.load (0.0s) 
+   598. 1887.5s - prefill: post: onnx.load (0.0s) 
+   599. 1894.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   600. 1903.1s - prefill: post: torch.onnx.export (0.0s) 
+   601. 1903.1s - prefill: onnx.load (0.0s) 
+   602. 1903.1s - prefill: post: onnx.load (0.0s) 
+   603. 1903.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   604. 1911.6s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   605. 1911.6s - prefill: onnx.save (0.2s) 
+   606. 1918.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   607. 1918.6s - prefill: onnx.load (0.0s) 
+   608. 1918.6s - prefill: post: onnx.load (0.0s) 
+   609. 1925.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   610. 1934.2s - prefill: post: torch.onnx.export (0.0s) 
+   611. 1934.2s - prefill: onnx.load (0.0s) 
+   612. 1934.2s - prefill: post: onnx.load (0.0s) 
+   613. 1934.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   614. 1942.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   615. 1942.8s - prefill: onnx.save (0.2s) 
+   616. 1950.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   617. 1950.3s - prefill: onnx.load (0.0s) 
+   618. 1950.3s - prefill: post: onnx.load (0.0s) 
+   619. 1961.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   620. 1972.3s - prefill: post: torch.onnx.export (0.0s) 
+   621. 1972.3s - prefill: onnx.load (0.0s) 
+   622. 1972.3s - prefill: post: onnx.load (0.0s) 
+   623. 1972.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   624. 1981.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   625. 1981.0s - prefill: onnx.save (0.2s) 
+   626. 2004.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   627. 2004.8s - prefill: onnx.load (0.0s) 
+   628. 2004.8s - prefill: post: onnx.load (0.0s) 
+   629. 2012.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   630. 2035.5s - prefill: post: torch.onnx.export (0.0s) 
+   631. 2035.5s - prefill: onnx.load (0.0s) 
+   632. 2035.5s - prefill: post: onnx.load (0.0s) 
+   633. 2035.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   634. 2044.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   635. 2044.4s - prefill: onnx.save (0.2s) 
+   636. 2071.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   637. 2072.1s - prefill: onnx.load (0.0s) 
+   638. 2072.1s - prefill: post: onnx.load (0.0s) 
+   639. 2078.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   640. 2095.4s - prefill: post: torch.onnx.export (0.0s) 
+   641. 2095.4s - prefill: onnx.load (0.0s) 
+   642. 2095.4s - prefill: post: onnx.load (0.0s) 
+   643. 2095.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   644. 2104.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   645. 2104.1s - prefill: onnx.save (0.2s) 
+   646. 2127.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   647. 2128.2s - prefill: onnx.load (0.0s) 
+   648. 2128.2s - prefill: post: onnx.load (0.0s) 
+   649. 2135.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   650. 2165.0s - prefill: post: torch.onnx.export (0.0s) 
+   651. 2165.0s - prefill: onnx.load (0.0s) 
+   652. 2165.0s - prefill: post: onnx.load (0.0s) 
+   653. 2165.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   654. 2173.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   655. 2173.5s - prefill: onnx.save (0.2s) 
+   656. 2206.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   657. 2206.9s - prefill: onnx.load (0.0s) 
+   658. 2206.9s - prefill: post: onnx.load (0.0s) 
+   659. 2214.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   660. 2239.7s - prefill: post: torch.onnx.export (0.0s) 
+   661. 2239.7s - prefill: onnx.load (0.0s) 
+   662. 2239.7s - prefill: post: onnx.load (0.0s) 
+   663. 2239.7s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   664. 2248.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   665. 2248.2s - prefill: onnx.save (0.2s) 
+   666. 2270.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   667. 2271.1s - prefill: onnx.load (0.0s) 
+   668. 2271.1s - prefill: post: onnx.load (0.0s) 
+   669. 2277.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   670. 2300.6s - prefill: post: torch.onnx.export (0.0s) 
+   671. 2300.6s - prefill: onnx.load (0.0s) 
+   672. 2300.6s - prefill: post: onnx.load (0.0s) 
+   673. 2300.6s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   674. 2309.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   675. 2309.4s - prefill: onnx.save (0.2s) 
+   676. 2316.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   677. 2317.0s - prefill: onnx.load (0.0s) 
+   678. 2317.0s - prefill: post: onnx.load (0.0s) 
+   679. 2326.1s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   680. 2335.1s - prefill: post: torch.onnx.export (0.0s) 
+   681. 2335.1s - prefill: onnx.load (0.0s) 
+   682. 2335.1s - prefill: post: onnx.load (0.0s) 
+   683. 2335.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   684. 2343.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   685. 2343.9s - prefill: onnx.save (0.2s) 
+   686. 2358.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   687. 2359.2s - prefill: onnx.load (0.0s) 
+   688. 2359.2s - prefill: post: onnx.load (0.0s) 
+   689. 2366.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   690. 2391.9s - prefill: post: torch.onnx.export (0.0s) 
+   691. 2391.9s - prefill: onnx.load (0.0s) 
+   692. 2391.9s - prefill: post: onnx.load (0.0s) 
+   693. 2391.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   694. 2400.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   695. 2400.9s - prefill: onnx.save (0.2s) 
+   696. 2424.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   697. 2424.7s - prefill: onnx.load (0.0s) 
+   698. 2424.7s - prefill: post: onnx.load (0.0s) 
+   699. 2435.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   700. 2456.0s - prefill: post: torch.onnx.export (0.0s) 
+   701. 2456.0s - prefill: onnx.load (0.0s) 
+   702. 2456.0s - prefill: post: onnx.load (0.0s) 
+   703. 2456.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   704. 2465.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   705. 2465.2s - prefill: onnx.save (0.2s) 
+   706. 2483.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   707. 2484.1s - prefill: onnx.load (0.0s) 
+   708. 2484.1s - prefill: post: onnx.load (0.0s) 
+   709. 2491.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   710. 2518.7s - prefill: post: torch.onnx.export (0.0s) 
+   711. 2518.7s - prefill: onnx.load (0.0s) 
+   712. 2518.7s - prefill: post: onnx.load (0.0s) 
+   713. 2518.7s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   714. 2527.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   715. 2527.8s - prefill: onnx.save (0.2s) 
+   716. 2537.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   717. 2537.7s - prefill: onnx.load (0.0s) 
+   718. 2537.7s - prefill: post: onnx.load (0.0s) 
+   719. 2544.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   720. 2553.5s - prefill: post: torch.onnx.export (0.0s) 
+   721. 2553.5s - prefill: onnx.load (0.0s) 
+   722. 2553.5s - prefill: post: onnx.load (0.0s) 
+   723. 2553.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   724. 2562.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   725. 2562.8s - prefill: onnx.save (0.2s) 
+   726. 2581.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   727. 2581.8s - prefill: onnx.load (0.0s) 
+   728. 2581.8s - prefill: post: onnx.load (0.0s) 
+   729. 2588.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   730. 2611.0s - prefill: post: torch.onnx.export (0.0s) 
+   731. 2611.0s - prefill: onnx.load (0.0s) 
+   732. 2611.0s - prefill: post: onnx.load (0.0s) 
+   733. 2611.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   734. 2620.3s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   735. 2620.3s - prefill: onnx.save (0.2s) 
+   736. 2649.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   737. 2650.0s - prefill: onnx.load (0.0s) 
+   738. 2650.0s - prefill: post: onnx.load (0.0s) 
+   739. 2658.1s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   740. 2669.8s - prefill: post: torch.onnx.export (0.0s) 
+   741. 2669.8s - prefill: onnx.load (0.0s) 
+   742. 2669.8s - prefill: post: onnx.load (0.0s) 
+   743. 2669.8s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   744. 2679.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   745. 2679.0s - prefill: onnx.save (0.2s) 
+   746. 2701.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   747. 2701.3s - prefill: onnx.load (0.0s) 
+   748. 2701.3s - prefill: post: onnx.load (0.0s) 
+   749. 2713.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   750. 2724.1s - prefill: post: torch.onnx.export (0.0s) 
+   751. 2724.1s - prefill: onnx.load (0.0s) 
+   752. 2724.1s - prefill: post: onnx.load (0.0s) 
+   753. 2724.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   754. 2733.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   755. 2733.4s - prefill: onnx.save (0.2s) 
+   756. 2743.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   757. 2744.2s - prefill: onnx.load (0.0s) 
+   758. 2744.2s - prefill: post: onnx.load (0.0s) 
+   759. 2757.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   760. 2778.3s - prefill: post: torch.onnx.export (0.0s) 
+   761. 2778.3s - prefill: onnx.load (0.0s) 
+   762. 2778.3s - prefill: post: onnx.load (0.0s) 
+   763. 2778.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   764. 2787.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   765. 2787.2s - prefill: onnx.save (0.2s) 
+   766. 2819.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   767. 2820.0s - prefill: onnx.load (0.0s) 
+   768. 2820.0s - prefill: post: onnx.load (0.0s) 
+   769. 2832.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   770. 2865.7s - prefill: post: torch.onnx.export (0.0s) 
+   771. 2865.7s - prefill: onnx.load (0.0s) 
+   772. 2865.7s - prefill: post: onnx.load (0.0s) 
+   773. 2865.7s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   774. 2874.6s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   775. 2874.6s - prefill: onnx.save (0.2s) 
+   776. 2890.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   777. 2890.4s - prefill: onnx.load (0.0s) 
+   778. 2890.4s - prefill: post: onnx.load (0.0s) 
+   779. 2899.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   780. 2913.4s - prefill: post: torch.onnx.export (0.0s) 
+   781. 2913.4s - prefill: onnx.load (0.0s) 
+   782. 2913.4s - prefill: post: onnx.load (0.0s) 
+   783. 2913.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   784. 2922.3s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   785. 2922.3s - prefill: onnx.save (0.2s) 
+   786. 2959.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   787. 2959.8s - prefill: onnx.load (0.0s) 
+   788. 2959.8s - prefill: post: onnx.load (0.0s) 
+   789. 2968.8s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   790. 2990.8s - prefill: post: torch.onnx.export (0.0s) 
+   791. 2990.8s - prefill: onnx.load (0.0s) 
+   792. 2990.8s - prefill: post: onnx.load (0.0s) 
+   793. 2990.8s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   794. 2999.7s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   795. 2999.7s - prefill: onnx.save (0.2s) 
+   796. 3020.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   797. 3020.3s - prefill: onnx.load (0.0s) 
+   798. 3020.3s - prefill: post: onnx.load (0.0s) 
+   799. 3029.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   800. 3047.0s - prefill: post: torch.onnx.export (0.0s) 
+   801. 3047.0s - prefill: onnx.load (0.0s) 
+   802. 3047.0s - prefill: post: onnx.load (0.0s) 
+   803. 3047.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   804. 3055.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   805. 3055.8s - prefill: onnx.save (0.2s) 
+   806. 3066.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   807. 3066.7s - prefill: onnx.load (0.0s) 
+   808. 3066.7s - prefill: post: onnx.load (0.0s) 
+   809. 3079.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   810. 3087.4s - prefill: post: torch.onnx.export (0.0s) 
+   811. 3087.4s - prefill: onnx.load (0.0s) 
+   812. 3087.4s - prefill: post: onnx.load (0.0s) 
+   813. 3087.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   814. 3096.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   815. 3096.1s - prefill: onnx.save (0.2s) 
+   816. 3102.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   817. 3103.0s - prefill: onnx.load (0.0s) 
+   818. 3103.0s - prefill: post: onnx.load (0.0s) 
+   819. 3110.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   820. 3118.6s - prefill: post: torch.onnx.export (0.0s) 
+   821. 3118.6s - prefill: onnx.load (0.0s) 
+   822. 3118.6s - prefill: post: onnx.load (0.0s) 
+   823. 3118.6s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   824. 3127.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   825. 3127.1s - prefill: onnx.save (0.2s) 
+   826. 3133.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   827. 3134.2s - prefill: onnx.load (0.0s) 
+   828. 3134.2s - prefill: post: onnx.load (0.0s) 
+   829. 3141.1s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   830. 3150.2s - prefill: post: torch.onnx.export (0.0s) 
+   831. 3150.2s - prefill: onnx.load (0.0s) 
+   832. 3150.2s - prefill: post: onnx.load (0.0s) 
+   833. 3150.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   834. 3158.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   835. 3158.8s - prefill: onnx.save (0.2s) 
+   836. 3165.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   837. 3166.2s - prefill: onnx.load (0.0s) 
+   838. 3166.2s - prefill: post: onnx.load (0.0s) 
+   839. 3177.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   840. 3187.8s - prefill: post: torch.onnx.export (0.0s) 
+   841. 3187.8s - prefill: onnx.load (0.0s) 
+   842. 3187.8s - prefill: post: onnx.load (0.0s) 
+   843. 3187.8s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   844. 3196.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   845. 3196.4s - prefill: onnx.save (0.2s) 
+   846. 3216.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   847. 3216.4s - prefill: onnx.load (0.0s) 
+   848. 3216.4s - prefill: post: onnx.load (0.0s) 
+   849. 3228.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   850. 3250.3s - prefill: post: torch.onnx.export (0.0s) 
+   851. 3250.3s - prefill: onnx.load (0.0s) 
+   852. 3250.3s - prefill: post: onnx.load (0.0s) 
+   853. 3250.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   854. 3259.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   855. 3259.0s - prefill: onnx.save (0.2s) 
+   856. 3273.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   857. 3274.1s - prefill: onnx.load (0.0s) 
+   858. 3274.1s - prefill: post: onnx.load (0.0s) 
+   859. 3286.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   860. 3305.0s - prefill: post: torch.onnx.export (0.0s) 
+   861. 3305.0s - prefill: onnx.load (0.0s) 
+   862. 3305.0s - prefill: post: onnx.load (0.0s) 
+   863. 3305.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   864. 3313.7s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   865. 3313.7s - prefill: onnx.save (0.2s) 
+   866. 3340.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   867. 3341.1s - prefill: onnx.load (0.0s) 
+   868. 3341.1s - prefill: post: onnx.load (0.0s) 
+   869. 3353.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   870. 3379.5s - prefill: post: torch.onnx.export (0.0s) 
+   871. 3379.5s - prefill: onnx.load (0.0s) 
+   872. 3379.5s - prefill: post: onnx.load (0.0s) 
+   873. 3379.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   874. 3388.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   875. 3388.2s - prefill: onnx.save (0.2s) 
+   876. 3414.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   877. 3415.1s - prefill: onnx.load (0.0s) 
+   878. 3415.1s - prefill: post: onnx.load (0.0s) 
+   879. 3427.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   880. 3441.5s - prefill: post: torch.onnx.export (0.0s) 
+   881. 3441.5s - prefill: onnx.load (0.0s) 
+   882. 3441.5s - prefill: post: onnx.load (0.0s) 
+   883. 3441.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   884. 3450.3s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   885. 3450.4s - prefill: onnx.save (0.2s) 
+   886. 3463.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   887. 3464.4s - prefill: onnx.load (0.0s) 
+   888. 3464.4s - prefill: post: onnx.load (0.0s) 
+   889. 3476.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   890. 3497.2s - prefill: post: torch.onnx.export (0.0s) 
+   891. 3497.2s - prefill: onnx.load (0.0s) 
+   892. 3497.2s - prefill: post: onnx.load (0.0s) 
+   893. 3497.2s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   894. 3506.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   895. 3506.0s - prefill: onnx.save (0.2s) 
+   896. 3524.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   897. 3524.9s - prefill: onnx.load (0.0s) 
+   898. 3524.9s - prefill: post: onnx.load (0.0s) 
+   899. 3537.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   900. 3556.7s - prefill: post: torch.onnx.export (0.0s) 
+   901. 3556.7s - prefill: onnx.load (0.0s) 
+   902. 3556.7s - prefill: post: onnx.load (0.0s) 
+   903. 3556.7s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   904. 3565.4s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   905. 3565.4s - prefill: onnx.save (0.2s) 
+   906. 3580.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   907. 3581.1s - prefill: onnx.load (0.0s) 
+   908. 3581.1s - prefill: post: onnx.load (0.0s) 
+   909. 3593.0s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   910. 3606.3s - prefill: post: torch.onnx.export (0.0s) 
+   911. 3606.3s - prefill: onnx.load (0.0s) 
+   912. 3606.3s - prefill: post: onnx.load (0.0s) 
+   913. 3606.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   914. 3615.1s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   915. 3615.1s - prefill: onnx.save (0.2s) 
+   916. 3633.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   917. 3633.7s - prefill: onnx.load (0.0s) 
+   918. 3633.7s - prefill: post: onnx.load (0.0s) 
+   919. 3645.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   920. 3661.0s - prefill: post: torch.onnx.export (0.0s) 
+   921. 3661.0s - prefill: onnx.load (0.0s) 
+   922. 3661.0s - prefill: post: onnx.load (0.0s) 
+   923. 3661.0s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   924. 3669.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   925. 3669.9s - prefill: onnx.save (0.2s) 
+   926. 3678.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   927. 3678.6s - prefill: onnx.load (0.0s) 
+   928. 3678.6s - prefill: post: onnx.load (0.0s) 
+   929. 3689.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   930. 3698.9s - prefill: post: torch.onnx.export (0.0s) 
+   931. 3698.9s - prefill: onnx.load (0.0s) 
+   932. 3698.9s - prefill: post: onnx.load (0.0s) 
+   933. 3698.9s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   934. 3707.9s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   935. 3707.9s - prefill: onnx.save (0.2s) 
+   936. 3714.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   937. 3715.2s - prefill: onnx.load (0.0s) 
+   938. 3715.2s - prefill: post: onnx.load (0.0s) 
+   939. 3727.8s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   940. 3736.4s - prefill: post: torch.onnx.export (0.0s) 
+   941. 3736.4s - prefill: onnx.load (0.0s) 
+   942. 3736.4s - prefill: post: onnx.load (0.0s) 
+   943. 3736.4s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   944. 3745.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   945. 3745.3s - prefill: onnx.save (0.2s) 
+   946. 3754.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   947. 3754.9s - prefill: onnx.load (0.0s) 
+   948. 3754.9s - prefill: post: onnx.load (0.0s) 
+   949. 3767.4s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   950. 3777.4s - prefill: post: torch.onnx.export (0.0s) 
+   951. 3777.5s - prefill: onnx.load (0.0s) 
+   952. 3777.5s - prefill: post: onnx.load (0.0s) 
+   953. 3777.5s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   954. 3786.2s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   955. 3786.2s - prefill: onnx.save (0.2s) 
+   956. 3794.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   957. 3794.7s - prefill: onnx.load (0.0s) 
+   958. 3794.7s - prefill: post: onnx.load (0.0s) 
+   959. 3803.9s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   960. 3812.8s - prefill: post: torch.onnx.export (0.0s) 
+   961. 3812.8s - prefill: onnx.load (0.0s) 
+   962. 3812.8s - prefill: post: onnx.load (0.0s) 
+   963. 3812.8s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   964. 3821.5s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   965. 3821.5s - prefill: onnx.save (0.2s) 
+   966. 3837.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   967. 3838.0s - prefill: onnx.load (0.0s) 
+   968. 3838.0s - prefill: post: onnx.load (0.0s) 
+   969. 3847.5s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   970. 3865.3s - prefill: post: torch.onnx.export (0.0s) 
+   971. 3865.3s - prefill: onnx.load (0.0s) 
+   972. 3865.3s - prefill: post: onnx.load (0.0s) 
+   973. 3865.3s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   974. 3874.3s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   975. 3874.3s - prefill: onnx.save (0.2s) 
+   976. 3883.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   977. 3884.1s - prefill: onnx.load (0.0s) 
+   978. 3884.1s - prefill: post: onnx.load (0.0s) 
+   979. 3890.6s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   980. 3899.7s - prefill: post: torch.onnx.export (0.0s) 
+   981. 3899.7s - prefill: onnx.load (0.0s) 
+   982. 3899.7s - prefill: post: onnx.load (0.0s) 
+   983. 3899.7s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   984. 3908.7s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   985. 3908.7s - prefill: onnx.save (0.2s) 
+   986. 3916.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   987. 3916.4s - prefill: onnx.load (0.0s) 
+   988. 3916.4s - prefill: post: onnx.load (0.0s) 
+   989. 3923.7s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   990. 3940.1s - prefill: post: torch.onnx.export (0.0s) 
+   991. 3940.1s - prefill: onnx.load (0.0s) 
+   992. 3940.1s - prefill: post: onnx.load (0.0s) 
+   993. 3940.1s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   994. 3948.8s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   995. 3948.8s - prefill: onnx.save (0.2s) 
+   996. 3958.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   997. 3958.9s - prefill: onnx.load (0.0s) 
+   998. 3958.9s - prefill: post: onnx.load (0.0s) 
+   999. 3965.3s - prefill: torch.onnx.export (10.5s) [-0.5 GB]
+   1000. 3975.8s - prefill: post: torch.onnx.export (0.0s) 
+   1001. 3975.8s - prefill: onnx.load (0.0s) 
+   1002. 3975.8s - prefill: post: onnx.load (0.0s) 
+   1003. 3975.8s - prefill: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (11.2s) [+4.7 GB]
+   1004. 3987.0s - prefill: post: onnx transforms: SplitTensorsTransform,CustomOpTransform,RenameFunctionOutputsTransform (0.0s) 
+   1005. 3987.0s - prefill: onnx.save (0.2s) 
+   1006. 3995.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1007. 3995.5s - prefill: onnx.load (0.0s) 
+   1008. 3995.5s - prefill: post: onnx.load (0.0s) 
+   1009. 3996.6s - prefill: onnx.load (0.0s) 
+   1010. 3996.7s - prefill: post: onnx.load (0.0s) 
+   1011. 3996.7s - prefill: onnx.load (0.0s) 
+   1012. 3996.7s - prefill: post: onnx.load (0.0s) 
+   1013. 3996.8s - prefill: onnx.save (0.2s) 
+   1014. 3996.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1015. 3996.8s - prefill: onnx.load (0.0s) 
+   1016. 3996.8s - prefill: post: onnx.load (0.0s) 
+   1017. 3996.8s - prefill: onnx.load (0.0s) 
+   1018. 3996.8s - prefill: post: onnx.load (0.0s) 
+   1019. 3996.8s - prefill: onnx.load (0.0s) 
+   1020. 3996.8s - prefill: post: onnx.load (0.0s) 
+   1021. 3997.0s - prefill: onnx.save (0.2s) 
+   1022. 3997.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1023. 3997.0s - prefill: onnx.load (0.0s) 
+   1024. 3997.0s - prefill: post: onnx.load (0.0s) 
+   1025. 3997.0s - prefill: onnx.load (0.0s) 
+   1026. 3997.0s - prefill: post: onnx.load (0.0s) 
+   1027. 3997.0s - prefill: onnx.load (0.0s) 
+   1028. 3997.0s - prefill: post: onnx.load (0.0s) 
+   1029. 3997.3s - prefill: onnx.save (0.2s) 
+   1030. 3997.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1031. 3997.3s - prefill: onnx.load (0.0s) 
+   1032. 3997.3s - prefill: post: onnx.load (0.0s) 
+   1033. 3997.3s - prefill: onnx.load (0.0s) 
+   1034. 3997.4s - prefill: post: onnx.load (0.0s) 
+   1035. 3997.4s - prefill: onnx.load (0.0s) 
+   1036. 3997.4s - prefill: post: onnx.load (0.0s) 
+   1037. 3997.8s - prefill: onnx.save (0.2s) 
+   1038. 3997.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1039. 3997.8s - prefill: onnx.load (0.0s) 
+   1040. 3997.8s - prefill: post: onnx.load (0.0s) 
+   1041. 3997.8s - prefill: onnx.load (0.0s) 
+   1042. 3997.9s - prefill: post: onnx.load (0.0s) 
+   1043. 3997.9s - prefill: onnx.load (0.0s) 
+   1044. 3997.9s - prefill: post: onnx.load (0.0s) 
+   1045. 3998.0s - prefill: onnx.save (0.2s) 
+   1046. 3998.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1047. 3998.0s - prefill: onnx.load (0.0s) 
+   1048. 3998.0s - prefill: post: onnx.load (0.0s) 
+   1049. 3998.0s - prefill: onnx.load (0.0s) 
+   1050. 3998.0s - prefill: post: onnx.load (0.0s) 
+   1051. 3998.0s - prefill: onnx.load (0.0s) 
+   1052. 3998.0s - prefill: post: onnx.load (0.0s) 
+   1053. 3998.1s - prefill: onnx.save (0.2s) 
+   1054. 3998.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1055. 3998.1s - prefill: onnx.load (0.0s) 
+   1056. 3998.1s - prefill: post: onnx.load (0.0s) 
+   1057. 3998.1s - prefill: onnx.load (0.0s) 
+   1058. 3998.2s - prefill: post: onnx.load (0.0s) 
+   1059. 3998.2s - prefill: onnx.load (0.0s) 
+   1060. 3998.2s - prefill: post: onnx.load (0.0s) 
+   1061. 3998.3s - prefill: onnx.save (0.2s) 
+   1062. 3998.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1063. 3998.3s - prefill: onnx.load (0.0s) 
+   1064. 3998.3s - prefill: post: onnx.load (0.0s) 
+   1065. 3998.3s - prefill: onnx.load (0.0s) 
+   1066. 3998.3s - prefill: post: onnx.load (0.0s) 
+   1067. 3998.3s - prefill: onnx.load (0.0s) 
+   1068. 3998.3s - prefill: post: onnx.load (0.0s) 
+   1069. 3998.8s - prefill: onnx.save (0.2s) 
+   1070. 3998.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1071. 3998.8s - prefill: onnx.load (0.0s) 
+   1072. 3998.8s - prefill: post: onnx.load (0.0s) 
+   1073. 3998.8s - prefill: onnx.load (0.0s) 
+   1074. 3998.8s - prefill: post: onnx.load (0.0s) 
+   1075. 3998.8s - prefill: onnx.load (0.0s) 
+   1076. 3998.8s - prefill: post: onnx.load (0.0s) 
+   1077. 3998.9s - prefill: onnx.save (0.2s) 
+   1078. 3998.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1079. 3998.9s - prefill: onnx.load (0.0s) 
+   1080. 3998.9s - prefill: post: onnx.load (0.0s) 
+   1081. 3998.9s - prefill: onnx.load (0.0s) 
+   1082. 3999.0s - prefill: post: onnx.load (0.0s) 
+   1083. 3999.0s - prefill: onnx.load (0.0s) 
+   1084. 3999.0s - prefill: post: onnx.load (0.0s) 
+   1085. 3999.1s - prefill: onnx.save (0.2s) 
+   1086. 3999.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1087. 3999.1s - prefill: onnx.load (0.0s) 
+   1088. 3999.1s - prefill: post: onnx.load (0.0s) 
+   1089. 3999.1s - prefill: onnx.load (0.0s) 
+   1090. 3999.1s - prefill: post: onnx.load (0.0s) 
+   1091. 3999.1s - prefill: onnx.load (0.0s) 
+   1092. 3999.1s - prefill: post: onnx.load (0.0s) 
+   1093. 3999.6s - prefill: onnx.save (0.2s) 
+   1094. 3999.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1095. 3999.6s - prefill: onnx.load (0.0s) 
+   1096. 3999.6s - prefill: post: onnx.load (0.0s) 
+   1097. 3999.6s - prefill: onnx.load (0.0s) 
+   1098. 3999.7s - prefill: post: onnx.load (0.0s) 
+   1099. 3999.7s - prefill: onnx.load (0.0s) 
+   1100. 3999.7s - prefill: post: onnx.load (0.0s) 
+   1101. 3999.8s - prefill: onnx.save (0.2s) 
+   1102. 3999.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1103. 3999.8s - prefill: onnx.load (0.0s) 
+   1104. 3999.8s - prefill: post: onnx.load (0.0s) 
+   1105. 3999.8s - prefill: onnx.load (0.0s) 
+   1106. 3999.9s - prefill: post: onnx.load (0.0s) 
+   1107. 3999.9s - prefill: onnx.load (0.0s) 
+   1108. 3999.9s - prefill: post: onnx.load (0.0s) 
+   1109. 4000.0s - prefill: onnx.save (0.2s) 
+   1110. 4000.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1111. 4000.0s - prefill: onnx.load (0.0s) 
+   1112. 4000.0s - prefill: post: onnx.load (0.0s) 
+   1113. 4000.0s - prefill: onnx.load (0.0s) 
+   1114. 4000.0s - prefill: post: onnx.load (0.0s) 
+   1115. 4000.0s - prefill: onnx.load (0.0s) 
+   1116. 4000.0s - prefill: post: onnx.load (0.0s) 
+   1117. 4000.1s - prefill: onnx.save (0.2s) 
+   1118. 4000.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1119. 4000.1s - prefill: onnx.load (0.0s) 
+   1120. 4000.1s - prefill: post: onnx.load (0.0s) 
+   1121. 4000.1s - prefill: onnx.load (0.0s) 
+   1122. 4000.1s - prefill: post: onnx.load (0.0s) 
+   1123. 4000.1s - prefill: onnx.load (0.0s) 
+   1124. 4000.1s - prefill: post: onnx.load (0.0s) 
+   1125. 4000.6s - prefill: onnx.save (0.2s) 
+   1126. 4000.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1127. 4000.6s - prefill: onnx.load (0.0s) 
+   1128. 4000.6s - prefill: post: onnx.load (0.0s) 
+   1129. 4000.6s - prefill: onnx.load (0.0s) 
+   1130. 4000.7s - prefill: post: onnx.load (0.0s) 
+   1131. 4000.7s - prefill: onnx.load (0.0s) 
+   1132. 4000.7s - prefill: post: onnx.load (0.0s) 
+   1133. 4000.8s - prefill: onnx.save (0.2s) 
+   1134. 4000.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1135. 4000.8s - prefill: onnx.load (0.0s) 
+   1136. 4000.8s - prefill: post: onnx.load (0.0s) 
+   1137. 4000.8s - prefill: onnx.load (0.0s) 
+   1138. 4000.8s - prefill: post: onnx.load (0.0s) 
+   1139. 4000.8s - prefill: onnx.load (0.0s) 
+   1140. 4000.8s - prefill: post: onnx.load (0.0s) 
+   1141. 4000.9s - prefill: onnx.save (0.2s) 
+   1142. 4000.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1143. 4000.9s - prefill: onnx.load (0.0s) 
+   1144. 4000.9s - prefill: post: onnx.load (0.0s) 
+   1145. 4000.9s - prefill: onnx.load (0.0s) 
+   1146. 4000.9s - prefill: post: onnx.load (0.0s) 
+   1147. 4000.9s - prefill: onnx.load (0.0s) 
+   1148. 4000.9s - prefill: post: onnx.load (0.0s) 
+   1149. 4001.0s - prefill: onnx.save (0.2s) 
+   1150. 4001.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1151. 4001.1s - prefill: onnx.load (0.0s) 
+   1152. 4001.1s - prefill: post: onnx.load (0.0s) 
+   1153. 4001.1s - prefill: onnx.load (0.0s) 
+   1154. 4001.1s - prefill: post: onnx.load (0.0s) 
+   1155. 4001.1s - prefill: onnx.load (0.0s) 
+   1156. 4001.1s - prefill: post: onnx.load (0.0s) 
+   1157. 4001.5s - prefill: onnx.save (0.2s) 
+   1158. 4001.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1159. 4001.5s - prefill: onnx.load (0.0s) 
+   1160. 4001.5s - prefill: post: onnx.load (0.0s) 
+   1161. 4001.5s - prefill: onnx.load (0.0s) 
+   1162. 4001.5s - prefill: post: onnx.load (0.0s) 
+   1163. 4001.5s - prefill: onnx.load (0.0s) 
+   1164. 4001.5s - prefill: post: onnx.load (0.0s) 
+   1165. 4001.6s - prefill: onnx.save (0.2s) 
+   1166. 4001.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1167. 4001.7s - prefill: onnx.load (0.0s) 
+   1168. 4001.7s - prefill: post: onnx.load (0.0s) 
+   1169. 4001.7s - prefill: onnx.load (0.0s) 
+   1170. 4001.7s - prefill: post: onnx.load (0.0s) 
+   1171. 4001.7s - prefill: onnx.load (0.0s) 
+   1172. 4001.7s - prefill: post: onnx.load (0.0s) 
+   1173. 4001.8s - prefill: onnx.save (0.2s) 
+   1174. 4001.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1175. 4001.8s - prefill: onnx.load (0.0s) 
+   1176. 4001.8s - prefill: post: onnx.load (0.0s) 
+   1177. 4001.8s - prefill: onnx.load (0.0s) 
+   1178. 4001.8s - prefill: post: onnx.load (0.0s) 
+   1179. 4001.8s - prefill: onnx.load (0.0s) 
+   1180. 4001.8s - prefill: post: onnx.load (0.0s) 
+   1181. 4001.9s - prefill: onnx.save (0.2s) 
+   1182. 4002.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1183. 4002.0s - prefill: onnx.load (0.0s) 
+   1184. 4002.0s - prefill: post: onnx.load (0.0s) 
+   1185. 4002.0s - prefill: onnx.load (0.0s) 
+   1186. 4002.0s - prefill: post: onnx.load (0.0s) 
+   1187. 4002.0s - prefill: onnx.load (0.0s) 
+   1188. 4002.0s - prefill: post: onnx.load (0.0s) 
+   1189. 4002.5s - prefill: onnx.save (0.2s) 
+   1190. 4002.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1191. 4002.5s - prefill: onnx.load (0.0s) 
+   1192. 4002.5s - prefill: post: onnx.load (0.0s) 
+   1193. 4002.5s - prefill: onnx.load (0.0s) 
+   1194. 4002.5s - prefill: post: onnx.load (0.0s) 
+   1195. 4002.5s - prefill: onnx.load (0.0s) 
+   1196. 4002.5s - prefill: post: onnx.load (0.0s) 
+   1197. 4002.6s - prefill: onnx.save (0.2s) 
+   1198. 4002.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1199. 4002.6s - prefill: onnx.load (0.0s) 
+   1200. 4002.6s - prefill: post: onnx.load (0.0s) 
+   1201. 4002.6s - prefill: onnx.load (0.0s) 
+   1202. 4002.6s - prefill: post: onnx.load (0.0s) 
+   1203. 4002.6s - prefill: onnx.load (0.0s) 
+   1204. 4002.6s - prefill: post: onnx.load (0.0s) 
+   1205. 4002.7s - prefill: onnx.save (0.2s) 
+   1206. 4002.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1207. 4002.7s - prefill: onnx.load (0.0s) 
+   1208. 4002.7s - prefill: post: onnx.load (0.0s) 
+   1209. 4002.7s - prefill: onnx.load (0.0s) 
+   1210. 4002.7s - prefill: post: onnx.load (0.0s) 
+   1211. 4002.7s - prefill: onnx.load (0.0s) 
+   1212. 4002.7s - prefill: post: onnx.load (0.0s) 
+   1213. 4002.8s - prefill: onnx.save (0.2s) 
+   1214. 4002.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1215. 4002.8s - prefill: onnx.load (0.0s) 
+   1216. 4002.8s - prefill: post: onnx.load (0.0s) 
+   1217. 4002.8s - prefill: onnx.load (0.0s) 
+   1218. 4002.8s - prefill: post: onnx.load (0.0s) 
+   1219. 4002.8s - prefill: onnx.load (0.0s) 
+   1220. 4002.8s - prefill: post: onnx.load (0.0s) 
+   1221. 4003.3s - prefill: onnx.save (0.2s) 
+   1222. 4003.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1223. 4003.3s - prefill: onnx.load (0.0s) 
+   1224. 4003.3s - prefill: post: onnx.load (0.0s) 
+   1225. 4003.3s - prefill: onnx.load (0.0s) 
+   1226. 4003.3s - prefill: post: onnx.load (0.0s) 
+   1227. 4003.3s - prefill: onnx.load (0.0s) 
+   1228. 4003.3s - prefill: post: onnx.load (0.0s) 
+   1229. 4003.4s - prefill: onnx.save (0.2s) 
+   1230. 4003.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1231. 4003.4s - prefill: onnx.load (0.0s) 
+   1232. 4003.4s - prefill: post: onnx.load (0.0s) 
+   1233. 4003.4s - prefill: onnx.load (0.0s) 
+   1234. 4003.4s - prefill: post: onnx.load (0.0s) 
+   1235. 4003.4s - prefill: onnx.load (0.0s) 
+   1236. 4003.4s - prefill: post: onnx.load (0.0s) 
+   1237. 4003.6s - prefill: onnx.save (0.2s) 
+   1238. 4003.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1239. 4003.6s - prefill: onnx.load (0.0s) 
+   1240. 4003.6s - prefill: post: onnx.load (0.0s) 
+   1241. 4003.6s - prefill: onnx.load (0.0s) 
+   1242. 4003.6s - prefill: post: onnx.load (0.0s) 
+   1243. 4003.6s - prefill: onnx.load (0.0s) 
+   1244. 4003.6s - prefill: post: onnx.load (0.0s) 
+   1245. 4004.0s - prefill: onnx.save (0.2s) 
+   1246. 4004.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1247. 4004.0s - prefill: onnx.load (0.0s) 
+   1248. 4004.0s - prefill: post: onnx.load (0.0s) 
+   1249. 4004.0s - prefill: onnx.load (0.0s) 
+   1250. 4004.0s - prefill: post: onnx.load (0.0s) 
+   1251. 4004.0s - prefill: onnx.load (0.0s) 
+   1252. 4004.0s - prefill: post: onnx.load (0.0s) 
+   1253. 4004.1s - prefill: onnx.save (0.2s) 
+   1254. 4004.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1255. 4004.1s - prefill: onnx.load (0.0s) 
+   1256. 4004.1s - prefill: post: onnx.load (0.0s) 
+   1257. 4004.1s - prefill: onnx.load (0.0s) 
+   1258. 4004.1s - prefill: post: onnx.load (0.0s) 
+   1259. 4004.1s - prefill: onnx.load (0.0s) 
+   1260. 4004.1s - prefill: post: onnx.load (0.0s) 
+   1261. 4004.3s - prefill: onnx.save (0.2s) 
+   1262. 4004.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1263. 4004.3s - prefill: onnx.load (0.0s) 
+   1264. 4004.3s - prefill: post: onnx.load (0.0s) 
+   1265. 4004.3s - prefill: onnx.load (0.0s) 
+   1266. 4004.3s - prefill: post: onnx.load (0.0s) 
+   1267. 4004.3s - prefill: onnx.load (0.0s) 
+   1268. 4004.3s - prefill: post: onnx.load (0.0s) 
+   1269. 4004.4s - prefill: onnx.save (0.2s) 
+   1270. 4004.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1271. 4004.4s - prefill: onnx.load (0.0s) 
+   1272. 4004.4s - prefill: post: onnx.load (0.0s) 
+   1273. 4004.4s - prefill: onnx.load (0.0s) 
+   1274. 4004.4s - prefill: post: onnx.load (0.0s) 
+   1275. 4004.4s - prefill: onnx.load (0.0s) 
+   1276. 4004.4s - prefill: post: onnx.load (0.0s) 
+   1277. 4004.9s - prefill: onnx.save (0.2s) 
+   1278. 4004.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1279. 4004.9s - prefill: onnx.load (0.0s) 
+   1280. 4004.9s - prefill: post: onnx.load (0.0s) 
+   1281. 4004.9s - prefill: onnx.load (0.0s) 
+   1282. 4004.9s - prefill: post: onnx.load (0.0s) 
+   1283. 4004.9s - prefill: onnx.load (0.0s) 
+   1284. 4004.9s - prefill: post: onnx.load (0.0s) 
+   1285. 4005.0s - prefill: onnx.save (0.2s) 
+   1286. 4005.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1287. 4005.0s - prefill: onnx.load (0.0s) 
+   1288. 4005.0s - prefill: post: onnx.load (0.0s) 
+   1289. 4005.0s - prefill: onnx.load (0.0s) 
+   1290. 4005.0s - prefill: post: onnx.load (0.0s) 
+   1291. 4005.0s - prefill: onnx.load (0.0s) 
+   1292. 4005.0s - prefill: post: onnx.load (0.0s) 
+   1293. 4005.1s - prefill: onnx.save (0.2s) 
+   1294. 4005.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1295. 4005.1s - prefill: onnx.load (0.0s) 
+   1296. 4005.1s - prefill: post: onnx.load (0.0s) 
+   1297. 4005.1s - prefill: onnx.load (0.0s) 
+   1298. 4005.1s - prefill: post: onnx.load (0.0s) 
+   1299. 4005.1s - prefill: onnx.load (0.0s) 
+   1300. 4005.1s - prefill: post: onnx.load (0.0s) 
+   1301. 4005.2s - prefill: onnx.save (0.2s) 
+   1302. 4005.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1303. 4005.2s - prefill: onnx.load (0.0s) 
+   1304. 4005.2s - prefill: post: onnx.load (0.0s) 
+   1305. 4005.2s - prefill: onnx.load (0.0s) 
+   1306. 4005.2s - prefill: post: onnx.load (0.0s) 
+   1307. 4005.2s - prefill: onnx.load (0.0s) 
+   1308. 4005.2s - prefill: post: onnx.load (0.0s) 
+   1309. 4005.7s - prefill: onnx.save (0.2s) 
+   1310. 4005.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1311. 4005.7s - prefill: onnx.load (0.0s) 
+   1312. 4005.7s - prefill: post: onnx.load (0.0s) 
+   1313. 4005.7s - prefill: onnx.load (0.0s) 
+   1314. 4005.7s - prefill: post: onnx.load (0.0s) 
+   1315. 4005.7s - prefill: onnx.load (0.0s) 
+   1316. 4005.7s - prefill: post: onnx.load (0.0s) 
+   1317. 4005.8s - prefill: onnx.save (0.2s) 
+   1318. 4005.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1319. 4005.8s - prefill: onnx.load (0.0s) 
+   1320. 4005.8s - prefill: post: onnx.load (0.0s) 
+   1321. 4005.8s - prefill: onnx.load (0.0s) 
+   1322. 4005.8s - prefill: post: onnx.load (0.0s) 
+   1323. 4005.8s - prefill: onnx.load (0.0s) 
+   1324. 4005.8s - prefill: post: onnx.load (0.0s) 
+   1325. 4006.0s - prefill: onnx.save (0.2s) 
+   1326. 4006.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1327. 4006.0s - prefill: onnx.load (0.0s) 
+   1328. 4006.0s - prefill: post: onnx.load (0.0s) 
+   1329. 4006.0s - prefill: onnx.load (0.0s) 
+   1330. 4006.0s - prefill: post: onnx.load (0.0s) 
+   1331. 4006.0s - prefill: onnx.load (0.0s) 
+   1332. 4006.0s - prefill: post: onnx.load (0.0s) 
+   1333. 4006.4s - prefill: onnx.save (0.2s) 
+   1334. 4006.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1335. 4006.4s - prefill: onnx.load (0.0s) 
+   1336. 4006.4s - prefill: post: onnx.load (0.0s) 
+   1337. 4006.4s - prefill: onnx.load (0.0s) 
+   1338. 4006.4s - prefill: post: onnx.load (0.0s) 
+   1339. 4006.4s - prefill: onnx.load (0.0s) 
+   1340. 4006.4s - prefill: post: onnx.load (0.0s) 
+   1341. 4006.5s - prefill: onnx.save (0.2s) 
+   1342. 4006.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1343. 4006.6s - prefill: onnx.load (0.0s) 
+   1344. 4006.6s - prefill: post: onnx.load (0.0s) 
+   1345. 4006.6s - prefill: onnx.load (0.0s) 
+   1346. 4006.6s - prefill: post: onnx.load (0.0s) 
+   1347. 4006.6s - prefill: onnx.load (0.0s) 
+   1348. 4006.6s - prefill: post: onnx.load (0.0s) 
+   1349. 4006.7s - prefill: onnx.save (0.2s) 
+   1350. 4006.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1351. 4006.7s - prefill: onnx.load (0.0s) 
+   1352. 4006.7s - prefill: post: onnx.load (0.0s) 
+   1353. 4006.7s - prefill: onnx.load (0.0s) 
+   1354. 4006.7s - prefill: post: onnx.load (0.0s) 
+   1355. 4006.7s - prefill: onnx.load (0.0s) 
+   1356. 4006.7s - prefill: post: onnx.load (0.0s) 
+   1357. 4006.8s - prefill: onnx.save (0.2s) 
+   1358. 4006.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1359. 4006.8s - prefill: onnx.load (0.0s) 
+   1360. 4006.8s - prefill: post: onnx.load (0.0s) 
+   1361. 4006.8s - prefill: onnx.load (0.0s) 
+   1362. 4006.8s - prefill: post: onnx.load (0.0s) 
+   1363. 4006.8s - prefill: onnx.load (0.0s) 
+   1364. 4006.8s - prefill: post: onnx.load (0.0s) 
+   1365. 4007.3s - prefill: onnx.save (0.2s) 
+   1366. 4007.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1367. 4007.3s - prefill: onnx.load (0.0s) 
+   1368. 4007.3s - prefill: post: onnx.load (0.0s) 
+   1369. 4007.3s - prefill: onnx.load (0.0s) 
+   1370. 4007.3s - prefill: post: onnx.load (0.0s) 
+   1371. 4007.3s - prefill: onnx.load (0.0s) 
+   1372. 4007.3s - prefill: post: onnx.load (0.0s) 
+   1373. 4007.4s - prefill: onnx.save (0.2s) 
+   1374. 4007.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1375. 4007.4s - prefill: onnx.load (0.0s) 
+   1376. 4007.4s - prefill: post: onnx.load (0.0s) 
+   1377. 4007.4s - prefill: onnx.load (0.0s) 
+   1378. 4007.4s - prefill: post: onnx.load (0.0s) 
+   1379. 4007.4s - prefill: onnx.load (0.0s) 
+   1380. 4007.4s - prefill: post: onnx.load (0.0s) 
+   1381. 4007.5s - prefill: onnx.save (0.2s) 
+   1382. 4007.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1383. 4007.5s - prefill: onnx.load (0.0s) 
+   1384. 4007.5s - prefill: post: onnx.load (0.0s) 
+   1385. 4007.5s - prefill: onnx.load (0.0s) 
+   1386. 4007.5s - prefill: post: onnx.load (0.0s) 
+   1387. 4007.5s - prefill: onnx.load (0.0s) 
+   1388. 4007.5s - prefill: post: onnx.load (0.0s) 
+   1389. 4007.6s - prefill: onnx.save (0.2s) 
+   1390. 4007.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1391. 4007.7s - prefill: onnx.load (0.0s) 
+   1392. 4007.7s - prefill: post: onnx.load (0.0s) 
+   1393. 4007.7s - prefill: onnx.load (0.0s) 
+   1394. 4007.7s - prefill: post: onnx.load (0.0s) 
+   1395. 4007.7s - prefill: onnx.load (0.0s) 
+   1396. 4007.7s - prefill: post: onnx.load (0.0s) 
+   1397. 4008.1s - prefill: onnx.save (0.2s) 
+   1398. 4008.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1399. 4008.1s - prefill: onnx.load (0.0s) 
+   1400. 4008.1s - prefill: post: onnx.load (0.0s) 
+   1401. 4008.1s - prefill: onnx.load (0.0s) 
+   1402. 4008.1s - prefill: post: onnx.load (0.0s) 
+   1403. 4008.1s - prefill: onnx.load (0.0s) 
+   1404. 4008.1s - prefill: post: onnx.load (0.0s) 
+   1405. 4008.3s - prefill: onnx.save (0.2s) 
+   1406. 4008.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1407. 4008.3s - prefill: onnx.load (0.0s) 
+   1408. 4008.3s - prefill: post: onnx.load (0.0s) 
+   1409. 4008.3s - prefill: onnx.load (0.0s) 
+   1410. 4008.3s - prefill: post: onnx.load (0.0s) 
+   1411. 4008.3s - prefill: onnx.load (0.0s) 
+   1412. 4008.3s - prefill: post: onnx.load (0.0s) 
+   1413. 4008.4s - prefill: onnx.save (0.2s) 
+   1414. 4008.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1415. 4008.4s - prefill: onnx.load (0.0s) 
+   1416. 4008.4s - prefill: post: onnx.load (0.0s) 
+   1417. 4008.4s - prefill: onnx.load (0.0s) 
+   1418. 4008.4s - prefill: post: onnx.load (0.0s) 
+   1419. 4008.4s - prefill: onnx.load (0.0s) 
+   1420. 4008.4s - prefill: post: onnx.load (0.0s) 
+   1421. 4008.9s - prefill: onnx.save (0.2s) 
+   1422. 4008.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1423. 4008.9s - prefill: onnx.load (0.0s) 
+   1424. 4008.9s - prefill: post: onnx.load (0.0s) 
+   1425. 4008.9s - prefill: onnx.load (0.0s) 
+   1426. 4008.9s - prefill: post: onnx.load (0.0s) 
+   1427. 4008.9s - prefill: onnx.load (0.0s) 
+   1428. 4008.9s - prefill: post: onnx.load (0.0s) 
+   1429. 4009.0s - prefill: onnx.save (0.2s) 
+   1430. 4009.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1431. 4009.0s - prefill: onnx.load (0.0s) 
+   1432. 4009.0s - prefill: post: onnx.load (0.0s) 
+   1433. 4009.0s - prefill: onnx.load (0.0s) 
+   1434. 4009.0s - prefill: post: onnx.load (0.0s) 
+   1435. 4009.0s - prefill: onnx.load (0.0s) 
+   1436. 4009.0s - prefill: post: onnx.load (0.0s) 
+   1437. 4009.1s - prefill: onnx.save (0.2s) 
+   1438. 4009.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1439. 4009.1s - prefill: onnx.load (0.0s) 
+   1440. 4009.1s - prefill: post: onnx.load (0.0s) 
+   1441. 4009.1s - prefill: onnx.load (0.0s) 
+   1442. 4009.1s - prefill: post: onnx.load (0.0s) 
+   1443. 4009.1s - prefill: onnx.load (0.0s) 
+   1444. 4009.1s - prefill: post: onnx.load (0.0s) 
+   1445. 4009.2s - prefill: onnx.save (0.2s) 
+   1446. 4009.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1447. 4009.2s - prefill: onnx.load (0.0s) 
+   1448. 4009.2s - prefill: post: onnx.load (0.0s) 
+   1449. 4009.2s - prefill: onnx.load (0.0s) 
+   1450. 4009.2s - prefill: post: onnx.load (0.0s) 
+   1451. 4009.2s - prefill: onnx.load (0.0s) 
+   1452. 4009.2s - prefill: post: onnx.load (0.0s) 
+   1453. 4009.7s - prefill: onnx.save (0.2s) 
+   1454. 4009.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1455. 4009.7s - prefill: onnx.load (0.0s) 
+   1456. 4009.7s - prefill: post: onnx.load (0.0s) 
+   1457. 4009.7s - prefill: onnx.load (0.0s) 
+   1458. 4009.7s - prefill: post: onnx.load (0.0s) 
+   1459. 4009.7s - prefill: onnx.load (0.0s) 
+   1460. 4009.7s - prefill: post: onnx.load (0.0s) 
+   1461. 4009.8s - prefill: onnx.save (0.2s) 
+   1462. 4009.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1463. 4009.9s - prefill: onnx.load (0.0s) 
+   1464. 4009.9s - prefill: post: onnx.load (0.0s) 
+   1465. 4009.9s - prefill: onnx.load (0.0s) 
+   1466. 4009.9s - prefill: post: onnx.load (0.0s) 
+   1467. 4009.9s - prefill: onnx.load (0.0s) 
+   1468. 4009.9s - prefill: post: onnx.load (0.0s) 
+   1469. 4010.0s - prefill: onnx.save (0.2s) 
+   1470. 4010.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1471. 4010.0s - prefill: onnx.load (0.0s) 
+   1472. 4010.0s - prefill: post: onnx.load (0.0s) 
+   1473. 4010.0s - prefill: onnx.load (0.0s) 
+   1474. 4010.0s - prefill: post: onnx.load (0.0s) 
+   1475. 4010.0s - prefill: onnx.load (0.0s) 
+   1476. 4010.0s - prefill: post: onnx.load (0.0s) 
+   1477. 4010.1s - prefill: onnx.save (0.2s) 
+   1478. 4010.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1479. 4010.1s - prefill: onnx.load (0.0s) 
+   1480. 4010.1s - prefill: post: onnx.load (0.0s) 
+   1481. 4010.1s - prefill: onnx.load (0.0s) 
+   1482. 4010.1s - prefill: post: onnx.load (0.0s) 
+   1483. 4010.1s - prefill: onnx.load (0.0s) 
+   1484. 4010.1s - prefill: post: onnx.load (0.0s) 
+   1485. 4010.6s - prefill: onnx.save (0.2s) 
+   1486. 4010.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1487. 4010.6s - prefill: onnx.load (0.0s) 
+   1488. 4010.6s - prefill: post: onnx.load (0.0s) 
+   1489. 4010.6s - prefill: onnx.load (0.0s) 
+   1490. 4010.6s - prefill: post: onnx.load (0.0s) 
+   1491. 4010.6s - prefill: onnx.load (0.0s) 
+   1492. 4010.6s - prefill: post: onnx.load (0.0s) 
+   1493. 4010.7s - prefill: onnx.save (0.2s) 
+   1494. 4010.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1495. 4010.7s - prefill: onnx.load (0.0s) 
+   1496. 4010.7s - prefill: post: onnx.load (0.0s) 
+   1497. 4010.7s - prefill: onnx.load (0.0s) 
+   1498. 4010.7s - prefill: post: onnx.load (0.0s) 
+   1499. 4010.7s - prefill: onnx.load (0.0s) 
+   1500. 4010.7s - prefill: post: onnx.load (0.0s) 
+   1501. 4010.8s - prefill: onnx.save (0.2s) 
+   1502. 4010.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1503. 4010.8s - prefill: onnx.load (0.0s) 
+   1504. 4010.8s - prefill: post: onnx.load (0.0s) 
+   1505. 4010.8s - prefill: onnx.load (0.0s) 
+   1506. 4010.8s - prefill: post: onnx.load (0.0s) 
+   1507. 4010.8s - prefill: onnx.load (0.0s) 
+   1508. 4010.8s - prefill: post: onnx.load (0.0s) 
+   1509. 4011.0s - prefill: onnx.save (0.2s) 
+   1510. 4011.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1511. 4011.0s - prefill: onnx.load (0.0s) 
+   1512. 4011.0s - prefill: post: onnx.load (0.0s) 
+   1513. 4011.0s - prefill: onnx.load (0.0s) 
+   1514. 4011.0s - prefill: post: onnx.load (0.0s) 
+   1515. 4011.0s - prefill: onnx.load (0.0s) 
+   1516. 4011.0s - prefill: post: onnx.load (0.0s) 
+   1517. 4011.4s - prefill: onnx.save (0.2s) 
+   1518. 4011.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1519. 4011.5s - prefill: onnx.load (0.0s) 
+   1520. 4011.5s - prefill: post: onnx.load (0.0s) 
+   1521. 4011.5s - prefill: onnx.load (0.0s) 
+   1522. 4011.5s - prefill: post: onnx.load (0.0s) 
+   1523. 4011.5s - prefill: onnx.load (0.0s) 
+   1524. 4011.5s - prefill: post: onnx.load (0.0s) 
+   1525. 4011.6s - prefill: onnx.save (0.2s) 
+   1526. 4011.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1527. 4011.6s - prefill: onnx.load (0.0s) 
+   1528. 4011.6s - prefill: post: onnx.load (0.0s) 
+   1529. 4011.6s - prefill: onnx.load (0.0s) 
+   1530. 4011.6s - prefill: post: onnx.load (0.0s) 
+   1531. 4011.6s - prefill: onnx.load (0.0s) 
+   1532. 4011.6s - prefill: post: onnx.load (0.0s) 
+   1533. 4011.7s - prefill: onnx.save (0.2s) 
+   1534. 4011.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1535. 4011.7s - prefill: onnx.load (0.0s) 
+   1536. 4011.7s - prefill: post: onnx.load (0.0s) 
+   1537. 4011.7s - prefill: onnx.load (0.0s) 
+   1538. 4011.7s - prefill: post: onnx.load (0.0s) 
+   1539. 4011.7s - prefill: onnx.load (0.0s) 
+   1540. 4011.7s - prefill: post: onnx.load (0.0s) 
+   1541. 4012.2s - prefill: onnx.save (0.2s) 
+   1542. 4012.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1543. 4012.2s - prefill: onnx.load (0.0s) 
+   1544. 4012.2s - prefill: post: onnx.load (0.0s) 
+   1545. 4012.2s - prefill: onnx.load (0.0s) 
+   1546. 4012.2s - prefill: post: onnx.load (0.0s) 
+   1547. 4012.2s - prefill: onnx.load (0.0s) 
+   1548. 4012.2s - prefill: post: onnx.load (0.0s) 
+   1549. 4012.3s - prefill: onnx.save (0.2s) 
+   1550. 4012.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1551. 4012.3s - prefill: onnx.load (0.0s) 
+   1552. 4012.3s - prefill: post: onnx.load (0.0s) 
+   1553. 4012.3s - prefill: onnx.load (0.0s) 
+   1554. 4012.3s - prefill: post: onnx.load (0.0s) 
+   1555. 4012.3s - prefill: onnx.load (0.0s) 
+   1556. 4012.3s - prefill: post: onnx.load (0.0s) 
+   1557. 4012.4s - prefill: onnx.save (0.2s) 
+   1558. 4012.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1559. 4012.4s - prefill: onnx.load (0.0s) 
+   1560. 4012.4s - prefill: post: onnx.load (0.0s) 
+   1561. 4012.4s - prefill: onnx.load (0.0s) 
+   1562. 4012.4s - prefill: post: onnx.load (0.0s) 
+   1563. 4012.4s - prefill: onnx.load (0.0s) 
+   1564. 4012.4s - prefill: post: onnx.load (0.0s) 
+   1565. 4012.5s - prefill: onnx.save (0.2s) 
+   1566. 4012.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1567. 4012.6s - prefill: onnx.load (0.0s) 
+   1568. 4012.6s - prefill: post: onnx.load (0.0s) 
+   1569. 4012.6s - prefill: onnx.load (0.0s) 
+   1570. 4012.6s - prefill: post: onnx.load (0.0s) 
+   1571. 4012.6s - prefill: onnx.load (0.0s) 
+   1572. 4012.6s - prefill: post: onnx.load (0.0s) 
+   1573. 4013.0s - prefill: onnx.save (0.2s) 
+   1574. 4013.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1575. 4013.1s - prefill: onnx.load (0.0s) 
+   1576. 4013.1s - prefill: post: onnx.load (0.0s) 
+   1577. 4013.1s - prefill: onnx.load (0.0s) 
+   1578. 4013.1s - prefill: post: onnx.load (0.0s) 
+   1579. 4013.1s - prefill: onnx.load (0.0s) 
+   1580. 4013.1s - prefill: post: onnx.load (0.0s) 
+   1581. 4013.2s - prefill: onnx.save (0.2s) 
+   1582. 4013.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1583. 4013.2s - prefill: onnx.load (0.0s) 
+   1584. 4013.2s - prefill: post: onnx.load (0.0s) 
+   1585. 4013.2s - prefill: onnx.load (0.0s) 
+   1586. 4013.2s - prefill: post: onnx.load (0.0s) 
+   1587. 4013.2s - prefill: onnx.load (0.0s) 
+   1588. 4013.2s - prefill: post: onnx.load (0.0s) 
+   1589. 4013.3s - prefill: onnx.save (0.2s) 
+   1590. 4013.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1591. 4013.3s - prefill: onnx.load (0.0s) 
+   1592. 4013.3s - prefill: post: onnx.load (0.0s) 
+   1593. 4013.3s - prefill: onnx.load (0.0s) 
+   1594. 4013.3s - prefill: post: onnx.load (0.0s) 
+   1595. 4013.3s - prefill: onnx.load (0.0s) 
+   1596. 4013.3s - prefill: post: onnx.load (0.0s) 
+   1597. 4013.4s - prefill: onnx.save (0.2s) 
+   1598. 4013.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1599. 4013.4s - prefill: onnx.load (0.0s) 
+   1600. 4013.4s - prefill: post: onnx.load (0.0s) 
+   1601. 4013.4s - prefill: onnx.load (0.0s) 
+   1602. 4013.4s - prefill: post: onnx.load (0.0s) 
+   1603. 4013.4s - prefill: onnx.load (0.0s) 
+   1604. 4013.4s - prefill: post: onnx.load (0.0s) 
+   1605. 4013.9s - prefill: onnx.save (0.2s) 
+   1606. 4013.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1607. 4013.9s - prefill: onnx.load (0.0s) 
+   1608. 4013.9s - prefill: post: onnx.load (0.0s) 
+   1609. 4013.9s - prefill: onnx.load (0.0s) 
+   1610. 4013.9s - prefill: post: onnx.load (0.0s) 
+   1611. 4013.9s - prefill: onnx.load (0.0s) 
+   1612. 4013.9s - prefill: post: onnx.load (0.0s) 
+   1613. 4014.0s - prefill: onnx.save (0.2s) 
+   1614. 4014.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1615. 4014.1s - prefill: onnx.load (0.0s) 
+   1616. 4014.1s - prefill: post: onnx.load (0.0s) 
+   1617. 4014.1s - prefill: onnx.load (0.0s) 
+   1618. 4014.1s - prefill: post: onnx.load (0.0s) 
+   1619. 4014.1s - prefill: onnx.load (0.0s) 
+   1620. 4014.1s - prefill: post: onnx.load (0.0s) 
+   1621. 4014.2s - prefill: onnx.save (0.2s) 
+   1622. 4014.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1623. 4014.2s - prefill: onnx.load (0.0s) 
+   1624. 4014.2s - prefill: post: onnx.load (0.0s) 
+   1625. 4014.2s - prefill: onnx.load (0.0s) 
+   1626. 4014.2s - prefill: post: onnx.load (0.0s) 
+   1627. 4014.2s - prefill: onnx.load (0.0s) 
+   1628. 4014.2s - prefill: post: onnx.load (0.0s) 
+   1629. 4014.3s - prefill: onnx.save (0.2s) 
+   1630. 4014.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1631. 4014.3s - prefill: onnx.load (0.0s) 
+   1632. 4014.3s - prefill: post: onnx.load (0.0s) 
+   1633. 4014.3s - prefill: onnx.load (0.0s) 
+   1634. 4014.3s - prefill: post: onnx.load (0.0s) 
+   1635. 4014.3s - prefill: onnx.load (0.0s) 
+   1636. 4014.3s - prefill: post: onnx.load (0.0s) 
+   1637. 4014.8s - prefill: onnx.save (0.2s) 
+   1638. 4014.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1639. 4014.8s - prefill: onnx.load (0.0s) 
+   1640. 4014.8s - prefill: post: onnx.load (0.0s) 
+   1641. 4014.8s - prefill: onnx.load (0.0s) 
+   1642. 4014.8s - prefill: post: onnx.load (0.0s) 
+   1643. 4014.8s - prefill: onnx.load (0.0s) 
+   1644. 4014.8s - prefill: post: onnx.load (0.0s) 
+   1645. 4014.9s - prefill: onnx.save (0.2s) 
+   1646. 4014.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1647. 4014.9s - prefill: onnx.load (0.0s) 
+   1648. 4014.9s - prefill: post: onnx.load (0.0s) 
+   1649. 4014.9s - prefill: onnx.load (0.0s) 
+   1650. 4014.9s - prefill: post: onnx.load (0.0s) 
+   1651. 4014.9s - prefill: onnx.load (0.0s) 
+   1652. 4014.9s - prefill: post: onnx.load (0.0s) 
+   1653. 4015.0s - prefill: onnx.save (0.2s) 
+   1654. 4015.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1655. 4015.0s - prefill: onnx.load (0.0s) 
+   1656. 4015.0s - prefill: post: onnx.load (0.0s) 
+   1657. 4015.0s - prefill: onnx.load (0.0s) 
+   1658. 4015.0s - prefill: post: onnx.load (0.0s) 
+   1659. 4015.0s - prefill: onnx.load (0.0s) 
+   1660. 4015.0s - prefill: post: onnx.load (0.0s) 
+   1661. 4015.2s - prefill: onnx.save (0.2s) 
+   1662. 4015.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1663. 4015.2s - prefill: onnx.load (0.0s) 
+   1664. 4015.2s - prefill: post: onnx.load (0.0s) 
+   1665. 4015.2s - prefill: onnx.load (0.0s) 
+   1666. 4015.2s - prefill: post: onnx.load (0.0s) 
+   1667. 4015.2s - prefill: onnx.load (0.0s) 
+   1668. 4015.2s - prefill: post: onnx.load (0.0s) 
+   1669. 4015.6s - prefill: onnx.save (0.2s) 
+   1670. 4015.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1671. 4015.7s - prefill: onnx.load (0.0s) 
+   1672. 4015.7s - prefill: post: onnx.load (0.0s) 
+   1673. 4015.7s - prefill: onnx.load (0.0s) 
+   1674. 4015.7s - prefill: post: onnx.load (0.0s) 
+   1675. 4015.7s - prefill: onnx.load (0.0s) 
+   1676. 4015.7s - prefill: post: onnx.load (0.0s) 
+   1677. 4015.8s - prefill: onnx.save (0.2s) 
+   1678. 4015.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1679. 4015.8s - prefill: onnx.load (0.0s) 
+   1680. 4015.8s - prefill: post: onnx.load (0.0s) 
+   1681. 4015.8s - prefill: onnx.load (0.0s) 
+   1682. 4015.8s - prefill: post: onnx.load (0.0s) 
+   1683. 4015.8s - prefill: onnx.load (0.0s) 
+   1684. 4015.8s - prefill: post: onnx.load (0.0s) 
+   1685. 4015.9s - prefill: onnx.save (0.2s) 
+   1686. 4015.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1687. 4015.9s - prefill: onnx.load (0.0s) 
+   1688. 4015.9s - prefill: post: onnx.load (0.0s) 
+   1689. 4015.9s - prefill: onnx.load (0.0s) 
+   1690. 4015.9s - prefill: post: onnx.load (0.0s) 
+   1691. 4015.9s - prefill: onnx.load (0.0s) 
+   1692. 4015.9s - prefill: post: onnx.load (0.0s) 
+   1693. 4016.4s - prefill: onnx.save (0.2s) 
+   1694. 4016.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1695. 4016.4s - prefill: onnx.load (0.0s) 
+   1696. 4016.4s - prefill: post: onnx.load (0.0s) 
+   1697. 4016.4s - prefill: onnx.load (0.0s) 
+   1698. 4016.4s - prefill: post: onnx.load (0.0s) 
+   1699. 4016.4s - prefill: onnx.load (0.0s) 
+   1700. 4016.4s - prefill: post: onnx.load (0.0s) 
+   1701. 4016.5s - prefill: onnx.save (0.2s) 
+   1702. 4016.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1703. 4016.5s - prefill: onnx.load (0.0s) 
+   1704. 4016.5s - prefill: post: onnx.load (0.0s) 
+   1705. 4016.5s - prefill: onnx.load (0.0s) 
+   1706. 4016.5s - prefill: post: onnx.load (0.0s) 
+   1707. 4016.5s - prefill: onnx.load (0.0s) 
+   1708. 4016.5s - prefill: post: onnx.load (0.0s) 
+   1709. 4016.6s - prefill: onnx.save (0.2s) 
+   1710. 4016.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1711. 4016.6s - prefill: onnx.load (0.0s) 
+   1712. 4016.6s - prefill: post: onnx.load (0.0s) 
+   1713. 4016.6s - prefill: onnx.load (0.0s) 
+   1714. 4016.6s - prefill: post: onnx.load (0.0s) 
+   1715. 4016.6s - prefill: onnx.load (0.0s) 
+   1716. 4016.6s - prefill: post: onnx.load (0.0s) 
+   1717. 4016.7s - prefill: onnx.save (0.2s) 
+   1718. 4016.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1719. 4016.8s - prefill: onnx.load (0.0s) 
+   1720. 4016.8s - prefill: post: onnx.load (0.0s) 
+   1721. 4016.8s - prefill: onnx.load (0.0s) 
+   1722. 4016.8s - prefill: post: onnx.load (0.0s) 
+   1723. 4016.8s - prefill: onnx.load (0.0s) 
+   1724. 4016.8s - prefill: post: onnx.load (0.0s) 
+   1725. 4017.2s - prefill: onnx.save (0.2s) 
+   1726. 4017.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1727. 4017.2s - prefill: onnx.load (0.0s) 
+   1728. 4017.2s - prefill: post: onnx.load (0.0s) 
+   1729. 4017.2s - prefill: onnx.load (0.0s) 
+   1730. 4017.2s - prefill: post: onnx.load (0.0s) 
+   1731. 4017.2s - prefill: onnx.load (0.0s) 
+   1732. 4017.2s - prefill: post: onnx.load (0.0s) 
+   1733. 4017.4s - prefill: onnx.save (0.2s) 
+   1734. 4017.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1735. 4017.4s - prefill: onnx.load (0.0s) 
+   1736. 4017.4s - prefill: post: onnx.load (0.0s) 
+   1737. 4017.4s - prefill: onnx.load (0.0s) 
+   1738. 4017.4s - prefill: post: onnx.load (0.0s) 
+   1739. 4017.4s - prefill: onnx.load (0.0s) 
+   1740. 4017.4s - prefill: post: onnx.load (0.0s) 
+   1741. 4017.5s - prefill: onnx.save (0.2s) 
+   1742. 4017.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1743. 4017.5s - prefill: onnx.load (0.0s) 
+   1744. 4017.5s - prefill: post: onnx.load (0.0s) 
+   1745. 4017.5s - prefill: onnx.load (0.0s) 
+   1746. 4017.5s - prefill: post: onnx.load (0.0s) 
+   1747. 4017.5s - prefill: onnx.load (0.0s) 
+   1748. 4017.5s - prefill: post: onnx.load (0.0s) 
+   1749. 4017.6s - prefill: onnx.save (0.2s) 
+   1750. 4017.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1751. 4017.6s - prefill: onnx.load (0.0s) 
+   1752. 4017.6s - prefill: post: onnx.load (0.0s) 
+   1753. 4017.6s - prefill: onnx.load (0.0s) 
+   1754. 4017.6s - prefill: post: onnx.load (0.0s) 
+   1755. 4017.6s - prefill: onnx.load (0.0s) 
+   1756. 4017.6s - prefill: post: onnx.load (0.0s) 
+   1757. 4018.1s - prefill: onnx.save (0.2s) 
+   1758. 4018.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1759. 4018.1s - prefill: onnx.load (0.0s) 
+   1760. 4018.1s - prefill: post: onnx.load (0.0s) 
+   1761. 4018.1s - prefill: onnx.load (0.0s) 
+   1762. 4018.1s - prefill: onnx.load (0.0s) 
+   1763. 4018.1s - prefill: onnx.load (0.0s) 
+   1764. 4018.1s - prefill: onnx.load (0.0s) 
+   1765. 4018.1s - prefill: post: onnx.load (0.0s) 
+   1766. 4018.1s - prefill: post: onnx.load (0.0s) 
+   1767. 4018.1s - prefill: onnx.load (0.0s) 
+   1768. 4018.1s - prefill: onnx.load (0.0s) 
+   1769. 4018.1s - prefill: onnx.load (0.0s) 
+   1770. 4018.1s - prefill: post: onnx.load (0.0s) 
+   1771. 4018.2s - prefill: post: onnx.load (0.0s) 
+   1772. 4018.2s - prefill: onnx.load (0.0s) 
+   1773. 4018.2s - prefill: post: onnx.load (0.0s) 
+   1774. 4018.2s - prefill: post: onnx.load (0.0s) 
+   1775. 4018.2s - prefill: post: onnx.load (0.0s) 
+   1776. 4018.2s - prefill: post: onnx.load (0.0s) 
+   1777. 4054.3s - prefill: onnx.save (0.2s) 
+   1778. 4076.9s - prefill: onnx.save (0.2s) 
+   1779. 4093.3s - prefill: onnx.save (0.2s) 
+   1780. 4093.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1781. 4098.4s - prefill: onnx.save (0.2s) 
+   1782. 4098.4s - prefill: onnx.save (0.2s) 
+   1783. 4098.4s - prefill: onnx.save (0.2s) 
+   1784. 4101.1s - prefill: onnx.save (0.2s) 
+   1785. 4103.1s - prefill: onnx.save (0.2s) 
+   1786. 4174.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1787. 4177.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1788. 4184.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1789. 4189.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1790. 4189.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1791. 4190.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1792. 4190.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1793. 4197.5s - prefill: onnx.load (0.0s) 
+   1794. 4197.5s - prefill: onnx.load (0.0s) 
+   1795. 4197.6s - prefill: onnx.load (0.0s) 
+   1796. 4197.6s - prefill: onnx.load (0.0s) 
+   1797. 4197.6s - prefill: post: onnx.load (0.0s) 
+   1798. 4197.6s - prefill: post: onnx.load (0.0s) 
+   1799. 4197.6s - prefill: onnx.load (0.0s) 
+   1800. 4197.6s - prefill: onnx.load (0.0s) 
+   1801. 4197.6s - prefill: post: onnx.load (0.0s) 
+   1802. 4197.6s - prefill: post: onnx.load (0.0s) 
+   1803. 4197.6s - prefill: onnx.load (0.0s) 
+   1804. 4197.6s - prefill: onnx.load (0.0s) 
+   1805. 4197.6s - prefill: post: onnx.load (0.0s) 
+   1806. 4197.6s - prefill: post: onnx.load (0.0s) 
+   1807. 4197.7s - prefill: post: onnx.load (0.0s) 
+   1808. 4197.7s - prefill: post: onnx.load (0.0s) 
+   1809. 4265.6s - prefill: onnx.save (0.2s) 
+   1810. 4268.0s - prefill: onnx.save (0.2s) 
+   1811. 4268.9s - prefill: onnx.save (0.2s) 
+   1812. 4269.0s - prefill: onnx.save (0.2s) 
+   1813. 4270.1s - prefill: onnx.save (0.2s) 
+   1814. 4288.8s - prefill: onnx.save (0.2s) 
+   1815. 4288.9s - prefill: onnx.save (0.2s) 
+   1816. 4288.9s - prefill: onnx.save (0.2s) 
+   1817. 4364.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1818. 4365.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1819. 4366.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1820. 4392.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1821. 4395.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1822. 4398.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1823. 4399.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1824. 4400.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1825. 4406.7s - prefill: onnx.load (0.0s) 
+   1826. 4406.7s - prefill: onnx.load (0.0s) 
+   1827. 4406.7s - prefill: onnx.load (0.0s) 
+   1828. 4406.7s - prefill: post: onnx.load (0.0s) 
+   1829. 4406.7s - prefill: onnx.load (0.0s) 
+   1830. 4406.7s - prefill: post: onnx.load (0.0s) 
+   1831. 4406.7s - prefill: post: onnx.load (0.0s) 
+   1832. 4406.7s - prefill: onnx.load (0.0s) 
+   1833. 4406.7s - prefill: onnx.load (0.0s) 
+   1834. 4406.7s - prefill: post: onnx.load (0.0s) 
+   1835. 4406.7s - prefill: onnx.load (0.0s) 
+   1836. 4406.7s - prefill: post: onnx.load (0.0s) 
+   1837. 4406.7s - prefill: post: onnx.load (0.0s) 
+   1838. 4406.7s - prefill: onnx.load (0.0s) 
+   1839. 4406.7s - prefill: post: onnx.load (0.0s) 
+   1840. 4406.8s - prefill: post: onnx.load (0.0s) 
+   1841. 4482.8s - prefill: onnx.save (0.2s) 
+   1842. 4492.0s - prefill: onnx.save (0.2s) 
+   1843. 4498.6s - prefill: onnx.save (0.2s) 
+   1844. 4499.9s - prefill: onnx.save (0.2s) 
+   1845. 4499.9s - prefill: onnx.save (0.2s) 
+   1846. 4499.9s - prefill: onnx.save (0.2s) 
+   1847. 4499.9s - prefill: onnx.save (0.2s) 
+   1848. 4511.5s - prefill: onnx.save (0.2s) 
+   1849. 4557.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1850. 4563.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1851. 4563.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1852. 4565.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1853. 4565.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1854. 4568.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1855. 4569.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1856. 4571.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1857. 4577.4s - prefill: onnx.load (0.0s) 
+   1858. 4577.4s - prefill: onnx.load (0.0s) 
+   1859. 4577.4s - prefill: post: onnx.load (0.0s) 
+   1860. 4577.4s - prefill: onnx.load (0.0s) 
+   1861. 4577.4s - prefill: onnx.load (0.0s) 
+   1862. 4577.4s - prefill: post: onnx.load (0.0s) 
+   1863. 4577.4s - prefill: onnx.load (0.0s) 
+   1864. 4577.4s - prefill: onnx.load (0.0s) 
+   1865. 4577.4s - prefill: post: onnx.load (0.0s) 
+   1866. 4577.4s - prefill: onnx.load (0.0s) 
+   1867. 4577.4s - prefill: post: onnx.load (0.0s) 
+   1868. 4577.4s - prefill: post: onnx.load (0.0s) 
+   1869. 4577.5s - prefill: onnx.load (0.0s) 
+   1870. 4577.5s - prefill: post: onnx.load (0.0s) 
+   1871. 4577.5s - prefill: post: onnx.load (0.0s) 
+   1872. 4577.5s - prefill: post: onnx.load (0.0s) 
+   1873. 4668.9s - prefill: onnx.save (0.2s) 
+   1874. 4669.9s - prefill: onnx.save (0.2s) 
+   1875. 4669.9s - prefill: onnx.save (0.2s) 
+   1876. 4670.0s - prefill: onnx.save (0.2s) 
+   1877. 4675.9s - prefill: onnx.save (0.2s) 
+   1878. 4677.0s - prefill: onnx.save (0.2s) 
+   1879. 4679.1s - prefill: onnx.save (0.2s) 
+   1880. 4679.2s - prefill: onnx.save (0.2s) 
+   1881. 4782.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1882. 4783.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1883. 4784.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1884. 4792.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1885. 4795.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1886. 4795.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1887. 4796.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1888. 4797.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1889. 4803.2s - prefill: onnx.load (0.0s) 
+   1890. 4803.2s - prefill: onnx.load (0.0s) 
+   1891. 4803.2s - prefill: onnx.load (0.0s) 
+   1892. 4803.2s - prefill: onnx.load (0.0s) 
+   1893. 4803.2s - prefill: post: onnx.load (0.0s) 
+   1894. 4803.3s - prefill: onnx.load (0.0s) 
+   1895. 4803.3s - prefill: post: onnx.load (0.0s) 
+   1896. 4803.3s - prefill: onnx.load (0.0s) 
+   1897. 4803.3s - prefill: post: onnx.load (0.0s) 
+   1898. 4803.3s - prefill: onnx.load (0.0s) 
+   1899. 4803.3s - prefill: post: onnx.load (0.0s) 
+   1900. 4803.3s - prefill: onnx.load (0.0s) 
+   1901. 4803.3s - prefill: post: onnx.load (0.0s) 
+   1902. 4803.3s - prefill: post: onnx.load (0.0s) 
+   1903. 4803.3s - prefill: post: onnx.load (0.0s) 
+   1904. 4803.4s - prefill: post: onnx.load (0.0s) 
+   1905. 4864.2s - prefill: onnx.save (0.2s) 
+   1906. 4864.2s - prefill: onnx.save (0.2s) 
+   1907. 4872.6s - prefill: onnx.save (0.2s) 
+   1908. 4882.7s - prefill: onnx.save (0.2s) 
+   1909. 4900.1s - prefill: onnx.save (0.2s) 
+   1910. 4901.3s - prefill: onnx.save (0.2s) 
+   1911. 4902.4s - prefill: onnx.save (0.2s) 
+   1912. 4903.7s - prefill: onnx.save (0.2s) 
+   1913. 4906.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1914. 4911.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1915. 4915.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1916. 4916.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1917. 4946.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1918. 4950.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1919. 4954.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1920. 4956.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1921. 4963.0s - prefill: onnx.load (0.0s) 
+   1922. 4963.0s - prefill: onnx.load (0.0s) 
+   1923. 4963.0s - prefill: post: onnx.load (0.0s) 
+   1924. 4963.0s - prefill: onnx.load (0.0s) 
+   1925. 4963.0s - prefill: onnx.load (0.0s) 
+   1926. 4963.0s - prefill: onnx.load (0.0s) 
+   1927. 4963.0s - prefill: onnx.load (0.0s) 
+   1928. 4963.0s - prefill: post: onnx.load (0.0s) 
+   1929. 4963.0s - prefill: post: onnx.load (0.0s) 
+   1930. 4963.0s - prefill: post: onnx.load (0.0s) 
+   1931. 4963.0s - prefill: post: onnx.load (0.0s) 
+   1932. 4963.0s - prefill: onnx.load (0.0s) 
+   1933. 4963.0s - prefill: post: onnx.load (0.0s) 
+   1934. 4963.0s - prefill: onnx.load (0.0s) 
+   1935. 4963.1s - prefill: post: onnx.load (0.0s) 
+   1936. 4963.1s - prefill: post: onnx.load (0.0s) 
+   1937. 5025.3s - prefill: onnx.save (0.2s) 
+   1938. 5031.9s - prefill: onnx.save (0.2s) 
+   1939. 5037.9s - prefill: onnx.save (0.2s) 
+   1940. 5059.8s - prefill: onnx.save (0.2s) 
+   1941. 5062.0s - prefill: onnx.save (0.2s) 
+   1942. 5065.3s - prefill: onnx.save (0.2s) 
+   1943. 5065.3s - prefill: onnx.save (0.2s) 
+   1944. 5065.3s - prefill: onnx.save (0.2s) 
+   1945. 5071.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1946. 5072.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1947. 5138.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1948. 5177.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1949. 5193.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1950. 5200.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1951. 5202.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1952. 5203.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1953. 5209.9s - prefill: onnx.load (0.0s) 
+   1954. 5209.9s - prefill: post: onnx.load (0.0s) 
+   1955. 5209.9s - prefill: onnx.load (0.0s) 
+   1956. 5209.9s - prefill: onnx.load (0.0s) 
+   1957. 5209.9s - prefill: onnx.load (0.0s) 
+   1958. 5209.9s - prefill: onnx.load (0.0s) 
+   1959. 5209.9s - prefill: onnx.load (0.0s) 
+   1960. 5209.9s - prefill: onnx.load (0.0s) 
+   1961. 5209.9s - prefill: onnx.load (0.0s) 
+   1962. 5209.9s - prefill: post: onnx.load (0.0s) 
+   1963. 5209.9s - prefill: post: onnx.load (0.0s) 
+   1964. 5209.9s - prefill: post: onnx.load (0.0s) 
+   1965. 5210.0s - prefill: post: onnx.load (0.0s) 
+   1966. 5210.0s - prefill: post: onnx.load (0.0s) 
+   1967. 5210.0s - prefill: post: onnx.load (0.0s) 
+   1968. 5210.0s - prefill: post: onnx.load (0.0s) 
+   1969. 5269.3s - prefill: onnx.save (0.2s) 
+   1970. 5294.0s - prefill: onnx.save (0.2s) 
+   1971. 5304.3s - prefill: onnx.save (0.2s) 
+   1972. 5305.3s - prefill: onnx.save (0.2s) 
+   1973. 5305.3s - prefill: onnx.save (0.2s) 
+   1974. 5305.4s - prefill: onnx.save (0.2s) 
+   1975. 5306.4s - prefill: onnx.save (0.2s) 
+   1976. 5307.5s - prefill: onnx.save (0.2s) 
+   1977. 5311.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1978. 5345.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1979. 5380.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1980. 5390.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1981. 5392.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1982. 5393.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1983. 5394.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1984. 5395.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   1985. 5401.8s - prefill: onnx.load (0.0s) 
+   1986. 5401.8s - prefill: onnx.load (0.0s) 
+   1987. 5401.8s - prefill: post: onnx.load (0.0s) 
+   1988. 5401.8s - prefill: post: onnx.load (0.0s) 
+   1989. 5401.8s - prefill: onnx.load (0.0s) 
+   1990. 5401.8s - prefill: onnx.load (0.0s) 
+   1991. 5401.8s - prefill: onnx.load (0.0s) 
+   1992. 5401.8s - prefill: onnx.load (0.0s) 
+   1993. 5401.8s - prefill: onnx.load (0.0s) 
+   1994. 5401.8s - prefill: post: onnx.load (0.0s) 
+   1995. 5401.8s - prefill: post: onnx.load (0.0s) 
+   1996. 5401.8s - prefill: post: onnx.load (0.0s) 
+   1997. 5401.8s - prefill: post: onnx.load (0.0s) 
+   1998. 5401.8s - prefill: onnx.load (0.0s) 
+   1999. 5401.8s - prefill: post: onnx.load (0.0s) 
+   2000. 5401.8s - prefill: post: onnx.load (0.0s) 
+   2001. 5465.1s - prefill: onnx.save (0.2s) 
+   2002. 5482.7s - prefill: onnx.save (0.2s) 
+   2003. 5482.8s - prefill: onnx.save (0.2s) 
+   2004. 5497.5s - prefill: onnx.save (0.2s) 
+   2005. 5499.6s - prefill: onnx.save (0.2s) 
+   2006. 5499.6s - prefill: onnx.save (0.2s) 
+   2007. 5499.6s - prefill: onnx.save (0.2s) 
+   2008. 5513.7s - prefill: onnx.save (0.2s) 
+   2009. 5541.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2010. 5547.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2011. 5553.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2012. 5559.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2013. 5572.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2014. 5575.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2015. 5577.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2016. 5579.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2017. 5585.4s - prefill: onnx.load (0.0s) 
+   2018. 5585.4s - prefill: onnx.load (0.0s) 
+   2019. 5585.4s - prefill: onnx.load (0.0s) 
+   2020. 5585.4s - prefill: post: onnx.load (0.0s) 
+   2021. 5585.4s - prefill: post: onnx.load (0.0s) 
+   2022. 5585.4s - prefill: onnx.load (0.0s) 
+   2023. 5585.4s - prefill: onnx.load (0.0s) 
+   2024. 5585.4s - prefill: onnx.load (0.0s) 
+   2025. 5585.4s - prefill: post: onnx.load (0.0s) 
+   2026. 5585.4s - prefill: post: onnx.load (0.0s) 
+   2027. 5585.4s - prefill: onnx.load (0.0s) 
+   2028. 5585.4s - prefill: post: onnx.load (0.0s) 
+   2029. 5585.5s - prefill: onnx.load (0.0s) 
+   2030. 5585.5s - prefill: post: onnx.load (0.0s) 
+   2031. 5585.5s - prefill: post: onnx.load (0.0s) 
+   2032. 5585.5s - prefill: post: onnx.load (0.0s) 
+   2033. 5668.7s - prefill: onnx.save (0.2s) 
+   2034. 5673.0s - prefill: onnx.save (0.2s) 
+   2035. 5674.1s - prefill: onnx.save (0.2s) 
+   2036. 5675.2s - prefill: onnx.save (0.2s) 
+   2037. 5676.3s - prefill: onnx.save (0.2s) 
+   2038. 5681.6s - prefill: onnx.save (0.2s) 
+   2039. 5681.9s - prefill: onnx.save (0.2s) 
+   2040. 5690.9s - prefill: onnx.save (0.2s) 
+   2041. 5740.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2042. 5742.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2043. 5743.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2044. 5751.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2045. 5756.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2046. 5756.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2047. 5759.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2048. 5761.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2049. 5766.9s - prefill: onnx.load (0.0s) 
+   2050. 5766.9s - prefill: onnx.load (0.0s) 
+   2051. 5766.9s - prefill: onnx.load (0.0s) 
+   2052. 5766.9s - prefill: onnx.load (0.0s) 
+   2053. 5766.9s - prefill: onnx.load (0.0s) 
+   2054. 5766.9s - prefill: onnx.load (0.0s) 
+   2055. 5766.9s - prefill: onnx.load (0.0s) 
+   2056. 5766.9s - prefill: post: onnx.load (0.0s) 
+   2057. 5766.9s - prefill: onnx.load (0.0s) 
+   2058. 5766.9s - prefill: post: onnx.load (0.0s) 
+   2059. 5766.9s - prefill: post: onnx.load (0.0s) 
+   2060. 5766.9s - prefill: post: onnx.load (0.0s) 
+   2061. 5766.9s - prefill: post: onnx.load (0.0s) 
+   2062. 5766.9s - prefill: post: onnx.load (0.0s) 
+   2063. 5767.0s - prefill: post: onnx.load (0.0s) 
+   2064. 5767.0s - prefill: post: onnx.load (0.0s) 
+   2065. 5835.3s - prefill: onnx.save (0.2s) 
+   2066. 5840.8s - prefill: onnx.save (0.2s) 
+   2067. 5844.3s - prefill: onnx.save (0.2s) 
+   2068. 5844.3s - prefill: onnx.save (0.2s) 
+   2069. 5844.3s - prefill: onnx.save (0.2s) 
+   2070. 5844.3s - prefill: onnx.save (0.2s) 
+   2071. 5846.6s - prefill: onnx.save (0.2s) 
+   2072. 5856.2s - prefill: onnx.save (0.2s) 
+   2073. 5913.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2074. 5937.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2075. 5943.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2076. 5944.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2077. 5945.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2078. 5946.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2079. 5947.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2080. 5948.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2081. 5955.2s - prefill: onnx.load (0.0s) 
+   2082. 5955.2s - prefill: onnx.load (0.0s) 
+   2083. 5955.2s - prefill: onnx.load (0.0s) 
+   2084. 5955.2s - prefill: onnx.load (0.0s) 
+   2085. 5955.2s - prefill: onnx.load (0.0s) 
+   2086. 5955.2s - prefill: onnx.load (0.0s) 
+   2087. 5955.2s - prefill: onnx.load (0.0s) 
+   2088. 5955.2s - prefill: onnx.load (0.0s) 
+   2089. 5955.3s - prefill: post: onnx.load (0.0s) 
+   2090. 5955.3s - prefill: post: onnx.load (0.0s) 
+   2091. 5955.3s - prefill: post: onnx.load (0.0s) 
+   2092. 5955.3s - prefill: post: onnx.load (0.0s) 
+   2093. 5955.3s - prefill: post: onnx.load (0.0s) 
+   2094. 5955.3s - prefill: post: onnx.load (0.0s) 
+   2095. 5955.4s - prefill: post: onnx.load (0.0s) 
+   2096. 5955.4s - prefill: post: onnx.load (0.0s) 
+   2097. 5980.2s - prefill: onnx.save (0.2s) 
+   2098. 5981.2s - prefill: onnx.save (0.2s) 
+   2099. 5989.9s - prefill: onnx.save (0.2s) 
+   2100. 6005.8s - prefill: onnx.save (0.2s) 
+   2101. 6017.2s - prefill: onnx.save (0.2s) 
+   2102. 6023.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2103. 6031.1s - prefill: onnx.save (0.2s) 
+   2104. 6032.1s - prefill: onnx.save (0.2s) 
+   2105. 6032.1s - prefill: onnx.save (0.2s) 
+   2106. 6034.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2107. 6036.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2108. 6085.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2109. 6086.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2110. 6096.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2111. 6097.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2112. 6099.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2113. 6108.8s - prefill: onnx.load (0.0s) 
+   2114. 6108.8s - prefill: onnx.load (0.0s) 
+   2115. 6108.8s - prefill: onnx.load (0.0s) 
+   2116. 6108.8s - prefill: onnx.load (0.0s) 
+   2117. 6108.8s - prefill: onnx.load (0.0s) 
+   2118. 6108.8s - prefill: onnx.load (0.0s) 
+   2119. 6108.8s - prefill: post: onnx.load (0.0s) 
+   2120. 6108.8s - prefill: post: onnx.load (0.0s) 
+   2121. 6108.8s - prefill: post: onnx.load (0.0s) 
+   2122. 6108.9s - prefill: post: onnx.load (0.0s) 
+   2123. 6108.9s - prefill: post: onnx.load (0.0s) 
+   2124. 6108.9s - prefill: post: onnx.load (0.0s) 
+   2125. 6126.2s - prefill: onnx.save (0.2s) 
+   2126. 6136.9s - prefill: onnx.save (0.2s) 
+   2127. 6149.3s - prefill: onnx.save (0.2s) 
+   2128. 6151.6s - prefill: onnx.save (0.2s) 
+   2129. 6151.6s - prefill: onnx.save (0.2s) 
+   2130. 6161.0s - prefill: onnx.save (0.2s) 
+   2131. 6188.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2132. 6202.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2133. 6216.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2134. 6217.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2135. 6218.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2136. 6227.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2137. 6237.3s - prefill: onnx.load (0.0s) 
+   2138. 6237.3s - prefill: post: onnx.load (0.0s) 
+   2139. 6237.3s - prefill: onnx.load (0.0s) 
+   2140. 6237.3s - prefill: post: onnx.load (0.0s) 
+   2141. 6237.3s - prefill: onnx.save (0.2s) 
+   2142. 6237.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2143. 6237.3s - prefill: onnx.load (0.0s) 
+   2144. 6237.3s - prefill: post: onnx.load (0.0s) 
+   2145. 6237.3s - prefill: onnx.load (0.0s) 
+   2146. 6237.3s - prefill: post: onnx.load (0.0s) 
+   2147. 6237.4s - prefill: onnx.save (0.2s) 
+   2148. 6237.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2149. 6237.4s - prefill: onnx.load (0.0s) 
+   2150. 6237.4s - prefill: post: onnx.load (0.0s) 
+   2151. 6237.4s - prefill: onnx.load (0.0s) 
+   2152. 6237.4s - prefill: post: onnx.load (0.0s) 
+   2153. 6237.4s - prefill: onnx.save (0.2s) 
+   2154. 6237.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2155. 6237.5s - prefill: onnx.load (0.0s) 
+   2156. 6237.5s - prefill: post: onnx.load (0.0s) 
+   2157. 6237.5s - prefill: onnx.load (0.0s) 
+   2158. 6237.5s - prefill: post: onnx.load (0.0s) 
+   2159. 6237.5s - prefill: onnx.save (0.2s) 
+   2160. 6237.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2161. 6237.5s - prefill: onnx.load (0.0s) 
+   2162. 6237.5s - prefill: post: onnx.load (0.0s) 
+   2163. 6237.5s - prefill: onnx.load (0.0s) 
+   2164. 6237.5s - prefill: post: onnx.load (0.0s) 
+   2165. 6237.6s - prefill: onnx.save (0.2s) 
+   2166. 6237.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2167. 6237.6s - prefill: onnx.load (0.0s) 
+   2168. 6237.6s - prefill: post: onnx.load (0.0s) 
+   2169. 6237.6s - prefill: onnx.load (0.0s) 
+   2170. 6237.6s - prefill: post: onnx.load (0.0s) 
+   2171. 6237.7s - prefill: onnx.save (0.2s) 
+   2172. 6237.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2173. 6237.7s - prefill: onnx.load (0.0s) 
+   2174. 6237.7s - prefill: post: onnx.load (0.0s) 
+   2175. 6237.7s - prefill: onnx.load (0.0s) 
+   2176. 6237.7s - prefill: post: onnx.load (0.0s) 
+   2177. 6237.8s - prefill: onnx.save (0.2s) 
+   2178. 6237.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2179. 6237.8s - prefill: onnx.load (0.0s) 
+   2180. 6237.8s - prefill: post: onnx.load (0.0s) 
+   2181. 6237.8s - prefill: onnx.load (0.0s) 
+   2182. 6237.8s - prefill: post: onnx.load (0.0s) 
+   2183. 6237.9s - prefill: onnx.save (0.2s) 
+   2184. 6237.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2185. 6237.9s - prefill: onnx.load (0.0s) 
+   2186. 6237.9s - prefill: post: onnx.load (0.0s) 
+   2187. 6237.9s - prefill: onnx.load (0.0s) 
+   2188. 6237.9s - prefill: post: onnx.load (0.0s) 
+   2189. 6237.9s - prefill: onnx.save (0.2s) 
+   2190. 6238.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2191. 6238.0s - prefill: onnx.load (0.0s) 
+   2192. 6238.0s - prefill: post: onnx.load (0.0s) 
+   2193. 6238.0s - prefill: onnx.load (0.0s) 
+   2194. 6238.0s - prefill: post: onnx.load (0.0s) 
+   2195. 6238.1s - prefill: onnx.save (0.2s) 
+   2196. 6238.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2197. 6238.1s - prefill: onnx.load (0.0s) 
+   2198. 6238.1s - prefill: post: onnx.load (0.0s) 
+   2199. 6238.1s - prefill: onnx.load (0.0s) 
+   2200. 6238.1s - prefill: post: onnx.load (0.0s) 
+   2201. 6238.2s - prefill: onnx.save (0.2s) 
+   2202. 6238.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2203. 6238.2s - prefill: onnx.load (0.0s) 
+   2204. 6238.2s - prefill: post: onnx.load (0.0s) 
+   2205. 6238.2s - prefill: onnx.load (0.0s) 
+   2206. 6238.2s - prefill: post: onnx.load (0.0s) 
+   2207. 6238.3s - prefill: onnx.save (0.2s) 
+   2208. 6238.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2209. 6238.3s - prefill: onnx.load (0.0s) 
+   2210. 6238.3s - prefill: post: onnx.load (0.0s) 
+   2211. 6238.3s - prefill: onnx.load (0.0s) 
+   2212. 6238.3s - prefill: post: onnx.load (0.0s) 
+   2213. 6238.4s - prefill: onnx.save (0.2s) 
+   2214. 6238.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2215. 6238.5s - prefill: onnx.load (0.0s) 
+   2216. 6238.5s - prefill: post: onnx.load (0.0s) 
+   2217. 6238.5s - prefill: onnx.load (0.0s) 
+   2218. 6238.5s - prefill: post: onnx.load (0.0s) 
+   2219. 6238.5s - prefill: onnx.save (0.2s) 
+   2220. 6238.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2221. 6238.6s - prefill: onnx.load (0.0s) 
+   2222. 6238.6s - prefill: post: onnx.load (0.0s) 
+   2223. 6238.6s - prefill: onnx.load (0.0s) 
+   2224. 6238.6s - prefill: post: onnx.load (0.0s) 
+   2225. 6238.7s - prefill: onnx.save (0.2s) 
+   2226. 6238.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2227. 6238.7s - prefill: onnx.load (0.0s) 
+   2228. 6238.7s - prefill: post: onnx.load (0.0s) 
+   2229. 6238.7s - prefill: onnx.load (0.0s) 
+   2230. 6238.7s - prefill: post: onnx.load (0.0s) 
+   2231. 6238.8s - prefill: onnx.save (0.2s) 
+   2232. 6238.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2233. 6238.8s - prefill: onnx.load (0.0s) 
+   2234. 6238.8s - prefill: post: onnx.load (0.0s) 
+   2235. 6238.8s - prefill: onnx.load (0.0s) 
+   2236. 6238.8s - prefill: post: onnx.load (0.0s) 
+   2237. 6238.9s - prefill: onnx.save (0.2s) 
+   2238. 6239.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2239. 6239.0s - prefill: onnx.load (0.0s) 
+   2240. 6239.0s - prefill: post: onnx.load (0.0s) 
+   2241. 6239.0s - prefill: onnx.load (0.0s) 
+   2242. 6239.0s - prefill: post: onnx.load (0.0s) 
+   2243. 6239.1s - prefill: onnx.save (0.2s) 
+   2244. 6239.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2245. 6239.1s - prefill: onnx.load (0.0s) 
+   2246. 6239.1s - prefill: post: onnx.load (0.0s) 
+   2247. 6239.1s - prefill: onnx.load (0.0s) 
+   2248. 6239.1s - prefill: post: onnx.load (0.0s) 
+   2249. 6239.2s - prefill: onnx.save (0.2s) 
+   2250. 6239.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2251. 6239.3s - prefill: onnx.load (0.0s) 
+   2252. 6239.3s - prefill: post: onnx.load (0.0s) 
+   2253. 6239.3s - prefill: onnx.load (0.0s) 
+   2254. 6239.3s - prefill: post: onnx.load (0.0s) 
+   2255. 6239.4s - prefill: onnx.save (0.2s) 
+   2256. 6239.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2257. 6239.4s - prefill: onnx.load (0.0s) 
+   2258. 6239.4s - prefill: post: onnx.load (0.0s) 
+   2259. 6239.4s - prefill: onnx.load (0.0s) 
+   2260. 6239.4s - prefill: post: onnx.load (0.0s) 
+   2261. 6239.6s - prefill: onnx.save (0.2s) 
+   2262. 6239.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2263. 6239.6s - prefill: onnx.load (0.0s) 
+   2264. 6239.6s - prefill: post: onnx.load (0.0s) 
+   2265. 6239.6s - prefill: onnx.load (0.0s) 
+   2266. 6239.6s - prefill: post: onnx.load (0.0s) 
+   2267. 6239.7s - prefill: onnx.save (0.2s) 
+   2268. 6239.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2269. 6239.8s - prefill: onnx.load (0.0s) 
+   2270. 6239.8s - prefill: post: onnx.load (0.0s) 
+   2271. 6239.8s - prefill: onnx.load (0.0s) 
+   2272. 6239.8s - prefill: post: onnx.load (0.0s) 
+   2273. 6239.9s - prefill: onnx.save (0.2s) 
+   2274. 6239.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2275. 6239.9s - prefill: onnx.load (0.0s) 
+   2276. 6239.9s - prefill: post: onnx.load (0.0s) 
+   2277. 6239.9s - prefill: onnx.load (0.0s) 
+   2278. 6239.9s - prefill: post: onnx.load (0.0s) 
+   2279. 6240.1s - prefill: onnx.save (0.2s) 
+   2280. 6240.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2281. 6240.1s - prefill: onnx.load (0.0s) 
+   2282. 6240.1s - prefill: post: onnx.load (0.0s) 
+   2283. 6240.1s - prefill: onnx.load (0.0s) 
+   2284. 6240.1s - prefill: post: onnx.load (0.0s) 
+   2285. 6240.3s - prefill: onnx.save (0.2s) 
+   2286. 6240.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2287. 6240.3s - prefill: onnx.load (0.0s) 
+   2288. 6240.3s - prefill: post: onnx.load (0.0s) 
+   2289. 6240.3s - prefill: onnx.load (0.0s) 
+   2290. 6240.3s - prefill: post: onnx.load (0.0s) 
+   2291. 6240.5s - prefill: onnx.save (0.2s) 
+   2292. 6240.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2293. 6240.5s - prefill: onnx.load (0.0s) 
+   2294. 6240.5s - prefill: post: onnx.load (0.0s) 
+   2295. 6240.5s - prefill: onnx.load (0.0s) 
+   2296. 6240.5s - prefill: post: onnx.load (0.0s) 
+   2297. 6240.6s - prefill: onnx.save (0.2s) 
+   2298. 6240.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2299. 6240.7s - prefill: onnx.load (0.0s) 
+   2300. 6240.7s - prefill: post: onnx.load (0.0s) 
+   2301. 6240.7s - prefill: onnx.load (0.0s) 
+   2302. 6240.7s - prefill: post: onnx.load (0.0s) 
+   2303. 6240.8s - prefill: onnx.save (0.2s) 
+   2304. 6240.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2305. 6240.9s - prefill: onnx.load (0.0s) 
+   2306. 6240.9s - prefill: post: onnx.load (0.0s) 
+   2307. 6240.9s - prefill: onnx.load (0.0s) 
+   2308. 6240.9s - prefill: post: onnx.load (0.0s) 
+   2309. 6241.0s - prefill: onnx.save (0.2s) 
+   2310. 6241.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2311. 6241.1s - prefill: onnx.load (0.0s) 
+   2312. 6241.1s - prefill: post: onnx.load (0.0s) 
+   2313. 6241.1s - prefill: onnx.load (0.0s) 
+   2314. 6241.1s - prefill: post: onnx.load (0.0s) 
+   2315. 6241.3s - prefill: onnx.save (0.2s) 
+   2316. 6241.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2317. 6241.3s - prefill: onnx.load (0.0s) 
+   2318. 6241.3s - prefill: post: onnx.load (0.0s) 
+   2319. 6241.3s - prefill: onnx.load (0.0s) 
+   2320. 6241.3s - prefill: post: onnx.load (0.0s) 
+   2321. 6241.5s - prefill: onnx.save (0.2s) 
+   2322. 6241.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2323. 6241.5s - prefill: onnx.load (0.0s) 
+   2324. 6241.5s - prefill: post: onnx.load (0.0s) 
+   2325. 6241.5s - prefill: onnx.load (0.0s) 
+   2326. 6241.5s - prefill: post: onnx.load (0.0s) 
+   2327. 6241.7s - prefill: onnx.save (0.2s) 
+   2328. 6241.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2329. 6241.7s - prefill: onnx.load (0.0s) 
+   2330. 6241.8s - prefill: post: onnx.load (0.0s) 
+   2331. 6241.8s - prefill: onnx.load (0.0s) 
+   2332. 6241.8s - prefill: post: onnx.load (0.0s) 
+   2333. 6241.9s - prefill: onnx.save (0.2s) 
+   2334. 6242.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2335. 6242.0s - prefill: onnx.load (0.0s) 
+   2336. 6242.0s - prefill: post: onnx.load (0.0s) 
+   2337. 6242.0s - prefill: onnx.load (0.0s) 
+   2338. 6242.0s - prefill: post: onnx.load (0.0s) 
+   2339. 6242.1s - prefill: onnx.save (0.2s) 
+   2340. 6242.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2341. 6242.2s - prefill: onnx.load (0.0s) 
+   2342. 6242.2s - prefill: post: onnx.load (0.0s) 
+   2343. 6242.2s - prefill: onnx.load (0.0s) 
+   2344. 6242.2s - prefill: post: onnx.load (0.0s) 
+   2345. 6242.4s - prefill: onnx.save (0.2s) 
+   2346. 6242.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2347. 6242.5s - prefill: onnx.load (0.0s) 
+   2348. 6242.5s - prefill: post: onnx.load (0.0s) 
+   2349. 6242.5s - prefill: onnx.load (0.0s) 
+   2350. 6242.5s - prefill: post: onnx.load (0.0s) 
+   2351. 6242.6s - prefill: onnx.save (0.2s) 
+   2352. 6242.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2353. 6242.7s - prefill: onnx.load (0.0s) 
+   2354. 6242.7s - prefill: post: onnx.load (0.0s) 
+   2355. 6242.7s - prefill: onnx.load (0.0s) 
+   2356. 6242.7s - prefill: post: onnx.load (0.0s) 
+   2357. 6242.9s - prefill: onnx.save (0.2s) 
+   2358. 6243.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2359. 6243.0s - prefill: onnx.load (0.0s) 
+   2360. 6243.0s - prefill: post: onnx.load (0.0s) 
+   2361. 6243.0s - prefill: onnx.load (0.0s) 
+   2362. 6243.0s - prefill: post: onnx.load (0.0s) 
+   2363. 6243.1s - prefill: onnx.save (0.2s) 
+   2364. 6243.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2365. 6243.2s - prefill: onnx.load (0.0s) 
+   2366. 6243.2s - prefill: post: onnx.load (0.0s) 
+   2367. 6243.2s - prefill: onnx.load (0.0s) 
+   2368. 6243.2s - prefill: post: onnx.load (0.0s) 
+   2369. 6243.4s - prefill: onnx.save (0.2s) 
+   2370. 6243.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2371. 6243.5s - prefill: onnx.load (0.0s) 
+   2372. 6243.5s - prefill: post: onnx.load (0.0s) 
+   2373. 6243.5s - prefill: onnx.load (0.0s) 
+   2374. 6243.5s - prefill: post: onnx.load (0.0s) 
+   2375. 6243.7s - prefill: onnx.save (0.2s) 
+   2376. 6243.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2377. 6243.8s - prefill: onnx.load (0.0s) 
+   2378. 6243.8s - prefill: post: onnx.load (0.0s) 
+   2379. 6243.8s - prefill: onnx.load (0.0s) 
+   2380. 6243.8s - prefill: post: onnx.load (0.0s) 
+   2381. 6244.0s - prefill: onnx.save (0.2s) 
+   2382. 6244.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2383. 6244.0s - prefill: onnx.load (0.0s) 
+   2384. 6244.0s - prefill: post: onnx.load (0.0s) 
+   2385. 6244.0s - prefill: onnx.load (0.0s) 
+   2386. 6244.0s - prefill: post: onnx.load (0.0s) 
+   2387. 6244.2s - prefill: onnx.save (0.2s) 
+   2388. 6244.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2389. 6244.3s - prefill: onnx.load (0.0s) 
+   2390. 6244.3s - prefill: post: onnx.load (0.0s) 
+   2391. 6244.3s - prefill: onnx.load (0.0s) 
+   2392. 6244.3s - prefill: post: onnx.load (0.0s) 
+   2393. 6244.5s - prefill: onnx.save (0.2s) 
+   2394. 6244.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2395. 6244.6s - prefill: onnx.load (0.0s) 
+   2396. 6244.6s - prefill: post: onnx.load (0.0s) 
+   2397. 6244.6s - prefill: onnx.load (0.0s) 
+   2398. 6244.6s - prefill: post: onnx.load (0.0s) 
+   2399. 6244.8s - prefill: onnx.save (0.2s) 
+   2400. 6244.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2401. 6244.9s - prefill: onnx.load (0.0s) 
+   2402. 6244.9s - prefill: post: onnx.load (0.0s) 
+   2403. 6244.9s - prefill: onnx.load (0.0s) 
+   2404. 6244.9s - prefill: post: onnx.load (0.0s) 
+   2405. 6245.1s - prefill: onnx.save (0.2s) 
+   2406. 6245.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2407. 6245.2s - prefill: onnx.load (0.0s) 
+   2408. 6245.2s - prefill: post: onnx.load (0.0s) 
+   2409. 6245.2s - prefill: onnx.load (0.0s) 
+   2410. 6245.2s - prefill: post: onnx.load (0.0s) 
+   2411. 6245.4s - prefill: onnx.save (0.2s) 
+   2412. 6245.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2413. 6245.5s - prefill: onnx.load (0.0s) 
+   2414. 6245.5s - prefill: post: onnx.load (0.0s) 
+   2415. 6245.5s - prefill: onnx.load (0.0s) 
+   2416. 6245.5s - prefill: post: onnx.load (0.0s) 
+   2417. 6245.7s - prefill: onnx.save (0.2s) 
+   2418. 6245.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2419. 6245.8s - prefill: onnx.load (0.0s) 
+   2420. 6245.8s - prefill: post: onnx.load (0.0s) 
+   2421. 6245.8s - prefill: onnx.load (0.0s) 
+   2422. 6245.8s - prefill: post: onnx.load (0.0s) 
+   2423. 6246.0s - prefill: onnx.save (0.2s) 
+   2424. 6246.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2425. 6246.1s - prefill: onnx.load (0.0s) 
+   2426. 6246.1s - prefill: post: onnx.load (0.0s) 
+   2427. 6246.1s - prefill: onnx.load (0.0s) 
+   2428. 6246.1s - prefill: post: onnx.load (0.0s) 
+   2429. 6246.4s - prefill: onnx.save (0.2s) 
+   2430. 6246.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2431. 6246.4s - prefill: onnx.load (0.0s) 
+   2432. 6246.4s - prefill: post: onnx.load (0.0s) 
+   2433. 6246.4s - prefill: onnx.load (0.0s) 
+   2434. 6246.5s - prefill: post: onnx.load (0.0s) 
+   2435. 6246.7s - prefill: onnx.save (0.2s) 
+   2436. 6246.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2437. 6246.8s - prefill: onnx.load (0.0s) 
+   2438. 6246.8s - prefill: post: onnx.load (0.0s) 
+   2439. 6246.8s - prefill: onnx.load (0.0s) 
+   2440. 6246.8s - prefill: post: onnx.load (0.0s) 
+   2441. 6247.0s - prefill: onnx.save (0.2s) 
+   2442. 6247.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2443. 6247.1s - prefill: onnx.load (0.0s) 
+   2444. 6247.1s - prefill: post: onnx.load (0.0s) 
+   2445. 6247.1s - prefill: onnx.load (0.0s) 
+   2446. 6247.1s - prefill: post: onnx.load (0.0s) 
+   2447. 6247.3s - prefill: onnx.save (0.2s) 
+   2448. 6247.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2449. 6247.4s - prefill: onnx.load (0.0s) 
+   2450. 6247.4s - prefill: post: onnx.load (0.0s) 
+   2451. 6247.4s - prefill: onnx.load (0.0s) 
+   2452. 6247.4s - prefill: post: onnx.load (0.0s) 
+   2453. 6247.7s - prefill: onnx.save (0.2s) 
+   2454. 6247.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2455. 6247.8s - prefill: onnx.load (0.0s) 
+   2456. 6247.8s - prefill: post: onnx.load (0.0s) 
+   2457. 6247.8s - prefill: onnx.load (0.0s) 
+   2458. 6247.8s - prefill: post: onnx.load (0.0s) 
+   2459. 6248.0s - prefill: onnx.save (0.2s) 
+   2460. 6248.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2461. 6248.1s - prefill: onnx.load (0.0s) 
+   2462. 6248.1s - prefill: post: onnx.load (0.0s) 
+   2463. 6248.1s - prefill: onnx.load (0.0s) 
+   2464. 6248.1s - prefill: post: onnx.load (0.0s) 
+   2465. 6248.4s - prefill: onnx.save (0.2s) 
+   2466. 6248.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2467. 6248.5s - prefill: onnx.load (0.0s) 
+   2468. 6248.5s - prefill: post: onnx.load (0.0s) 
+   2469. 6248.5s - prefill: onnx.load (0.0s) 
+   2470. 6248.5s - prefill: post: onnx.load (0.0s) 
+   2471. 6248.7s - prefill: onnx.save (0.2s) 
+   2472. 6248.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2473. 6248.8s - prefill: onnx.load (0.0s) 
+   2474. 6248.8s - prefill: post: onnx.load (0.0s) 
+   2475. 6248.8s - prefill: onnx.load (0.0s) 
+   2476. 6248.8s - prefill: post: onnx.load (0.0s) 
+   2477. 6249.1s - prefill: onnx.save (0.2s) 
+   2478. 6249.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2479. 6249.2s - prefill: onnx.load (0.0s) 
+   2480. 6249.2s - prefill: post: onnx.load (0.0s) 
+   2481. 6249.2s - prefill: onnx.load (0.0s) 
+   2482. 6249.2s - prefill: post: onnx.load (0.0s) 
+   2483. 6249.5s - prefill: onnx.save (0.2s) 
+   2484. 6249.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2485. 6249.6s - prefill: onnx.load (0.0s) 
+   2486. 6249.6s - prefill: post: onnx.load (0.0s) 
+   2487. 6249.6s - prefill: onnx.load (0.0s) 
+   2488. 6249.6s - prefill: post: onnx.load (0.0s) 
+   2489. 6249.8s - prefill: onnx.save (0.2s) 
+   2490. 6249.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2491. 6249.9s - prefill: onnx.load (0.0s) 
+   2492. 6249.9s - prefill: post: onnx.load (0.0s) 
+   2493. 6249.9s - prefill: onnx.load (0.0s) 
+   2494. 6250.0s - prefill: post: onnx.load (0.0s) 
+   2495. 6250.2s - prefill: onnx.save (0.2s) 
+   2496. 6250.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2497. 6250.3s - prefill: onnx.load (0.0s) 
+   2498. 6250.3s - prefill: post: onnx.load (0.0s) 
+   2499. 6250.3s - prefill: onnx.load (0.0s) 
+   2500. 6250.4s - prefill: post: onnx.load (0.0s) 
+   2501. 6250.6s - prefill: onnx.save (0.2s) 
+   2502. 6250.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2503. 6250.7s - prefill: onnx.load (0.0s) 
+   2504. 6250.7s - prefill: post: onnx.load (0.0s) 
+   2505. 6250.7s - prefill: onnx.load (0.0s) 
+   2506. 6250.7s - prefill: post: onnx.load (0.0s) 
+   2507. 6251.0s - prefill: onnx.save (0.2s) 
+   2508. 6251.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2509. 6251.1s - prefill: onnx.load (0.0s) 
+   2510. 6251.1s - prefill: post: onnx.load (0.0s) 
+   2511. 6251.1s - prefill: onnx.load (0.0s) 
+   2512. 6251.1s - prefill: post: onnx.load (0.0s) 
+   2513. 6251.4s - prefill: onnx.save (0.2s) 
+   2514. 6251.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2515. 6251.5s - prefill: onnx.load (0.0s) 
+   2516. 6251.5s - prefill: post: onnx.load (0.0s) 
+   2517. 6251.5s - prefill: onnx.load (0.0s) 
+   2518. 6251.5s - prefill: post: onnx.load (0.0s) 
+   2519. 6251.8s - prefill: onnx.save (0.2s) 
+   2520. 6251.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2521. 6251.9s - prefill: onnx.load (0.0s) 
+   2522. 6251.9s - prefill: post: onnx.load (0.0s) 
+   2523. 6251.9s - prefill: onnx.load (0.0s) 
+   2524. 6251.9s - prefill: post: onnx.load (0.0s) 
+   2525. 6252.2s - prefill: onnx.save (0.2s) 
+   2526. 6252.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2527. 6252.3s - prefill: onnx.load (0.0s) 
+   2528. 6252.3s - prefill: post: onnx.load (0.0s) 
+   2529. 6252.3s - prefill: onnx.load (0.0s) 
+   2530. 6252.3s - prefill: post: onnx.load (0.0s) 
+   2531. 6252.7s - prefill: onnx.save (0.2s) 
+   2532. 6252.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2533. 6252.8s - prefill: onnx.load (0.0s) 
+   2534. 6252.8s - prefill: post: onnx.load (0.0s) 
+   2535. 6252.8s - prefill: onnx.load (0.0s) 
+   2536. 6252.8s - prefill: post: onnx.load (0.0s) 
+   2537. 6253.1s - prefill: onnx.save (0.2s) 
+   2538. 6253.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2539. 6253.2s - prefill: onnx.load (0.0s) 
+   2540. 6253.2s - prefill: post: onnx.load (0.0s) 
+   2541. 6253.2s - prefill: onnx.load (0.0s) 
+   2542. 6253.2s - prefill: post: onnx.load (0.0s) 
+   2543. 6253.5s - prefill: onnx.save (0.2s) 
+   2544. 6253.6s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2545. 6253.6s - prefill: onnx.load (0.0s) 
+   2546. 6253.6s - prefill: post: onnx.load (0.0s) 
+   2547. 6253.6s - prefill: onnx.load (0.0s) 
+   2548. 6253.6s - prefill: post: onnx.load (0.0s) 
+   2549. 6254.0s - prefill: onnx.save (0.2s) 
+   2550. 6254.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2551. 6254.1s - prefill: onnx.load (0.0s) 
+   2552. 6254.1s - prefill: post: onnx.load (0.0s) 
+   2553. 6254.1s - prefill: onnx.load (0.0s) 
+   2554. 6254.1s - prefill: post: onnx.load (0.0s) 
+   2555. 6254.4s - prefill: onnx.save (0.2s) 
+   2556. 6254.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2557. 6254.5s - prefill: onnx.load (0.0s) 
+   2558. 6254.5s - prefill: post: onnx.load (0.0s) 
+   2559. 6254.5s - prefill: onnx.load (0.0s) 
+   2560. 6254.5s - prefill: post: onnx.load (0.0s) 
+   2561. 6254.8s - prefill: onnx.save (0.2s) 
+   2562. 6255.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2563. 6255.0s - prefill: onnx.load (0.0s) 
+   2564. 6255.0s - prefill: post: onnx.load (0.0s) 
+   2565. 6255.0s - prefill: onnx.load (0.0s) 
+   2566. 6255.0s - prefill: post: onnx.load (0.0s) 
+   2567. 6255.3s - prefill: onnx.save (0.2s) 
+   2568. 6255.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2569. 6255.4s - prefill: onnx.load (0.0s) 
+   2570. 6255.4s - prefill: post: onnx.load (0.0s) 
+   2571. 6255.4s - prefill: onnx.load (0.0s) 
+   2572. 6255.4s - prefill: post: onnx.load (0.0s) 
+   2573. 6255.8s - prefill: onnx.save (0.2s) 
+   2574. 6255.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2575. 6255.9s - prefill: onnx.load (0.0s) 
+   2576. 6255.9s - prefill: post: onnx.load (0.0s) 
+   2577. 6255.9s - prefill: onnx.load (0.0s) 
+   2578. 6255.9s - prefill: post: onnx.load (0.0s) 
+   2579. 6256.2s - prefill: onnx.save (0.2s) 
+   2580. 6256.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2581. 6256.3s - prefill: onnx.load (0.0s) 
+   2582. 6256.3s - prefill: post: onnx.load (0.0s) 
+   2583. 6256.3s - prefill: onnx.load (0.0s) 
+   2584. 6256.3s - prefill: post: onnx.load (0.0s) 
+   2585. 6256.7s - prefill: onnx.save (0.2s) 
+   2586. 6256.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2587. 6256.8s - prefill: onnx.load (0.0s) 
+   2588. 6256.8s - prefill: post: onnx.load (0.0s) 
+   2589. 6256.8s - prefill: onnx.load (0.0s) 
+   2590. 6256.9s - prefill: post: onnx.load (0.0s) 
+   2591. 6257.2s - prefill: onnx.save (0.2s) 
+   2592. 6257.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2593. 6257.3s - prefill: onnx.load (0.0s) 
+   2594. 6257.3s - prefill: post: onnx.load (0.0s) 
+   2595. 6257.3s - prefill: onnx.load (0.0s) 
+   2596. 6257.3s - prefill: post: onnx.load (0.0s) 
+   2597. 6257.7s - prefill: onnx.save (0.2s) 
+   2598. 6257.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2599. 6257.8s - prefill: onnx.load (0.0s) 
+   2600. 6257.8s - prefill: post: onnx.load (0.0s) 
+   2601. 6257.8s - prefill: onnx.load (0.0s) 
+   2602. 6257.9s - prefill: post: onnx.load (0.0s) 
+   2603. 6258.2s - prefill: onnx.save (0.2s) 
+   2604. 6258.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2605. 6258.3s - prefill: onnx.load (0.0s) 
+   2606. 6258.3s - prefill: post: onnx.load (0.0s) 
+   2607. 6258.3s - prefill: onnx.load (0.0s) 
+   2608. 6258.3s - prefill: post: onnx.load (0.0s) 
+   2609. 6258.7s - prefill: onnx.save (0.2s) 
+   2610. 6258.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2611. 6258.8s - prefill: onnx.load (0.0s) 
+   2612. 6258.8s - prefill: post: onnx.load (0.0s) 
+   2613. 6258.8s - prefill: onnx.load (0.0s) 
+   2614. 6258.8s - prefill: post: onnx.load (0.0s) 
+   2615. 6259.2s - prefill: onnx.save (0.2s) 
+   2616. 6259.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2617. 6259.3s - prefill: onnx.load (0.0s) 
+   2618. 6259.3s - prefill: post: onnx.load (0.0s) 
+   2619. 6259.3s - prefill: onnx.load (0.0s) 
+   2620. 6259.3s - prefill: post: onnx.load (0.0s) 
+   2621. 6259.6s - prefill: onnx.save (0.2s) 
+   2622. 6259.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2623. 6259.8s - prefill: onnx.load (0.0s) 
+   2624. 6259.8s - prefill: post: onnx.load (0.0s) 
+   2625. 6259.8s - prefill: onnx.load (0.0s) 
+   2626. 6259.8s - prefill: post: onnx.load (0.0s) 
+   2627. 6260.1s - prefill: onnx.save (0.2s) 
+   2628. 6260.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2629. 6260.3s - prefill: onnx.load (0.0s) 
+   2630. 6260.3s - prefill: post: onnx.load (0.0s) 
+   2631. 6260.3s - prefill: onnx.load (0.0s) 
+   2632. 6260.3s - prefill: post: onnx.load (0.0s) 
+   2633. 6260.6s - prefill: onnx.save (0.2s) 
+   2634. 6260.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2635. 6260.8s - prefill: onnx.load (0.0s) 
+   2636. 6260.8s - prefill: post: onnx.load (0.0s) 
+   2637. 6260.8s - prefill: onnx.load (0.0s) 
+   2638. 6260.8s - prefill: post: onnx.load (0.0s) 
+   2639. 6261.2s - prefill: onnx.save (0.2s) 
+   2640. 6261.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2641. 6261.3s - prefill: onnx.load (0.0s) 
+   2642. 6261.3s - prefill: post: onnx.load (0.0s) 
+   2643. 6261.3s - prefill: onnx.load (0.0s) 
+   2644. 6261.3s - prefill: post: onnx.load (0.0s) 
+   2645. 6261.7s - prefill: onnx.save (0.2s) 
+   2646. 6261.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2647. 6261.8s - prefill: onnx.load (0.0s) 
+   2648. 6261.9s - prefill: post: onnx.load (0.0s) 
+   2649. 6261.9s - prefill: onnx.load (0.0s) 
+   2650. 6261.9s - prefill: post: onnx.load (0.0s) 
+   2651. 6262.2s - prefill: onnx.save (0.2s) 
+   2652. 6262.4s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2653. 6262.4s - prefill: onnx.load (0.0s) 
+   2654. 6262.4s - prefill: post: onnx.load (0.0s) 
+   2655. 6262.4s - prefill: onnx.load (0.0s) 
+   2656. 6262.4s - prefill: post: onnx.load (0.0s) 
+   2657. 6262.9s - prefill: onnx.save (0.2s) 
+   2658. 6263.0s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2659. 6263.0s - prefill: onnx.load (0.0s) 
+   2660. 6263.1s - prefill: post: onnx.load (0.0s) 
+   2661. 6263.1s - prefill: onnx.load (0.0s) 
+   2662. 6263.1s - prefill: post: onnx.load (0.0s) 
+   2663. 6263.5s - prefill: onnx.save (0.2s) 
+   2664. 6263.7s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2665. 6263.7s - prefill: onnx.load (0.0s) 
+   2666. 6263.7s - prefill: post: onnx.load (0.0s) 
+   2667. 6263.7s - prefill: onnx.load (0.0s) 
+   2668. 6263.7s - prefill: post: onnx.load (0.0s) 
+   2669. 6264.2s - prefill: onnx.save (0.2s) 
+   2670. 6264.3s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2671. 6264.3s - prefill: onnx.load (0.0s) 
+   2672. 6264.3s - prefill: post: onnx.load (0.0s) 
+   2673. 6264.3s - prefill: onnx.load (0.0s) 
+   2674. 6264.3s - prefill: post: onnx.load (0.0s) 
+   2675. 6264.7s - prefill: onnx.save (0.2s) 
+   2676. 6264.9s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2677. 6264.9s - prefill: onnx.load (0.0s) 
+   2678. 6264.9s - prefill: post: onnx.load (0.0s) 
+   2679. 6264.9s - prefill: onnx.load (0.0s) 
+   2680. 6264.9s - prefill: post: onnx.load (0.0s) 
+   2681. 6265.4s - prefill: onnx.save (0.2s) 
+   2682. 6265.5s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2683. 6265.5s - prefill: onnx.load (0.0s) 
+   2684. 6265.5s - prefill: post: onnx.load (0.0s) 
+   2685. 6265.5s - prefill: onnx.load (0.0s) 
+   2686. 6265.5s - prefill: post: onnx.load (0.0s) 
+   2687. 6265.9s - prefill: onnx.save (0.2s) 
+   2688. 6266.1s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2689. 6266.1s - prefill: onnx.load (0.0s) 
+   2690. 6266.2s - prefill: post: onnx.load (0.0s) 
+   2691. 6266.2s - prefill: onnx.load (0.0s) 
+   2692. 6266.2s - prefill: post: onnx.load (0.0s) 
+   2693. 6266.7s - prefill: onnx.save (0.2s) 
+   2694. 6266.8s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2695. 6266.8s - prefill: onnx.load (0.0s) 
+   2696. 6266.8s - prefill: post: onnx.load (0.0s) 
+   2697. 6267.0s - prefill: onnx.save (0.2s) 
+   2698. 6267.2s - prefill: post: onnx.save (0.1s) [-0.2 GB]
+   2699. 6267.3s - prefill: onnx.load (0.0s) 
+   2700. 6267.3s - prefill: post: onnx.load (0.0s) 
+   2701. 6267.3s - prefill: onnx.load (0.0s) 
+   2702. 6267.3s - prefill: post: onnx.load (0.0s) 
+   2703. 6267.3s - prefill: subprocess.run: qaic-compile (0.4s) 
+   2704. 6267.7s - prefill: post: subprocess.run: qaic-compile (0.0s) 
+   2705. 6267.7s - prefill: post: compile request (0.2s) 
+   2706. 6267.9s - Completion  

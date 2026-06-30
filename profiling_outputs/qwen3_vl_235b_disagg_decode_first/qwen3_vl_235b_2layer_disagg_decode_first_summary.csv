@@ -1,0 +1,8 @@
+phase,start_s,end_s,duration_s,peak_rss_gb,peak_s
+setup + load,0.000,4.179,4.179,29.022,3.214
+vision export,4.190,27.152,22.962,16.897,26.266
+vision qaic-compile,39.297,55.478,16.181,15.995,40.164
+decode export,55.490,83.683,28.193,32.886,57.062
+decode qaic-compile,84.049,134.145,50.096,18.090,121.981
+prefill export,134.158,190.386,56.228,22.914,190.384
+prefill qaic-compile,191.881,277.495,85.614,16.561,273.333

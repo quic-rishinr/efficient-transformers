@@ -1,0 +1,2033 @@
+/home/rishinr/.pyenv/versions/mainline/lib/python3.10/site-packages/onnxscript/converter.py:816: FutureWarning: 'onnxscript.values.Op.param_schemas' is deprecated in version 0.1 and will be removed in the future. Please use '.op_signature' instead.
+  param_schemas = callee.param_schemas()
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:25, 14.37it/s]Loading weights:   1%|          | 4/365 [00:00<00:57,  6.25it/s]Loading weights:   1%|▏         | 5/365 [00:01<01:35,  3.76it/s]Loading weights: 100%|██████████| 365/365 [00:01<00:00, 327.62it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status     |  | 
+---------------------------------------------------------------------+------------+--+-
+model.language_model.layers.{1...93}.self_attn.k_proj.weight         | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.self_attn.q_norm.weight         | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.mlp.experts.down_proj           | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.self_attn.v_proj.weight         | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.mlp.gate.weight                 | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.self_attn.k_norm.weight         | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.post_attention_layernorm.weight | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.self_attn.o_proj.weight         | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.input_layernorm.weight          | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.mlp.experts.gate_up_proj        | UNEXPECTED |  | 
+model.language_model.layers.{1...93}.self_attn.q_proj.weight         | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[93m[Warning]: No transforms applied to model: Qwen3VLMoeForConditionalGeneration. It may be an unsupported model![0m
+[93m[Warning]: The subfunction feature is experimental. Please note that using compile consecutively with and without subfunction may produce inconsistent results.[0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:19, 18.21it/s]Loading weights:   1%|          | 4/365 [00:00<00:44,  8.16it/s]Loading weights:   2%|▏         | 6/365 [00:01<01:12,  4.97it/s]Loading weights: 100%|██████████| 365/365 [00:01<00:00, 347.65it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{1...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{1...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{1...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{1...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{1...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{1...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{1...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{1...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{1...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{1...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{1...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.[0m
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+[93m[Warning]: ONNX Preprocess - Removing mutation from node aten::index_put_ on block input: '5'. This changes graph semantics. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/remove_inplace_ops_for_onnx.cpp:348.)[0m
+[93m[Warning]: ONNX Preprocess - Removing mutation from node aten::index_put_ on block input: '6'. This changes graph semantics. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/remove_inplace_ops_for_onnx.cpp:348.)[0m
+[93m[Warning]: Exporting aten::index operator of advanced indexing in opset 17 is achieved by combination of multiple ONNX operators, including Reshape, Transpose, Concat, and Gather. If indices include negative values, the exported graph will produce incorrect results.[0m
+
+Total export time: 10.77 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:27, 12.97it/s]Loading weights:   1%|          | 4/365 [00:00<00:50,  7.20it/s]Loading weights:   1%|▏         | 5/365 [00:01<01:32,  3.90it/s]Loading weights: 100%|██████████| 365/365 [00:01<00:00, 342.90it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[93m[Warning]: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs![0m
+
+Total export time: 8.93 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:16,  4.78it/s]Loading weights:   1%|          | 4/365 [00:08<13:02,  2.17s/it]Loading weights:   1%|▏         | 5/365 [00:10<12:56,  2.16s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.69it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.90 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:56,  3.13it/s]Loading weights:   1%|          | 4/365 [00:07<11:20,  1.88s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:43,  2.12s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.19it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.76 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:19,  4.54it/s]Loading weights:   1%|          | 4/365 [00:07<13:38,  2.27s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:24,  2.07s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 38.63it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.52 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<02:05,  2.89it/s]Loading weights:   1%|          | 4/365 [00:07<12:17,  2.04s/it]Loading weights:   1%|▏         | 5/365 [00:10<13:25,  2.24s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.05it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.71 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:06<10:23,  1.73s/it]Loading weights:   1%|▏         | 5/365 [00:09<11:41,  1.95s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 38.48it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.69 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:40,  3.63it/s]Loading weights:   1%|          | 4/365 [00:08<12:56,  2.15s/it]Loading weights:   1%|▏         | 5/365 [00:10<14:01,  2.34s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 33.56it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.50 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:50,  7.15it/s]Loading weights:   1%|          | 4/365 [00:09<16:01,  2.66s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:31,  2.09s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 36.98it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.42 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:40,  8.93it/s]Loading weights:   1%|          | 4/365 [00:07<12:17,  2.04s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:52,  2.15s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 38.76it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.42 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:47,  7.64it/s]Loading weights:   1%|          | 4/365 [00:09<15:54,  2.64s/it]Loading weights:   1%|▏         | 5/365 [00:10<13:20,  2.22s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.43it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.50 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<03:04,  1.98it/s]Loading weights:   1%|          | 4/365 [00:08<12:47,  2.12s/it]Loading weights:   1%|▏         | 5/365 [00:10<14:09,  2.36s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 33.20it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.45 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:47,  3.36it/s]Loading weights:   1%|          | 4/365 [00:09<16:15,  2.70s/it]Loading weights:   1%|▏         | 5/365 [00:10<14:00,  2.34s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 33.67it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.71 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:53,  3.22it/s]Loading weights:   1%|          | 4/365 [00:07<12:38,  2.10s/it]Loading weights:   1%|▏         | 5/365 [00:10<12:58,  2.16s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.76it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.43 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:36,  3.77it/s]Loading weights:   1%|          | 4/365 [00:08<15:19,  2.55s/it]Loading weights:   1%|▏         | 5/365 [00:10<13:21,  2.23s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.47it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.35 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:07<11:35,  1.93s/it]Loading weights:   1%|▏         | 5/365 [00:10<13:03,  2.18s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 34.47it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.24 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:07,  5.34it/s]Loading weights:   1%|          | 4/365 [00:06<11:49,  1.96s/it]Loading weights:   1%|▏         | 5/365 [00:10<14:22,  2.40s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.68it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.33 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:06<09:44,  1.62s/it]Loading weights:   1%|▏         | 5/365 [00:09<11:55,  1.99s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 38.38it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.27 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:03,  5.72it/s]Loading weights:   1%|          | 4/365 [00:03<05:07,  1.17it/s]Loading weights:   1%|▏         | 5/365 [00:03<04:31,  1.33it/s]Loading weights: 100%|██████████| 365/365 [00:03<00:00, 98.29it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.20 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:40,  3.60it/s]Loading weights:   1%|          | 4/365 [00:06<11:40,  1.94s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:27,  2.08s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 39.78it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.36 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:02,  5.84it/s]Loading weights:   1%|          | 4/365 [00:05<08:28,  1.41s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:01,  1.34s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 56.81it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.17 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:55,  3.15it/s]Loading weights:   1%|          | 4/365 [00:06<11:13,  1.87s/it]Loading weights:   1%|▏         | 5/365 [00:08<11:18,  1.89s/it]Loading weights: 100%|██████████| 365/365 [00:08<00:00, 40.80it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.83 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:52,  3.24it/s]Loading weights:   1%|          | 4/365 [00:06<10:27,  1.74s/it]Loading weights:   1%|▏         | 5/365 [00:09<13:01,  2.17s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.13it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.13 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:05<08:02,  1.34s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:22,  1.40s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 52.75it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.14 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<00:37,  9.63it/s]Loading weights:   1%|          | 2/365 [00:00<00:53,  6.75it/s]Loading weights:   1%|          | 4/365 [00:03<05:46,  1.04it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:52,  1.15s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 76.99it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.12 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:03<04:44,  1.27it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:21,  1.06s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 73.28it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.15 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:01,  5.95it/s]Loading weights:   1%|          | 4/365 [00:03<05:34,  1.08it/s]Loading weights:   1%|▏         | 5/365 [00:05<06:36,  1.10s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 72.39it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.57 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:42,  8.52it/s]Loading weights:   1%|          | 4/365 [00:04<08:07,  1.35s/it]Loading weights:   1%|▏         | 5/365 [00:07<11:20,  1.89s/it]Loading weights: 100%|██████████| 365/365 [00:07<00:00, 46.49it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.56 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:12,  5.03it/s]Loading weights:   1%|          | 4/365 [00:05<09:18,  1.55s/it]Loading weights:   1%|▏         | 5/365 [00:08<12:01,  2.00s/it]Loading weights: 100%|██████████| 365/365 [00:08<00:00, 43.04it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.51 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:39,  3.65it/s]Loading weights:   1%|          | 4/365 [00:06<10:13,  1.70s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:28,  2.08s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 38.63it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.85 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<00:44,  8.16it/s]Loading weights:   1%|          | 2/365 [00:00<01:32,  3.91it/s]Loading weights:   1%|          | 4/365 [00:08<15:25,  2.56s/it]Loading weights:   1%|▏         | 5/365 [00:10<14:01,  2.34s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.83it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.05 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<00:40,  8.99it/s]Loading weights:   1%|          | 4/365 [00:08<13:21,  2.22s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:14,  2.04s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.13it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.92 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:57,  3.11it/s]Loading weights:   1%|          | 4/365 [00:07<12:12,  2.03s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:40,  2.11s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 36.71it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.10 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:35, 10.19it/s]Loading weights:   1%|          | 4/365 [00:04<08:27,  1.41s/it]Loading weights:   1%|▏         | 5/365 [00:05<07:34,  1.26s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 63.22it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.35 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:04<06:34,  1.09s/it]Loading weights:   1%|▏         | 5/365 [00:06<07:59,  1.33s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 57.16it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.35 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:20, 17.82it/s]Loading weights:   1%|          | 4/365 [00:05<10:02,  1.67s/it]Loading weights:   1%|▏         | 5/365 [00:08<11:15,  1.88s/it]Loading weights: 100%|██████████| 365/365 [00:08<00:00, 45.10it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.28 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:41,  3.59it/s]Loading weights:   1%|          | 4/365 [00:03<05:43,  1.05it/s]Loading weights:   1%|▏         | 5/365 [00:05<06:40,  1.11s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 70.90it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.36 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:45,  8.05it/s]Loading weights:   1%|          | 4/365 [00:02<04:55,  1.22it/s]Loading weights:   1%|▏         | 5/365 [00:03<05:13,  1.15it/s]Loading weights: 100%|██████████| 365/365 [00:03<00:00, 94.16it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.51 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:30, 11.96it/s]Loading weights:   1%|          | 4/365 [00:03<06:05,  1.01s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:50,  1.47s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 60.06it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.47 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:38,  9.38it/s]Loading weights:   1%|          | 4/365 [00:03<06:15,  1.04s/it]Loading weights:   1%|▏         | 5/365 [00:05<07:00,  1.17s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 71.75it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.51 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:46,  7.81it/s]Loading weights:   1%|          | 4/365 [00:03<06:28,  1.08s/it]Loading weights:   1%|▏         | 5/365 [00:04<06:38,  1.11s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 74.03it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.61 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:38,  9.55it/s]Loading weights:   1%|          | 4/365 [00:03<06:28,  1.08s/it]Loading weights:   1%|▏         | 5/365 [00:04<06:48,  1.13s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 72.90it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.45 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:32,  3.93it/s]Loading weights:   1%|          | 4/365 [00:03<05:32,  1.09it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:29,  1.08s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 73.02it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.46 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:30, 11.91it/s]Loading weights:   1%|          | 4/365 [00:03<06:00,  1.00it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:47,  1.13s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 74.38it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.51 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:58,  3.07it/s]Loading weights:   1%|          | 4/365 [00:03<05:21,  1.12it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:29,  1.08s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 73.29it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.39 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:32,  3.92it/s]Loading weights:   1%|          | 4/365 [00:03<05:11,  1.16it/s]Loading weights:   1%|▏         | 5/365 [00:05<06:46,  1.13s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 71.64it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.48 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:35, 10.29it/s]Loading weights:   1%|          | 4/365 [00:03<06:07,  1.02s/it]Loading weights:   1%|▏         | 5/365 [00:05<07:05,  1.18s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 71.53it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.49 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:15,  4.81it/s]Loading weights:   1%|          | 4/365 [00:03<05:37,  1.07it/s]Loading weights:   1%|▏         | 5/365 [00:05<07:25,  1.24s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 65.66it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.47 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:39,  9.10it/s]Loading weights:   1%|          | 4/365 [00:03<05:47,  1.04it/s]Loading weights:   1%|▏         | 5/365 [00:05<07:18,  1.22s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 70.44it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.52 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:43,  8.41it/s]Loading weights:   1%|          | 4/365 [00:03<05:59,  1.01it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:37,  1.10s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 75.48it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.47 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:38,  9.53it/s]Loading weights:   1%|          | 4/365 [00:03<06:11,  1.03s/it]Loading weights:   1%|▏         | 5/365 [00:05<07:23,  1.23s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 69.03it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.73 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:07,  5.41it/s]Loading weights:   1%|          | 4/365 [00:03<06:13,  1.03s/it]Loading weights:   1%|▏         | 5/365 [00:05<07:14,  1.21s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 69.44it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.80 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:17,  4.70it/s]Loading weights:   1%|          | 4/365 [00:03<05:50,  1.03it/s]Loading weights:   1%|▏         | 5/365 [00:05<06:35,  1.10s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 71.51it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.62 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:50,  7.14it/s]Loading weights:   1%|          | 4/365 [00:03<05:32,  1.09it/s]Loading weights:   1%|▏         | 5/365 [00:04<05:54,  1.02it/s]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 83.70it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.43 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:26, 13.45it/s]Loading weights:   1%|          | 4/365 [00:02<04:23,  1.37it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:10,  1.03s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 85.33it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.54 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:43,  8.40it/s]Loading weights:   1%|          | 4/365 [00:05<09:16,  1.54s/it]Loading weights:   1%|▏         | 5/365 [00:07<11:09,  1.86s/it]Loading weights: 100%|██████████| 365/365 [00:07<00:00, 45.97it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 11.31 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:09,  5.26it/s]Loading weights:   1%|          | 4/365 [00:02<04:18,  1.40it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:39,  1.11s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 75.28it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 22.94 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:02<03:53,  1.55it/s]Loading weights:   1%|▏         | 5/365 [00:04<05:27,  1.10it/s]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 86.03it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 16.44 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:39,  9.08it/s]Loading weights:   1%|          | 4/365 [00:03<05:31,  1.09it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:11,  1.03s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 80.99it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 29.70 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:54,  6.63it/s]Loading weights:   1%|          | 4/365 [00:03<05:54,  1.02it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:19,  1.05s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 78.27it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 25.36 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:35, 10.26it/s]Loading weights:   1%|          | 4/365 [00:03<05:20,  1.13it/s]Loading weights:   1%|▏         | 5/365 [00:04<05:33,  1.08it/s]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 88.94it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 22.81 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:55,  6.57it/s]Loading weights:   1%|          | 4/365 [00:05<08:45,  1.46s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:28,  1.41s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 57.33it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.97 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:10,  5.19it/s]Loading weights:   1%|          | 4/365 [00:03<05:40,  1.06it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:29,  1.08s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 72.98it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 25.30 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:05<08:32,  1.42s/it]Loading weights:   1%|▏         | 5/365 [00:08<10:21,  1.73s/it]Loading weights: 100%|██████████| 365/365 [00:08<00:00, 44.08it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 20.37 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<00:49,  7.29it/s]Loading weights:   1%|          | 4/365 [00:03<04:59,  1.20it/s]Loading weights:   1%|▏         | 5/365 [00:04<06:07,  1.02s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 78.72it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 27.44 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:26, 13.81it/s]Loading weights:   1%|          | 4/365 [00:02<04:53,  1.23it/s]Loading weights:   1%|▏         | 5/365 [00:04<05:34,  1.08it/s]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 90.65it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.06 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:29, 12.31it/s]Loading weights:   1%|          | 4/365 [00:02<05:00,  1.20it/s]Loading weights:   1%|▏         | 5/365 [00:03<05:23,  1.11it/s]Loading weights: 100%|██████████| 365/365 [00:03<00:00, 92.42it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 22.49 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:32, 11.04it/s]Loading weights:   1%|          | 4/365 [00:02<03:43,  1.61it/s]Loading weights:   1%|▏         | 5/365 [00:05<08:32,  1.42s/it]Loading weights: 100%|██████████| 365/365 [00:05<00:00, 66.28it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 11.75 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:18,  4.62it/s]Loading weights:   1%|          | 4/365 [00:07<11:37,  1.93s/it]Loading weights:   1%|▏         | 5/365 [00:08<11:15,  1.88s/it]Loading weights: 100%|██████████| 365/365 [00:08<00:00, 40.75it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 11.05 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:52,  6.94it/s]Loading weights:   1%|          | 4/365 [00:07<12:16,  2.04s/it]Loading weights:   1%|▏         | 5/365 [00:10<14:09,  2.36s/it]Loading weights: 100%|██████████| 365/365 [00:10<00:00, 35.95it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 21.29 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:43,  3.52it/s]Loading weights:   1%|          | 4/365 [00:07<11:32,  1.92s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:39,  2.11s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.23it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 33.28 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:43,  8.26it/s]Loading weights:   1%|          | 4/365 [00:05<10:03,  1.67s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:32,  1.42s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 55.29it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 13.82 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:00,  5.99it/s]Loading weights:   1%|          | 4/365 [00:05<09:24,  1.56s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:10,  1.36s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 57.80it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 22.07 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<02:00,  3.01it/s]Loading weights:   1%|          | 4/365 [00:04<07:44,  1.29s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:25,  1.40s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 55.43it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 17.63 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:02,  5.84it/s]Loading weights:   1%|          | 4/365 [00:07<13:28,  2.24s/it]Loading weights:   1%|▏         | 5/365 [00:09<13:07,  2.19s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.30it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.39 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:03<05:20,  1.12it/s]Loading weights:   1%|▏         | 5/365 [00:04<05:02,  1.19it/s]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 85.52it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.62 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:03<05:24,  1.11it/s]Loading weights:   1%|▏         | 5/365 [00:04<05:03,  1.18it/s]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 84.91it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.07 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:54,  3.18it/s]Loading weights:   1%|          | 4/365 [00:06<11:07,  1.85s/it]Loading weights:   1%|▏         | 5/365 [00:08<11:26,  1.91s/it]Loading weights: 100%|██████████| 365/365 [00:08<00:00, 42.76it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 10.21 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:40,  9.00it/s]Loading weights:   1%|          | 4/365 [00:07<13:35,  2.26s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:35,  2.10s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 38.51it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 22.00 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:52,  6.95it/s]Loading weights:   1%|          | 4/365 [00:06<12:13,  2.03s/it]Loading weights:   1%|▏         | 5/365 [00:09<13:24,  2.24s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.53it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 18.70 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:47,  7.61it/s]Loading weights:   1%|          | 4/365 [00:07<12:51,  2.14s/it]Loading weights:   1%|▏         | 5/365 [00:09<13:33,  2.26s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 36.84it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 25.94 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:30,  4.01it/s]Loading weights:   1%|          | 4/365 [00:07<12:21,  2.05s/it]Loading weights:   1%|▏         | 5/365 [00:09<13:29,  2.25s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.03it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 13.92 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<02:22,  2.55it/s]Loading weights:   1%|          | 4/365 [00:07<11:51,  1.97s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:00,  2.00s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 38.39it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 20.97 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:44,  3.48it/s]Loading weights:   1%|          | 4/365 [00:06<10:57,  1.82s/it]Loading weights:   1%|▏         | 5/365 [00:09<12:40,  2.11s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.63it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 19.28 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:06<10:22,  1.72s/it]Loading weights:   1%|▏         | 5/365 [00:09<11:13,  1.87s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 39.73it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 13.29 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<02:29,  2.44it/s]Loading weights:   1%|          | 4/365 [00:06<10:53,  1.81s/it]Loading weights:   1%|▏         | 5/365 [00:09<11:35,  1.93s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 40.22it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 15.70 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<02:27,  2.46it/s]Loading weights:   1%|          | 4/365 [00:07<11:17,  1.88s/it]Loading weights:   1%|▏         | 5/365 [00:08<11:13,  1.87s/it]Loading weights: 100%|██████████| 365/365 [00:08<00:00, 40.87it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.96 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<01:02,  5.83it/s]Loading weights:   1%|          | 4/365 [00:07<12:26,  2.07s/it]Loading weights:   1%|▏         | 5/365 [00:09<13:31,  2.25s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 37.09it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.62 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<02:11,  2.76it/s]Loading weights:   1%|          | 4/365 [00:07<12:43,  2.11s/it]Loading weights:   1%|▏         | 5/365 [00:09<13:19,  2.22s/it]Loading weights: 100%|██████████| 365/365 [00:09<00:00, 36.89it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 10.09 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<00:36,  9.94it/s]Loading weights:   1%|          | 4/365 [00:05<08:26,  1.40s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:27,  1.41s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 54.81it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 8.89 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   0%|          | 1/365 [00:00<01:23,  4.37it/s]Loading weights:   1%|          | 4/365 [00:05<08:19,  1.38s/it]Loading weights:   1%|▏         | 5/365 [00:06<08:39,  1.44s/it]Loading weights: 100%|██████████| 365/365 [00:06<00:00, 53.67it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 17.87 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:02<03:43,  1.61it/s]Loading weights:   1%|▏         | 5/365 [00:03<04:28,  1.34it/s]Loading weights: 100%|██████████| 365/365 [00:03<00:00, 101.72it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 9.06 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 2/365 [00:00<00:35, 10.28it/s]Loading weights:   1%|          | 4/365 [00:03<06:29,  1.08s/it]Loading weights:   1%|▏         | 5/365 [00:04<06:24,  1.07s/it]Loading weights: 100%|██████████| 365/365 [00:04<00:00, 76.26it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...93}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...93}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...93}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...93}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...93}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...93}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 16.32 seconds
+Loading weights:   0%|          | 0/365 [00:00<?, ?it/s]Loading weights:   1%|          | 4/365 [00:02<04:04,  1.48it/s]Loading weights:   1%|▏         | 5/365 [00:03<04:50,  1.24it/s]Loading weights: 100%|██████████| 365/365 [00:03<00:00, 93.96it/s]
+[1mQwen3VLMoeForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen3-VL-235B-A22B-Instruct
+Key                                                                  | Status  | 
+---------------------------------------------------------------------+---------+-
+model.language_model.layers.{0...92}.self_attn.k_proj.weight         | MISSING | 
+model.language_model.layers.{0...92}.mlp.gate.weight                 | MISSING | 
+model.language_model.layers.{0...92}.self_attn.o_proj.weight         | MISSING | 
+model.language_model.layers.{0...92}.self_attn.q_norm.weight         | MISSING | 
+model.language_model.layers.{0...92}.self_attn.v_proj.weight         | MISSING | 
+model.language_model.layers.{0...92}.input_layernorm.weight          | MISSING | 
+model.language_model.layers.{0...92}.post_attention_layernorm.weight | MISSING | 
+model.language_model.layers.{0...92}.self_attn.k_norm.weight         | MISSING | 
+model.language_model.layers.{0...92}.self_attn.q_proj.weight         | MISSING | 
+model.language_model.layers.{0...92}.mlp.experts.down_proj           | MISSING | 
+model.language_model.layers.{0...92}.mlp.experts.gate_up_proj        | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Total export time: 10.53 seconds
+{
+  "metadata": {
+    "target_script": "/home/rishinr/qeff/mainline/efficient-transformers/examples/image_text_to_text/models/qwen3_vl_moe/qwen3_vl_disagg_mode.py",
+    "started_at": "2026-06-26T07:02:00.264456",
+    "hf_hub_cache": "/home/huggingface_hub",
+    "qeff_home": "/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home",
+    "hf_hub_enable_hf_transfer": "1",
+    "sampling_interval": 0.05,
+    "child_scan_interval": 0.1,
+    "model_id": "Qwen/Qwen3-VL-235B-A22B-Instruct",
+    "local_files_only": true,
+    "requested_text_layers": null,
+    "requested_vision_depth": null,
+    "layerwise": true,
+    "layerwise_window_size": 1,
+    "skip_missing_key_initialization_for_layerwise_filtering": true,
+    "compile_order": [
+      "vision",
+      "prefill",
+      "decode"
+    ],
+    "runtime_decode_steps": 8,
+    "compile_options": {
+      "batch_size": 1,
+      "prefill_seq_len": 128,
+      "ctx_len": 4096,
+      "num_cores": 16,
+      "vision_num_devices": 1,
+      "prefill_num_devices": 1,
+      "decode_num_devices": 1,
+      "height": 354,
+      "width": 536,
+      "mxfp6_matmul": true,
+      "mxint8_kv_cache": true,
+      "aic_enable_depth_first": true,
+      "split_model_io": true,
+      "use_onnx_subfunctions": true,
+      "mos": 1
+    },
+    "original_text_layers": 94,
+    "original_vision_depth": 27,
+    "resolved_text_layers": 94,
+    "resolved_vision_depth": 27,
+    "vision_export_text_layers": 1,
+    "completed_at": "2026-06-26T08:46:27.994346",
+    "status": "failed",
+    "error": "RuntimeError(\"Compilation failed!\\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/merged_0-94.onnx', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-split-model-io', '-mos=1', '-aic-enable-depth-first', '-sub-functions', '-network-specialization-config=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/specializations.json', '-custom-IO-list-file=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/custom_io.yaml', '-aic-binary-dir=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/qpc']\\nCompiler exitcode: 1\\nCompiler stderr:\\nQAIC_ERROR: \\nError message: Cannot broadcast with these dimensions.\\nNode: layer_1//language_model/Add_8/\\nInputs dims:\\n[1, 128, 4096, \\x08\\x08]\\n[1, 32, 4096, \\x08\\x08]\\n\\nAccording to ONNX specification, the dimensions need to be common length or 1 in order to be broadcastable. \\nIn cases where some tensors have too few dimensions, their shapes can be prepended with dimension(s) of length 1\\nto satisfy the latter property.\\n\\nUnable to AddNodesToGraphFromModel\\n\")",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 1051, in _compile\n    subprocess.run(command, capture_output=True, check=True)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_5_disagg_mode.py\", line 129, in profiled_subprocess_run\n    return detailed_profiler.call(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_5_disagg_mode.py\", line 87, in call\n    return func(*args, **kwargs)\n  File \"/home/rishinr/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/merged_0-94.onnx', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-split-model-io', '-mos=1', '-aic-enable-depth-first', '-sub-functions', '-network-specialization-config=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/specializations.json', '-custom-IO-list-file=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/custom_io.yaml', '-aic-binary-dir=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/qpc']' returned non-zero exit status 1.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_vl_moe_disagg_e2e.py\", line 280, in run_profile\n    prefill_qpc_path = detailed_profiler.call(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_5_disagg_mode.py\", line 87, in call\n    return func(*args, **kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py\", line 1970, in compile\n    return self._run_layerwise_compile(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py\", line 1826, in _run_layerwise_compile\n    qpc_paths = _layerwise.run_layerwise(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/_layerwise.py\", line 838, in run_layerwise\n    return last_qeff_model.compile(**final_kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py\", line 2164, in compile\n    lang_qpc_path = self.lang_model._compile(\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/utils/_utils.py\", line 818, in wrapper\n    result = func(self, *args, **kwargs)\n  File \"/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py\", line 1053, in _compile\n    raise RuntimeError(\nRuntimeError: Compilation failed!\nCompiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/merged_0-94.onnx', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-split-model-io', '-mos=1', '-aic-enable-depth-first', '-sub-functions', '-network-specialization-config=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/specializations.json', '-custom-IO-list-file=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/custom_io.yaml', '-aic-binary-dir=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/qpc']\nCompiler exitcode: 1\nCompiler stderr:\nQAIC_ERROR: \nError message: Cannot broadcast with these dimensions.\nNode: layer_1//language_model/Add_8/\nInputs dims:\n[1, 128, 4096, \b\b]\n[1, 32, 4096, \b\b]\n\nAccording to ONNX specification, the dimensions need to be common length or 1 in order to be broadcastable. \nIn cases where some tensors have too few dimensions, their shapes can be prepended with dimension(s) of length 1\nto satisfy the latter property.\n\nUnable to AddNodesToGraphFromModel\n\n",
+    "vision_qpc_path": "{'vision_qpc_path': PosixPath('/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLEncoderWrapper-2f56aa2df4ca56ea/qpc-5e71f2abe6dbe25f/qpc')}",
+    "prefill_qpc_path": "None",
+    "decode_qpc_path": "None"
+  },
+  "outputs": {
+    "report": "/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/profile/memory_report.txt",
+    "phases_csv": "/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/profile/component_phases.csv",
+    "samples_csv": "/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/profile/samples_timeseries.csv",
+    "summary_json": "/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/profile/profile_summary.json",
+    "graph": "/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/profile/memory_timeline.png"
+  }
+}
+Detailed Qwen3-VL-MoE full-layer disagg e2e profiling elapsed time: 6324.5s
+Traceback (most recent call last):
+  File "/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py", line 1051, in _compile
+    subprocess.run(command, capture_output=True, check=True)
+  File "/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_5_disagg_mode.py", line 129, in profiled_subprocess_run
+    return detailed_profiler.call(
+  File "/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_5_disagg_mode.py", line 87, in call
+    return func(*args, **kwargs)
+  File "/home/rishinr/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/merged_0-94.onnx', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-split-model-io', '-mos=1', '-aic-enable-depth-first', '-sub-functions', '-network-specialization-config=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/specializations.json', '-custom-IO-list-file=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/custom_io.yaml', '-aic-binary-dir=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/qpc']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_vl_moe_disagg_e2e.py", line 579, in <module>
+    run_profile(parse_args())
+  File "/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_vl_moe_disagg_e2e.py", line 280, in run_profile
+    prefill_qpc_path = detailed_profiler.call(
+  File "/home/rishinr/qeff/mainline/efficient-transformers/scripts/memory_profiling/profile_qwen3_5_disagg_mode.py", line 87, in call
+    return func(*args, **kwargs)
+  File "/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py", line 1970, in compile
+    return self._run_layerwise_compile(
+  File "/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py", line 1826, in _run_layerwise_compile
+    qpc_paths = _layerwise.run_layerwise(
+  File "/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/_layerwise.py", line 838, in run_layerwise
+    return last_qeff_model.compile(**final_kwargs)
+  File "/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/transformers/models/modeling_auto.py", line 2164, in compile
+    lang_qpc_path = self.lang_model._compile(
+  File "/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/utils/_utils.py", line 818, in wrapper
+    result = func(self, *args, **kwargs)
+  File "/home/rishinr/qeff/mainline/efficient-transformers/QEfficient/base/modeling_qeff.py", line 1053, in _compile
+    raise RuntimeError(
+RuntimeError: Compilation failed!
+Compiler command: ['/opt/qti-aic/exec/qaic-compile', '-aic-hw', '-aic-hw-version=ai100', '-m=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/merged_0-94.onnx', '-retained-state', '-convert-to-fp16', '-mxfp6-matmul', '-aic-num-cores=16', '-split-model-io', '-mos=1', '-aic-enable-depth-first', '-sub-functions', '-network-specialization-config=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/specializations.json', '-custom-IO-list-file=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/custom_io.yaml', '-aic-binary-dir=/home/rishinr/qwen3_vl_235b_full_layer_disagg_e2e_final_20260626_070152/qeff_home/Qwen3VLMoeForConditionalGeneration/Qwen3VLDecoderWrapper-18e78fa9cf00b85f/qpc-65638e06f9c34a93/qpc']
+Compiler exitcode: 1
+Compiler stderr:
+QAIC_ERROR: 
+Error message: Cannot broadcast with these dimensions.
+Node: layer_1//language_model/Add_8/
+Inputs dims:
+[1, 128, 4096, ]
+[1, 32, 4096, ]
+
+According to ONNX specification, the dimensions need to be common length or 1 in order to be broadcastable. 
+In cases where some tensors have too few dimensions, their shapes can be prepended with dimension(s) of length 1
+to satisfy the latter property.
+
+Unable to AddNodesToGraphFromModel
+
+Skipping module attribute 'freeze'
+Skipping module attribute 'freeze'

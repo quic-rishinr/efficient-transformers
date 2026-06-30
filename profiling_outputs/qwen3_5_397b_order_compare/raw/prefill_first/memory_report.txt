@@ -1,0 +1,146 @@
+
+QEFFICIENT PERFORMANCE MONITORING REPORT
+============================================================
+Peak Memory Usage:
+   • RSS (Physical): 285.11 GB at 03:00:47
+   • VMS (Virtual):  834.01 GB at 02:58:59
+   • Peak during:    vision: torch.onnx.export
+
+Memory Statistics:
+   • Current RSS:    59.94 GB (Delta: +59.35 GB)
+   • Current VMS:    85.99 GB (Delta: +79.62 GB)
+   • Average RSS:    83.56 GB
+   • Min/Max RSS:    0.60 / 285.11 GB
+   • Memory Range:   284.51 GB
+Disk I/O Statistics:
+   • Total Read:     5685.84 MB
+   • Total Write:    144066.25 MB
+   • Peak Read Rate: 1633.99 MB/s
+   • Peak Write Rate:14822.72 MB/s
+   • Avg Read Rate:  5.16 MB/s
+   • Avg Write Rate: 56.48 MB/s
+
+Monitoring Info:
+   • Duration:       722.1 seconds
+   • Data Points:    8890
+   • Operations:     117
+   • Sampling Rate:  0.05s
+
+QEfficient Operations Timeline:
+    1.    0.0s - hf config setup (0.0s) 
+    2.    0.0s - AutoConfig.from_pretrained (0.5s) 
+    3.    0.5s - post: AutoConfig.from_pretrained (0.0s) 
+    4.    0.5s - post: hf config setup (0.0s) 
+    5.    0.5s - QEFFAutoModelForImageTextToText.from_pretrained (3.5s) [+58.7 GB]
+    6.    4.0s - post: QEFFAutoModelForImageTextToText.from_pretrained (0.0s) 
+    7.    4.0s - AutoTokenizer.from_pretrained (2.7s) [+59.0 GB]
+    8.    6.7s - post: AutoTokenizer.from_pretrained (0.0s) 
+    9.    6.7s - AutoProcessor.from_pretrained (8.1s) [+59.1 GB]
+   10.   14.8s - post: AutoProcessor.from_pretrained (0.0s) 
+   11.   14.8s - vision: compile request (0.0s) 
+   12.   14.8s - vision: build output names (0.0s) 
+   13.   14.8s - vision: post: build output names (0.0s) 
+   14.   14.8s - vision: vision pytorch transform (0.0s) 
+   15.   14.8s - vision: post: vision pytorch transform (0.0s) 
+   16.   14.8s - vision: language pytorch transform (0.0s) 
+   17.   14.8s - vision: post: language pytorch transform (0.0s) 
+   18.   14.8s - vision: dual-qpc export orchestration (0.0s) 
+   19.   14.8s - vision: build dummy inputs (0.0s) 
+   20.   14.8s - vision: post: build dummy inputs (0.0s) 
+   21.   14.8s - vision: build dynamic axes (0.0s) 
+   22.   14.8s - vision: post: build dynamic axes (0.0s) 
+   23.   14.8s - vision: build output names (0.0s) 
+   24.   14.8s - vision: post: build output names (0.0s) 
+   25.   14.8s - vision: vision export (0.0s) 
+   26.   14.8s - vision: torch.onnx.export (122.5s) [+59.3 GB]
+   27.  137.3s - vision: post: torch.onnx.export (0.0s) 
+   28.  137.3s - vision: vision offload pytorch weights (0.0s) 
+   29.  137.3s - vision: post: vision offload pytorch weights (0.0s) 
+   30.  137.3s - vision: onnx.load (2.0s) [-0.1 GB]
+   31.  139.2s - vision: post: onnx.load (0.0s) 
+   32.  139.2s - vision: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   33.  139.2s - vision: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   34.  139.2s - vision: onnx.save (5.3s) [-55.0 GB]
+   35.  144.5s - vision: post: onnx.save (13.3s) [-37.3 GB]
+   36.  157.8s - vision: post: vision export (0.0s) 
+   37.  157.8s - vision: post: dual-qpc export orchestration (0.0s) 
+   38.  157.8s - vision: vision compile wrapper (0.0s) 
+   39.  157.8s - vision: onnx.load (2.0s) [-0.1 GB]
+   40.  159.7s - vision: post: onnx.load (0.0s) 
+   41.  159.7s - vision: subprocess.run: qaic-compile (17.2s) [+0.5 GB]
+   42.  177.0s - vision: post: subprocess.run: qaic-compile (0.1s) [-1.6 GB]
+   43.  177.1s - vision: post: vision compile wrapper (0.0s) 
+   44.  177.1s - vision: post: compile request (0.0s) 
+   45.  177.1s - prefill: compile request (0.0s) 
+   46.  177.1s - prefill: build output names (0.0s) 
+   47.  177.1s - prefill: post: build output names (0.0s) 
+   48.  177.1s - prefill: vision pytorch transform (0.0s) 
+   49.  177.1s - prefill: post: vision pytorch transform (0.0s) 
+   50.  177.1s - prefill: language pytorch transform (0.0s) 
+   51.  177.1s - prefill: post: language pytorch transform (0.0s) 
+   52.  177.1s - prefill: dual-qpc export orchestration (0.0s) 
+   53.  177.1s - prefill: build dummy inputs (0.0s) 
+   54.  177.1s - prefill: post: build dummy inputs (0.0s) 
+   55.  177.1s - prefill: build dynamic axes (0.0s) 
+   56.  177.1s - prefill: post: build dynamic axes (0.0s) 
+   57.  177.1s - prefill: build output names (0.0s) 
+   58.  177.1s - prefill: post: build output names (0.0s) 
+   59.  177.1s - prefill: language export (0.0s) 
+   60.  177.1s - prefill: torch.onnx.export (115.6s) [-0.2 GB]
+   61.  292.7s - prefill: post: torch.onnx.export (0.0s) 
+   62.  292.7s - prefill: language offload pytorch weights (0.0s) 
+   63.  292.7s - prefill: post: language offload pytorch weights (0.0s) 
+   64.  292.7s - prefill: onnx.load (0.0s) 
+   65.  292.7s - prefill: post: onnx.load (0.0s) 
+   66.  292.7s - prefill: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   67.  292.7s - prefill: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   68.  292.7s - prefill: onnx.save (0.1s) 
+   69.  292.7s - prefill: post: onnx.save (0.2s) 
+   70.  293.0s - prefill: post: language export (0.0s) 
+   71.  293.0s - prefill: post: dual-qpc export orchestration (0.0s) 
+   72.  293.0s - prefill: onnx.load (0.0s) 
+   73.  293.0s - prefill: post: onnx.load (0.0s) 
+   74.  293.0s - prefill: language compile wrapper (0.0s) 
+   75.  293.0s - prefill: onnx.load (0.0s) 
+   76.  293.0s - prefill: post: onnx.load (0.0s) 
+   77.  293.0s - prefill: subprocess.run: qaic-compile (29.6s) [-0.4 GB]
+   78.  322.6s - prefill: post: subprocess.run: qaic-compile (0.0s) 
+   79.  322.6s - prefill: post: language compile wrapper (0.0s) 
+   80.  322.6s - prefill: post: compile request (0.0s) 
+   81.  322.6s - decode: compile request (0.0s) 
+   82.  322.6s - decode: build output names (0.0s) 
+   83.  322.6s - decode: post: build output names (0.0s) 
+   84.  322.6s - decode: vision pytorch transform (0.0s) 
+   85.  322.6s - decode: post: vision pytorch transform (0.0s) 
+   86.  322.6s - decode: language pytorch transform (0.0s) 
+   87.  322.6s - decode: post: language pytorch transform (0.0s) 
+   88.  322.6s - decode: dual-qpc export orchestration (0.0s) 
+   89.  322.6s - decode: build dummy inputs (0.0s) 
+   90.  322.6s - decode: post: build dummy inputs (0.0s) 
+   91.  322.6s - decode: build dynamic axes (0.0s) 
+   92.  322.6s - decode: post: build dynamic axes (0.0s) 
+   93.  322.6s - decode: build output names (0.0s) 
+   94.  322.6s - decode: post: build output names (0.0s) 
+   95.  322.6s - decode: language export (0.0s) 
+   96.  322.6s - decode: torch.onnx.export (104.4s) [-157.3 GB]
+   97.  427.0s - decode: post: torch.onnx.export (0.0s) 
+   98.  427.0s - decode: language offload pytorch weights (0.0s) 
+   99.  427.0s - decode: post: language offload pytorch weights (0.0s) 
+   100.  427.0s - decode: onnx.load (0.0s) 
+   101.  427.0s - decode: post: onnx.load (0.0s) 
+   102.  427.0s - decode: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   103.  427.0s - decode: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   104.  427.0s - decode: onnx.save (0.1s) 
+   105.  427.1s - decode: post: onnx.save (0.3s) 
+   106.  427.4s - decode: post: language export (0.0s) 
+   107.  427.4s - decode: post: dual-qpc export orchestration (0.0s) 
+   108.  427.4s - decode: onnx.load (0.0s) 
+   109.  427.4s - decode: post: onnx.load (0.0s) 
+   110.  427.4s - decode: language compile wrapper (0.0s) 
+   111.  427.4s - decode: onnx.load (0.0s) 
+   112.  427.4s - decode: post: onnx.load (0.0s) 
+   113.  427.4s - decode: subprocess.run: qaic-compile (294.7s) [-0.6 GB]
+   114.  722.1s - decode: post: subprocess.run: qaic-compile (0.0s) 
+   115.  722.1s - decode: post: language compile wrapper (0.0s) 
+   116.  722.1s - decode: post: compile request (0.0s) 
+   117.  722.2s - Completion  

@@ -1,0 +1,148 @@
+
+QEFFICIENT PERFORMANCE MONITORING REPORT
+============================================================
+Peak Memory Usage:
+   • RSS (Physical): 32.89 GB at 02:21:10
+   • VMS (Virtual):  483.49 GB at 02:20:15
+   • Peak during:    decode: torch.onnx.export
+
+Memory Statistics:
+   • Current RSS:    13.49 GB (Delta: +12.89 GB)
+   • Current VMS:    39.66 GB (Delta: +33.29 GB)
+   • Average RSS:    15.07 GB
+   • Min/Max RSS:    0.60 / 32.89 GB
+   • Memory Range:   32.29 GB
+Disk I/O Statistics:
+   • Total Read:     3413.27 MB
+   • Total Write:    39046.95 MB
+   • Peak Read Rate: 356918.90 MB/s
+   • Peak Write Rate:719096.07 MB/s
+   • Avg Read Rate:  106.11 MB/s
+   • Avg Write Rate: 272.05 MB/s
+
+Monitoring Info:
+   • Duration:       277.5 seconds
+   • Data Points:    3483
+   • Operations:     119
+   • Sampling Rate:  0.05s
+
+QEfficient Operations Timeline:
+    1.    0.0s - setup: torch.manual_seed (0.0s) 
+    2.    0.0s - post: setup: torch.manual_seed (0.0s) 
+    3.    0.0s - hf config: AutoConfig.from_pretrained (0.0s) 
+    4.    0.0s - post: hf config: AutoConfig.from_pretrained (0.0s) 
+    5.    0.0s - config: mutate dtype/text_layers (0.0s) 
+    6.    0.0s - post: config: mutate dtype/text_layers (0.0s) 
+    7.    0.0s - hf tokenizer: AutoTokenizer.from_pretrained (0.7s) [+0.1 GB]
+    8.    0.7s - post: hf tokenizer: AutoTokenizer.from_pretrained (0.0s) 
+    9.    0.7s - hf processor: AutoProcessor.from_pretrained (0.5s) 
+   10.    1.3s - post: hf processor: AutoProcessor.from_pretrained (0.0s) 
+   11.    1.3s - qeff load: QEFFAutoModelForImageTextToText.from_pretrained (2.9s) [+12.9 GB]
+   12.    4.2s - post: qeff load: QEFFAutoModelForImageTextToText.from_pretrained (0.0s) 
+   13.    4.2s - vision: compile request (0.0s) 
+   14.    4.2s - vision: build output names (0.0s) 
+   15.    4.2s - vision: post: build output names (0.0s) 
+   16.    4.2s - vision: vision pytorch transform (0.0s) 
+   17.    4.2s - vision: post: vision pytorch transform (0.0s) 
+   18.    4.2s - vision: language pytorch transform (0.0s) 
+   19.    4.2s - vision: post: language pytorch transform (0.0s) 
+   20.    4.2s - vision: dual-qpc export orchestration (0.0s) 
+   21.    4.2s - vision: build dummy inputs (0.0s) 
+   22.    4.2s - vision: post: build dummy inputs (0.0s) 
+   23.    4.2s - vision: build dynamic axes (0.0s) 
+   24.    4.2s - vision: post: build dynamic axes (0.0s) 
+   25.    4.2s - vision: build output names (0.0s) 
+   26.    4.2s - vision: post: build output names (0.0s) 
+   27.    4.2s - vision: vision export (0.0s) 
+   28.    4.2s - vision: torch.onnx.export (23.0s) [+14.3 GB]
+   29.   27.2s - vision: post: torch.onnx.export (0.0s) 
+   30.   27.2s - vision: vision offload pytorch weights (0.0s) 
+   31.   27.2s - vision: post: vision offload pytorch weights (0.0s) 
+   32.   27.2s - vision: onnx.load (0.7s) 
+   33.   27.8s - vision: post: onnx.load (0.0s) 
+   34.   27.8s - vision: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   35.   27.8s - vision: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   36.   27.8s - vision: onnx.save (4.6s) [-0.3 GB]
+   37.   32.5s - vision: post: onnx.save (6.1s) [-0.9 GB]
+   38.   38.6s - vision: post: vision export (0.0s) 
+   39.   38.6s - vision: post: dual-qpc export orchestration (0.0s) 
+   40.   38.6s - vision: vision compile wrapper (0.0s) 
+   41.   38.6s - vision: onnx.load (0.7s) 
+   42.   39.3s - vision: post: onnx.load (0.0s) 
+   43.   39.3s - vision: subprocess.run: qaic-compile (16.2s) [-0.1 GB]
+   44.   55.5s - vision: post: subprocess.run: qaic-compile (0.0s) 
+   45.   55.5s - vision: post: vision compile wrapper (0.0s) 
+   46.   55.5s - vision: post: compile request (0.0s) 
+   47.   55.5s - decode: compile request (0.0s) 
+   48.   55.5s - decode: build output names (0.0s) 
+   49.   55.5s - decode: post: build output names (0.0s) 
+   50.   55.5s - decode: vision pytorch transform (0.0s) 
+   51.   55.5s - decode: post: vision pytorch transform (0.0s) 
+   52.   55.5s - decode: language pytorch transform (0.0s) 
+   53.   55.5s - decode: post: language pytorch transform (0.0s) 
+   54.   55.5s - decode: dual-qpc export orchestration (0.0s) 
+   55.   55.5s - decode: build dummy inputs (0.0s) 
+   56.   55.5s - decode: post: build dummy inputs (0.0s) 
+   57.   55.5s - decode: build dynamic axes (0.0s) 
+   58.   55.5s - decode: post: build dynamic axes (0.0s) 
+   59.   55.5s - decode: build output names (0.0s) 
+   60.   55.5s - decode: post: build output names (0.0s) 
+   61.   55.5s - decode: language export (0.0s) 
+   62.   55.5s - decode: torch.onnx.export (28.2s) [-0.3 GB]
+   63.   83.7s - decode: post: torch.onnx.export (0.0s) 
+   64.   83.7s - decode: language offload pytorch weights (0.0s) 
+   65.   83.7s - decode: post: language offload pytorch weights (0.0s) 
+   66.   83.7s - decode: onnx.load (0.0s) 
+   67.   83.7s - decode: post: onnx.load (0.0s) 
+   68.   83.7s - decode: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   69.   83.7s - decode: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   70.   83.7s - decode: onnx.save (0.0s) 
+   71.   83.7s - decode: post: onnx.save (0.4s) 
+   72.   84.0s - decode: post: language export (0.0s) 
+   73.   84.0s - decode: post: dual-qpc export orchestration (0.0s) 
+   74.   84.0s - decode: onnx.load (0.0s) 
+   75.   84.0s - decode: post: onnx.load (0.0s) 
+   76.   84.0s - decode: language compile wrapper (0.0s) 
+   77.   84.0s - decode: onnx.load (0.0s) 
+   78.   84.0s - decode: post: onnx.load (0.0s) 
+   79.   84.0s - decode: subprocess.run: qaic-compile (50.1s) [-9.2 GB]
+   80.  134.1s - decode: post: subprocess.run: qaic-compile (0.0s) 
+   81.  134.1s - decode: post: language compile wrapper (0.0s) 
+   82.  134.1s - decode: post: compile request (0.0s) 
+   83.  134.1s - prefill: compile request (0.0s) 
+   84.  134.1s - prefill: build output names (0.0s) 
+   85.  134.1s - prefill: post: build output names (0.0s) 
+   86.  134.1s - prefill: vision pytorch transform (0.0s) 
+   87.  134.1s - prefill: post: vision pytorch transform (0.0s) 
+   88.  134.1s - prefill: language pytorch transform (0.0s) 
+   89.  134.1s - prefill: post: language pytorch transform (0.0s) 
+   90.  134.1s - prefill: dual-qpc export orchestration (0.0s) 
+   91.  134.1s - prefill: build dummy inputs (0.0s) 
+   92.  134.1s - prefill: post: build dummy inputs (0.0s) 
+   93.  134.1s - prefill: build dynamic axes (0.0s) 
+   94.  134.1s - prefill: post: build dynamic axes (0.0s) 
+   95.  134.1s - prefill: build output names (0.0s) 
+   96.  134.1s - prefill: post: build output names (0.0s) 
+   97.  134.1s - prefill: language export (0.0s) 
+   98.  134.2s - prefill: torch.onnx.export (56.2s) [+7.9 GB]
+   99.  190.4s - prefill: post: torch.onnx.export (0.0s) 
+   100.  190.4s - prefill: language offload pytorch weights (1.2s) [-1.4 GB]
+   101.  191.6s - prefill: post: language offload pytorch weights (0.0s) 
+   102.  191.6s - prefill: onnx.load (0.0s) 
+   103.  191.6s - prefill: post: onnx.load (0.0s) 
+   104.  191.6s - prefill: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   105.  191.6s - prefill: post: onnx transforms: RenameFunctionOutputsTransform,CustomOpTransform (0.0s) 
+   106.  191.6s - prefill: onnx.save (0.0s) 
+   107.  191.6s - prefill: post: onnx.save (0.2s) 
+   108.  191.9s - prefill: post: language export (0.0s) 
+   109.  191.9s - prefill: post: dual-qpc export orchestration (0.0s) 
+   110.  191.9s - prefill: onnx.load (0.0s) 
+   111.  191.9s - prefill: post: onnx.load (0.0s) 
+   112.  191.9s - prefill: language compile wrapper (0.0s) 
+   113.  191.9s - prefill: onnx.load (0.0s) 
+   114.  191.9s - prefill: post: onnx.load (0.0s) 
+   115.  191.9s - prefill: subprocess.run: qaic-compile (85.6s) [-1.4 GB]
+   116.  277.5s - prefill: post: subprocess.run: qaic-compile (0.0s) 
+   117.  277.5s - prefill: post: language compile wrapper (0.0s) 
+   118.  277.5s - prefill: post: compile request (0.0s) 
+   119.  277.5s - Completion  
